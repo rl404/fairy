@@ -58,7 +58,7 @@ func (c *Client) Set(key string, data interface{}) error {
 
 // Delete to delete data from cache.
 func (c *Client) Delete(key string) error {
-	err :=  c.bc.Delete(key)
+	err := c.bc.Delete(key)
 	if errors.Is(err, bigcache.ErrEntryNotFound) {
 		return nil
 	}
