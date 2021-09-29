@@ -9,6 +9,7 @@ require (
 	github.com/go-playground/validator/v10 v10.9.0
 	github.com/go-redis/redis/v8 v8.11.3
 	github.com/nsqio/go-nsq v1.0.8
+	github.com/rs/zerolog v1.25.0
 	github.com/streadway/amqp v1.0.0
 )
 
