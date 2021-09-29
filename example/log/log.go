@@ -3,12 +3,14 @@ package main
 import "github.com/rl404/fairy"
 
 func main() {
-	// Log type and level.
+	// Log type, level, json format, and color.
 	t := fairy.Zerolog
-	l := fairy.TraceLevel
+	lvl := fairy.TraceLevel
+	json := false
+	color := true
 
 	// Init logger.
-	log, err := fairy.NewLog(t, l, false, true)
+	log, err := fairy.NewLog(t, lvl, json, color)
 	if err != nil {
 		panic(err)
 	}

@@ -15,6 +15,7 @@ _Fairy_ contains several general tools for easier and simpler development.
   - [RabbitMQ](https://rabbitmq.com/)
   - [NSQ](https://nsq.io/)
 - Struct modification and validation
+- Logging
 
 All these tools are simplified version of the original ones
 and for general use. Your case may need a more complex one
