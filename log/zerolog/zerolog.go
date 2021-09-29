@@ -4,6 +4,7 @@ package zerolog
 import (
 	"fmt"
 	"os"
+	"reflect"
 
 	"github.com/rs/zerolog"
 )
@@ -98,4 +99,43 @@ func (l *Log) Fatal(fmt string, args ...interface{}) {
 // like panic().
 func (l *Log) Panic(fmt string, args ...interface{}) {
 	l.log.Panic().Msgf(fmt, args...)
+}
+
+// Log to print general log.
+// Key `level` can be used to differentiate
+// log level.
+func (l *Log) Log(fields map[string]interface{}) {
+	if fields == nil || len(fields) == 0 {
+		return
+	}
+
+	ll := l.log.Log()
+	if level, ok := fields["level"]; ok {
+		switch reflect.TypeOf(level).Kind() {
+		case reflect.Int8:
+			switch LogLevel(reflect.ValueOf(level).Int()) {
+			case TraceLevel:
+				ll = l.log.Trace()
+			case DebugLevel:
+				ll = l.log.Debug()
+			case InfoLevel:
+				ll = l.log.Info()
+			case WarnLevel:
+				ll = l.log.Warn()
+			case ErrorLevel:
+				ll = l.log.Error()
+			case FatalLevel:
+				ll = l.log.Fatal()
+			case PanicLevel:
+				ll = l.log.Panic()
+			}
+			delete(fields, "level")
+		}
+	}
+
+	for k, v := range fields {
+		ll.Interface(k, v)
+	}
+
+	ll.Send()
 }
