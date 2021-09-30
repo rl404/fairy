@@ -2,12 +2,15 @@ package main
 
 import (
 	"bytes"
+	"context"
+	"errors"
 	"io"
 	"net/http"
 	"net/http/httptest"
 
 	"github.com/go-chi/chi"
 	"github.com/rl404/fairy"
+	"github.com/rl404/fairy/example/errors/helper"
 )
 
 func main() {
@@ -57,7 +60,16 @@ func main() {
 }
 
 func sampleHandler(w http.ResponseWriter, r *http.Request) {
-	w.WriteHeader(http.StatusOK)
+	if err := sampleErr(r.Context()); err != nil {
+		// Let's also test the error stack trace feature.
+		helper.Wrap(r.Context(), errors.New("sample error"), err)
+	}
+
+	w.WriteHeader(http.StatusInternalServerError)
 	w.Header().Set("Content-Type", "application/json")
 	io.WriteString(w, `{"ok":"nice"}`)
+}
+
+func sampleErr(ctx context.Context) error {
+	return helper.Wrap(ctx, errors.New("sample original error"))
 }

@@ -60,7 +60,7 @@ func main() {
 			select {
 			// If message comes.
 			case <-msgs:
-				// Proccess the message.
+				// Process the message.
 				fmt.Println(newData.Field1, newData.Field2)
 
 			// If error comes.
