@@ -4,6 +4,7 @@ import (
 	"errors"
 	"net"
 	"net/http"
+	"strings"
 	"time"
 
 	"github.com/go-chi/chi/middleware"
@@ -87,6 +88,8 @@ func HandlerFuncWithLog(logger Logger, next http.HandlerFunc) http.HandlerFunc {
 }
 
 // HandlerWithLog is http handler with log.
+// Also includes error stack tracing feature
+// if you use it.
 func HandlerWithLog(logger Logger, next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		if logger == nil {
@@ -94,19 +97,35 @@ func HandlerWithLog(logger Logger, next http.Handler) http.Handler {
 			return
 		}
 
+		// Prepare error stack tracing.
+		s := NewErrStacker()
+		ctx := s.Init(r.Context())
+
 		start := time.Now()
 		ww := middleware.NewWrapResponseWriter(w, r.ProtoMajor)
 
-		next.ServeHTTP(ww, r)
+		next.ServeHTTP(ww, r.WithContext(ctx))
 
-		logger.Log(map[string]interface{}{
+		m := map[string]interface{}{
 			"level":    getLevelFromStatus(ww.Status()),
 			"duration": time.Since(start).String(),
 			"method":   r.Method,
 			"path":     r.RequestURI,
 			"code":     ww.Status(),
 			"ip":       getIP(r),
-		})
+		}
+
+		// Include the error stack if you use it.
+		errStack := s.Get(ctx).([]string)
+		if len(errStack) > 0 {
+			// Reverse the stack order.
+			for i, j := 0, len(errStack)-1; i < j; i, j = i+1, j-1 {
+				errStack[i], errStack[j] = errStack[j], errStack[i]
+			}
+			m["error"] = strings.Join(errStack, " | ")
+		}
+
+		logger.Log(m)
 	})
 }
 
