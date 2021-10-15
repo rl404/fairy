@@ -8,6 +8,7 @@ import (
 	"time"
 
 	"github.com/go-chi/chi/middleware"
+	"github.com/rl404/fairy/log/logrus"
 	"github.com/rl404/fairy/log/zerolog"
 )
 
@@ -69,7 +70,7 @@ func NewLog(logType LogType, level LogLevel, jsonFormat bool, color bool) (Logge
 	case Zerolog:
 		return zerolog.New(zerolog.LogLevel(level), jsonFormat, color), nil
 	case Logrus:
-		return nil, nil
+		return logrus.New(logrus.LogLevel(level), jsonFormat, color), nil
 	default:
 		return nil, ErrInvalidLogType
 	}

@@ -1,12 +1,12 @@
-// Package zerolog is a wrapper of the original "github.com/rs/zerolog" library.
-package zerolog
+// Package logrus is a wrapper of the original "github.com/sirupsen/logrus" library.
+package logrus
 
 import (
 	"fmt"
-	"os"
 	"reflect"
+	"time"
 
-	"github.com/rs/zerolog"
+	"github.com/sirupsen/logrus"
 )
 
 // LogLevel is level of log that will be printed.
@@ -28,29 +28,22 @@ const (
 
 // Log is logging client.
 type Log struct {
-	log zerolog.Logger
+	log *logrus.Logger
 }
 
 // New to create new logging client.
 // Color is not working in json format.
 func New(level LogLevel, jsonFmt, color bool) *Log {
-	l := zerolog.
-		New(os.Stderr).
-		With().
-		Timestamp().
-		Logger().
-		Level(zerolog.Level(level))
-
-	if !jsonFmt {
-		l = l.Output(zerolog.ConsoleWriter{
-			Out:     os.Stderr,
-			NoColor: !color,
-			FormatTimestamp: func(i interface{}) string {
-				return colorize(i, 90, !color)
-			},
-		})
+	l := logrus.New()
+	l.SetLevel(convertLevel(level))
+	l.SetFormatter(&logrus.TextFormatter{
+		DisableColors:   !color,
+		FullTimestamp:   true,
+		TimestampFormat: colorize(time.RFC3339, 90, !color),
+	})
+	if jsonFmt {
+		l.SetFormatter(&logrus.JSONFormatter{})
 	}
-
 	return &Log{
 		log: l,
 	}
@@ -63,42 +56,63 @@ func colorize(s interface{}, c int, disabled bool) string {
 	return fmt.Sprintf("\x1b[%dm%v\x1b[0m", c, s)
 }
 
+func convertLevel(lvl LogLevel) logrus.Level {
+	switch lvl {
+	case TraceLevel:
+		return logrus.TraceLevel
+	case DebugLevel:
+		return logrus.DebugLevel
+	case InfoLevel:
+		return logrus.InfoLevel
+	case WarnLevel:
+		return logrus.WarnLevel
+	case ErrorLevel:
+		return logrus.ErrorLevel
+	case FatalLevel:
+		return logrus.FatalLevel
+	case PanicLevel:
+		return logrus.PanicLevel
+	default:
+		return 0
+	}
+}
+
 // Trace to print trace log.
 func (l *Log) Trace(fmt string, args ...interface{}) {
-	l.log.Trace().Msgf(fmt, args...)
+	l.log.Tracef(fmt, args...)
 }
 
 // Debug to print debug log.
 func (l *Log) Debug(fmt string, args ...interface{}) {
-	l.log.Debug().Msgf(fmt, args...)
+	l.log.Debugf(fmt, args...)
 }
 
 // Info to print info log.
 func (l *Log) Info(fmt string, args ...interface{}) {
-	l.log.Info().Msgf(fmt, args...)
+	l.log.Infof(fmt, args...)
 }
 
 // Warn to print warn log.
 func (l *Log) Warn(fmt string, args ...interface{}) {
-	l.log.Warn().Msgf(fmt, args...)
+	l.log.Warnf(fmt, args...)
 }
 
 // Error to print error log.
 func (l *Log) Error(fmt string, args ...interface{}) {
-	l.log.Error().Msgf(fmt, args...)
+	l.log.Errorf(fmt, args...)
 }
 
 // Fatal to print fatal log.
 // Will exit the program when called.
 func (l *Log) Fatal(fmt string, args ...interface{}) {
-	l.log.Fatal().Msgf(fmt, args...)
+	l.log.Fatalf(fmt, args...)
 }
 
 // Panic to print panic log.
 // Will print panic error stack and exit
 // like panic().
 func (l *Log) Panic(fmt string, args ...interface{}) {
-	l.log.Panic().Msgf(fmt, args...)
+	l.log.Panicf(fmt, args...)
 }
 
 // Log to print general log.
@@ -109,33 +123,26 @@ func (l *Log) Log(fields map[string]interface{}) {
 		return
 	}
 
-	ll := l.log.Log()
 	if level, ok := fields["level"]; ok {
 		switch reflect.TypeOf(level).Kind() {
 		case reflect.Int8:
 			delete(fields, "level")
 			switch LogLevel(reflect.ValueOf(level).Int()) {
 			case TraceLevel:
-				ll = l.log.Trace()
+				l.log.WithFields(fields).Trace()
 			case DebugLevel:
-				ll = l.log.Debug()
+				l.log.WithFields(fields).Debug()
 			case InfoLevel:
-				ll = l.log.Info()
+				l.log.WithFields(fields).Info()
 			case WarnLevel:
-				ll = l.log.Warn()
+				l.log.WithFields(fields).Warn()
 			case ErrorLevel:
-				ll = l.log.Error()
+				l.log.WithFields(fields).Error()
 			case FatalLevel:
-				ll = l.log.Fatal()
+				l.log.WithFields(fields).Fatal()
 			case PanicLevel:
-				ll = l.log.Panic()
+				l.log.WithFields(fields).Panic()
 			}
 		}
 	}
-
-	for k, v := range fields {
-		ll.Interface(k, v)
-	}
-
-	ll.Send()
 }
