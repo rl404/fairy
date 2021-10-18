@@ -15,7 +15,7 @@ import (
 
 func main() {
 	// Log type, level, json format, and color.
-	t := fairy.Zerolog
+	t := fairy.Logrus
 	lvl := fairy.TraceLevel
 	json := false
 	color := true
