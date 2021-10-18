@@ -8,7 +8,9 @@ import (
 	"time"
 
 	"github.com/go-chi/chi/middleware"
+	"github.com/rl404/fairy/log/builtin"
 	"github.com/rl404/fairy/log/logrus"
+	"github.com/rl404/fairy/log/nolog"
 	"github.com/rl404/fairy/log/zerolog"
 )
 
@@ -64,9 +66,9 @@ var ErrInvalidLogType = errors.New("invalid log type")
 func NewLog(logType LogType, level LogLevel, jsonFormat bool, color bool) (Logger, error) {
 	switch logType {
 	case NoLog:
-		return nil, nil
+		return nolog.New(), nil
 	case BuiltIn:
-		return nil, nil
+		return builtin.New(builtin.LogLevel(level), jsonFormat, color), nil
 	case Zerolog:
 		return zerolog.New(zerolog.LogLevel(level), jsonFormat, color), nil
 	case Logrus:
