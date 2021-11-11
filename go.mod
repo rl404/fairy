@@ -8,9 +8,9 @@ require (
 	github.com/go-chi/chi v1.5.4
 	github.com/go-playground/mold/v4 v4.2.0
 	github.com/go-playground/validator/v10 v10.9.0
-	github.com/go-redis/redis/v8 v8.11.3
-	github.com/nsqio/go-nsq v1.0.8
-	github.com/rs/zerolog v1.25.0
+	github.com/go-redis/redis/v8 v8.11.4
+	github.com/nsqio/go-nsq v1.1.0
+	github.com/rs/zerolog v1.26.0
 	github.com/sirupsen/logrus v1.8.1
 	github.com/streadway/amqp v1.0.0
 )
@@ -28,7 +28,6 @@ require (
 	go.uber.org/multierr v1.7.0 // indirect
 	go.uber.org/zap v1.19.1 // indirect
 	golang.org/x/crypto v0.0.0-20210711020723-a769d52b0f97 // indirect
-	golang.org/x/net v0.0.0-20210805182204-aaa1db679c0d // indirect
 	golang.org/x/sys v0.0.0-20210809222454-d867a43fc93e // indirect
 	golang.org/x/text v0.3.6 // indirect
 )
