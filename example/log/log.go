@@ -15,7 +15,7 @@ import (
 
 func main() {
 	// Log type, level, json format, and color.
-	t := fairy.Logrus
+	t := fairy.Zerolog
 	lvl := fairy.TraceLevel
 	json := false
 	color := true
@@ -46,7 +46,14 @@ func main() {
 
 	// Example use of go-chi http middleware with log.
 	r := chi.NewRouter()
-	r.Use(fairy.MiddlewareWithLog(log))
+	r.Use(fairy.MiddlewareWithLog(log, fairy.MiddlewareConfig{
+		RequestHeader:  true,
+		RequestBody:    true,
+		ResponseHeader: true,
+		ResponseBody:   true,
+		QueryParam:     true,
+		Error:          true,
+	}))
 
 	// Or wrap the handler directly.
 	r.Get("/user", fairy.HandlerFuncWithLog(log, sampleHandler))
@@ -54,7 +61,10 @@ func main() {
 	// Let's see the printed log.
 	// Run this whole main() function to
 	// see the log.
-	req := httptest.NewRequest(http.MethodPost, "/test", bytes.NewBufferString("sample-body"))
+	req := httptest.NewRequest(http.MethodPost, "/test?id=1", bytes.NewBufferString(`{"name":"sample-request"}`))
+	req.Header.Add("Content-Type", "application/json")
+	req.Header.Add("Accept", "application/json")
+
 	r.Post("/test", sampleHandler)
 	r.ServeHTTP(httptest.NewRecorder(), req)
 }

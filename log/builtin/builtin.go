@@ -3,6 +3,7 @@ package builtin
 
 import (
 	"bytes"
+	"encoding/json"
 	"fmt"
 	"log"
 	"os"
@@ -73,12 +74,8 @@ func (l *Log) print(lvl LogLevel, fields map[string]interface{}, str string, arg
 			b.WriteString(fmt.Sprintf(`,"message":"%s"`, fmt.Sprintf(str, args...)))
 		}
 		for k, v := range fields {
-			switch reflect.TypeOf(v).Kind() {
-			case reflect.Int, reflect.Int8, reflect.Int16, reflect.Int32, reflect.Int64, reflect.Uint, reflect.Uint8, reflect.Uint16, reflect.Uint32, reflect.Uint64, reflect.Float32, reflect.Float64:
-				b.WriteString(fmt.Sprintf(`,"%s":%v`, k, v))
-			default:
-				b.WriteString(fmt.Sprintf(`,"%s":"%v"`, k, v))
-			}
+			j, _ := json.Marshal(v)
+			b.WriteString(fmt.Sprintf(`,"%s":%s`, k, j))
 		}
 		b.WriteByte('}')
 		l.log.Println(b)
@@ -90,7 +87,11 @@ func (l *Log) print(lvl LogLevel, fields map[string]interface{}, str string, arg
 		b.WriteByte(' ')
 		b.WriteString(fmt.Sprintf(str, args...))
 		for k, v := range fields {
-			b.WriteString(fmt.Sprintf(" %s=%v", l.colorize(36, k), v))
+			if k == "error" {
+				b.WriteString(l.colorize(31, fmt.Sprintf(" %s=%v", k, v)))
+			} else {
+				b.WriteString(fmt.Sprintf(" %s=%v", l.colorize(36, k), v))
+			}
 		}
 		l.log.Println(b)
 	}
