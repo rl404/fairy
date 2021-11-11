@@ -6,6 +6,7 @@ import (
 	"github.com/rl404/fairy/log/builtin"
 	"github.com/rl404/fairy/log/logrus"
 	"github.com/rl404/fairy/log/nolog"
+	"github.com/rl404/fairy/log/zap"
 	"github.com/rl404/fairy/log/zerolog"
 )
 
@@ -51,6 +52,7 @@ const (
 	BuiltIn
 	Zerolog
 	Logrus
+	Zap
 )
 
 // ErrInvalidLogType is error for invalid log type.
@@ -68,6 +70,8 @@ func NewLog(logType LogType, level LogLevel, jsonFormat bool, color bool) (Logge
 		return zerolog.New(zerolog.LogLevel(level), jsonFormat, color), nil
 	case Logrus:
 		return logrus.New(logrus.LogLevel(level), jsonFormat, color), nil
+	case Zap:
+		return zap.New(zap.LogLevel(level), jsonFormat, color), nil
 	default:
 		return nil, ErrInvalidLogType
 	}
