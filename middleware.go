@@ -1,0 +1,169 @@
+package fairy
+
+import (
+	"bytes"
+	"io/ioutil"
+	"net"
+	"net/http"
+	"time"
+
+	"github.com/go-chi/chi/middleware"
+)
+
+// MiddlewareConfig is log config for middleware.
+type MiddlewareConfig struct {
+	// Show request header.
+	RequestHeader bool
+	// Show request body.
+	RequestBody bool
+	// Show response header.
+	ResponseHeader bool
+	// Show response body.
+	ResponseBody bool
+	// Include query param in url path.
+	QueryParam bool
+	// Show error stack.
+	Error bool
+}
+
+// MiddlewareWithLog is http middleware that will log the request and response.
+func MiddlewareWithLog(logger Logger, middlewareConfig ...MiddlewareConfig) func(http.Handler) http.Handler {
+	return func(next http.Handler) http.Handler {
+		return HandlerWithLog(logger, next, middlewareConfig...)
+	}
+}
+
+// HandlerFuncWithLog is http handler func with log.
+func HandlerFuncWithLog(logger Logger, next http.HandlerFunc, middlewareConfig ...MiddlewareConfig) http.HandlerFunc {
+	return HandlerWithLog(logger, next, middlewareConfig...).(http.HandlerFunc)
+}
+
+// HandlerWithLog is http handler with log.
+// Also includes error stack tracing feature
+// if you use it.
+func HandlerWithLog(logger Logger, next http.Handler, middlewareConfig ...MiddlewareConfig) http.Handler {
+	var cfg MiddlewareConfig
+	if len(middlewareConfig) > 0 {
+		cfg = middlewareConfig[0]
+	}
+
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		if logger == nil {
+			next.ServeHTTP(w, r)
+			return
+		}
+
+		// Prepare error stack tracing.
+		s := NewErrStacker()
+		ctx := s.Init(r.Context())
+		start := time.Now()
+
+		var bw bodyWriter
+		ww := middleware.NewWrapResponseWriter(w, r.ProtoMajor)
+		ww.Tee(&bw)
+
+		// Get request body.
+		body, err := ioutil.ReadAll(r.Body)
+		if err != nil {
+			s.Wrap(ctx, err)
+		}
+		r.Body = ioutil.NopCloser(bytes.NewBuffer(body))
+
+		// Call next handler.
+		next.ServeHTTP(ww, r.WithContext(ctx))
+
+		// Prepare map for logging.
+		m := map[string]interface{}{
+			"level":    getLevelFromStatus(ww.Status()),
+			"duration": time.Since(start).String(),
+			"method":   r.Method,
+			"path":     r.URL.Path,
+			"code":     ww.Status(),
+			"ip":       getIP(r),
+		}
+
+		if cfg.QueryParam {
+			m["path"] = r.RequestURI
+		}
+
+		if cfg.RequestHeader {
+			m["request_header"] = r.Header
+		}
+
+		if cfg.RequestBody {
+			m["request_body"] = string(body)
+		}
+
+		if cfg.ResponseHeader {
+			m["response_header"] = ww.Header()
+		}
+
+		if cfg.ResponseBody {
+			m["response_body"] = string(bw.Body)
+		}
+
+		// Include the error stack if you use it.
+		errStack := s.Get(ctx).([]string)
+		if cfg.Error && len(errStack) > 0 {
+			// Reverse the stack order.
+			for i, j := 0, len(errStack)-1; i < j; i, j = i+1, j-1 {
+				errStack[i], errStack[j] = errStack[j], errStack[i]
+			}
+			m["error"] = errStack
+		}
+
+		logger.Log(m)
+	})
+}
+
+func getLevelFromStatus(status int) LogLevel {
+	switch status {
+	case
+		http.StatusOK,
+		http.StatusCreated,
+		http.StatusAccepted,
+		http.StatusMultipleChoices,
+		http.StatusMovedPermanently,
+		http.StatusFound,
+		http.StatusSeeOther,
+		http.StatusNotModified,
+		http.StatusTemporaryRedirect,
+		http.StatusPermanentRedirect:
+		return InfoLevel
+	case
+		http.StatusBadRequest,
+		http.StatusUnauthorized,
+		http.StatusForbidden,
+		http.StatusNotFound,
+		http.StatusMethodNotAllowed,
+		http.StatusNotAcceptable,
+		http.StatusRequestTimeout,
+		http.StatusConflict,
+		http.StatusGone,
+		http.StatusPreconditionFailed,
+		http.StatusExpectationFailed,
+		http.StatusMisdirectedRequest,
+		http.StatusUnprocessableEntity,
+		http.StatusFailedDependency,
+		http.StatusTooManyRequests:
+		return WarnLevel
+	default:
+		return ErrorLevel
+	}
+}
+
+func getIP(r *http.Request) string {
+	if host, _, err := net.SplitHostPort(r.RemoteAddr); err == nil {
+		return host
+	}
+	return r.RemoteAddr
+}
+
+type bodyWriter struct {
+	Body []byte
+}
+
+func (w *bodyWriter) Write(b []byte) (int, error) {
+	w.Body = b
+	return len(b), nil
+}
