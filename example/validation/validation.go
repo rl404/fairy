@@ -24,18 +24,15 @@ func main() {
 		return in + " magic"
 	})
 
-	// Register custom validator.
-	v.RegisterValidator("contain", func(value interface{}, param ...string) bool {
-		return strings.Contains(value.(string), param[0])
-	})
-
-	// Register custom error message handler.
-	v.RegisterValidatorError("gt", func(field string, param ...string) error {
-		return fmt.Errorf("field %s must be greater than %s", field, param[0])
-	})
-	v.RegisterValidatorError("contain", func(field string, param ...string) error {
-		return fmt.Errorf("field %s must contain %s", field, param[0])
-	})
+	// Register custom validator and error message handler.
+	v.RegisterValidator("contain",
+		func(value interface{}, param ...string) bool {
+			return strings.Contains(value.(string), param[0])
+		},
+		func(field string, param ...string) error {
+			return fmt.Errorf("field %s must contain %s", field, param[0])
+		},
+	)
 
 	// Sample 'dirty' data.
 	naruto := user{
