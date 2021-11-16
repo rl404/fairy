@@ -1,4 +1,4 @@
-package fairy
+package log
 
 import (
 	"bytes"
@@ -8,6 +8,7 @@ import (
 	"time"
 
 	"github.com/go-chi/chi/middleware"
+	"github.com/rl404/fairy/errors"
 )
 
 // MiddlewareConfig is log config for middleware.
@@ -54,7 +55,7 @@ func HandlerWithLog(logger Logger, next http.Handler, middlewareConfig ...Middle
 		}
 
 		// Prepare error stack tracing.
-		s := NewErrStacker()
+		s := errors.New()
 		ctx := s.Init(r.Context())
 		start := time.Now()
 

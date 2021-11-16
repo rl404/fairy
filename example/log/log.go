@@ -9,19 +9,19 @@ import (
 	"net/http/httptest"
 
 	"github.com/go-chi/chi"
-	"github.com/rl404/fairy"
 	"github.com/rl404/fairy/example/errors/helper"
+	"github.com/rl404/fairy/log"
 )
 
 func main() {
 	// Log type, level, json format, and color.
-	t := fairy.Zerolog
-	lvl := fairy.TraceLevel
+	t := log.Zerolog
+	lvl := log.TraceLevel
 	json := false
 	color := true
 
 	// Init logger.
-	log, err := fairy.NewLog(t, lvl, json, color)
+	l, err := log.New(t, lvl, json, color)
 	if err != nil {
 		panic(err)
 	}
@@ -29,24 +29,24 @@ func main() {
 	// General log with additional fields.
 	// Key `level` can be used to differentiate
 	// log level.
-	log.Log(map[string]interface{}{
-		"level":  fairy.ErrorLevel,
+	l.Log(map[string]interface{}{
+		"level":  log.ErrorLevel,
 		"field1": "f1",
 		"field2": "f2",
 	})
 
 	// Quick log.
-	log.Trace("%s", "trace")
-	log.Debug("%s", "debug")
-	log.Info("%s", "info")
-	log.Warn("%s", "warn")
-	log.Error("%s", "error")
-	// log.Fatal("%s", "fatal")
-	// log.Panic("%s", "panic")
+	l.Trace("%s", "trace")
+	l.Debug("%s", "debug")
+	l.Info("%s", "info")
+	l.Warn("%s", "warn")
+	l.Error("%s", "error")
+	// l.Fatal("%s", "fatal")
+	// l.Panic("%s", "panic")
 
 	// Example use of go-chi http middleware with log.
 	r := chi.NewRouter()
-	r.Use(fairy.MiddlewareWithLog(log, fairy.MiddlewareConfig{
+	r.Use(log.MiddlewareWithLog(l, log.MiddlewareConfig{
 		RequestHeader:  true,
 		RequestBody:    true,
 		ResponseHeader: true,
@@ -56,7 +56,7 @@ func main() {
 	}))
 
 	// Or wrap the handler directly.
-	r.Get("/user", fairy.HandlerFuncWithLog(log, sampleHandler))
+	r.Get("/user", log.HandlerFuncWithLog(l, sampleHandler))
 
 	// Let's see the printed log.
 	// Run this whole main() function to

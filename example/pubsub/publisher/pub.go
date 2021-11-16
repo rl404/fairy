@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/rl404/fairy"
+	"github.com/rl404/fairy/pubsub"
 )
 
 type sampleData struct {
@@ -11,10 +11,10 @@ type sampleData struct {
 
 func main() {
 	// Pubsub type.
-	t := fairy.RabbitMQ
+	t := pubsub.RabbitMQ
 
 	// Init client.
-	client, err := fairy.NewPubSub(t, "amqp://guest:guest@localhost:5672", "")
+	client, err := pubsub.New(t, "amqp://guest:guest@localhost:5672", "")
 	if err != nil {
 		panic(err)
 	}
