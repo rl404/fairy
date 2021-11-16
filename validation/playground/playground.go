@@ -69,7 +69,7 @@ func (v *Validator) Modify(data interface{}) error {
 	return v.mod.Struct(context.Background(), data)
 }
 
-// RegisterValidator to register custom validator and error message.
+// RegisterValidator to register custom validator.
 func (v *Validator) RegisterValidator(name string, fn func(interface{}, ...string) bool) error {
 	if name == "" {
 		return ErrRequiredName
@@ -129,6 +129,7 @@ func (v *Validator) Validate(data interface{}) error {
 			if e.Param() != "" {
 				param = append(param, e.Param())
 			}
+
 			return fn(e.Field(), param...)
 		}
 	}
