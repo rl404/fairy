@@ -1,4 +1,4 @@
-package fairy
+package cache
 
 import (
 	"errors"
@@ -35,21 +35,21 @@ type CacheType int8
 const (
 	NoCache CacheType = iota
 	InMemory
-	RedisCache
+	Redis
 	Memcache
 )
 
 // ErrInvalidCacheType is error for invalid cache type.
 var ErrInvalidCacheType = errors.New("invalid cache type")
 
-// NewCache to create new cache client depends on the type.
-func NewCache(cacheType CacheType, address string, password string, expiredTime time.Duration) (Cacher, error) {
+// New to create new cache client depends on the type.
+func New(cacheType CacheType, address string, password string, expiredTime time.Duration) (Cacher, error) {
 	switch cacheType {
 	case NoCache:
 		return nocache.New()
 	case InMemory:
 		return bigcache.New(expiredTime)
-	case RedisCache:
+	case Redis:
 		return redis.New(address, password, expiredTime)
 	case Memcache:
 		return memcache.New(address, expiredTime)

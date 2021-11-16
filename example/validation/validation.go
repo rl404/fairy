@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/rl404/fairy"
+	"github.com/rl404/fairy/validation"
 )
 
 type user struct {
@@ -17,7 +17,7 @@ type user struct {
 
 func main() {
 	// Init validator.
-	v := fairy.NewValidator(true)
+	v := validation.New(true)
 
 	// Register custom modifier.
 	v.RegisterModifier("magic", func(in string) string {

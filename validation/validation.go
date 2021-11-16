@@ -1,4 +1,4 @@
-package fairy
+package validation
 
 import "github.com/rl404/fairy/validation/playground"
 
@@ -21,9 +21,9 @@ type Validator interface {
 	Validate(data interface{}) error
 }
 
-// NewValidator to create new validator.
+// New to create new validator.
 // Pass true if you want to modify the data
 // automatically before validate.
-func NewValidator(mod bool) Validator {
+func New(mod bool) Validator {
 	return playground.New(mod)
 }

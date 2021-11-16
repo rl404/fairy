@@ -6,7 +6,7 @@ import (
 	"os/signal"
 	"syscall"
 
-	"github.com/rl404/fairy"
+	"github.com/rl404/fairy/pubsub"
 )
 
 type sampleData struct {
@@ -16,10 +16,10 @@ type sampleData struct {
 
 func main() {
 	// Pubsub type.
-	t := fairy.RabbitMQ
+	t := pubsub.RabbitMQ
 
 	// Init client.
-	client, err := fairy.NewPubSub(t, "amqp://guest:guest@localhost:5672", "")
+	client, err := pubsub.New(t, "amqp://guest:guest@localhost:5672", "")
 	if err != nil {
 		panic(err)
 	}
@@ -35,7 +35,7 @@ func main() {
 
 	// Need to convert to Channel interface first
 	// so you can use function in the Channel interface.
-	channel := s.(fairy.Channel)
+	channel := s.(pubsub.Channel)
 
 	// Don't forget to close subscription.
 	defer channel.Close()

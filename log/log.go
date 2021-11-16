@@ -1,4 +1,4 @@
-package fairy
+package log
 
 import (
 	"errors"
@@ -58,9 +58,9 @@ const (
 // ErrInvalidLogType is error for invalid log type.
 var ErrInvalidLogType = errors.New("invalid log type")
 
-// NewLog to create new log client depends on the type.
-// Color is not working in json format.
-func NewLog(logType LogType, level LogLevel, jsonFormat bool, color bool) (Logger, error) {
+// New to create new log client depends on the type.
+// Color will not work in json format.
+func New(logType LogType, level LogLevel, jsonFormat bool, color bool) (Logger, error) {
 	switch logType {
 	case NoLog:
 		return nolog.New(), nil
