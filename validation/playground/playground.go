@@ -69,21 +69,14 @@ func (v *Validator) Modify(data interface{}) error {
 	return v.mod.Struct(context.Background(), data)
 }
 
-// RegisterValidator to register custom validator and error message.
-func (v *Validator) RegisterValidator(name string, validationFunc func(interface{}, ...string) bool, errorFunc ...func(string, ...string) error) error {
+// RegisterValidator to register custom validator.
+func (v *Validator) RegisterValidator(name string, fn func(interface{}, ...string) bool) error {
 	if name == "" {
 		return ErrRequiredName
 	}
 
-	if validationFunc == nil {
+	if fn == nil {
 		return ErrRequiredFn
-	}
-
-	if len(errorFunc) > 0 {
-		if errorFunc[0] == nil {
-			return ErrRequiredFn
-		}
-		v.customErrs[name] = errorFunc[0]
 	}
 
 	return v.val.RegisterValidation(name, func(fl validator.FieldLevel) bool {
@@ -91,8 +84,23 @@ func (v *Validator) RegisterValidator(name string, validationFunc func(interface
 		if fl.Param() != "" {
 			param = append(param, fl.Param())
 		}
-		return validationFunc(fl.Field().Interface(), param...)
+		return fn(fl.Field().Interface(), param...)
 	})
+}
+
+// RegisterValidatorError to register custom error message handling.
+func (v *Validator) RegisterValidatorError(name string, fn func(string, ...string) error) error {
+	if name == "" {
+		return ErrRequiredName
+	}
+
+	if fn == nil {
+		return ErrRequiredFn
+	}
+
+	v.customErrs[name] = fn
+
+	return nil
 }
 
 // Validate to validate struct field value according
@@ -121,6 +129,7 @@ func (v *Validator) Validate(data interface{}) error {
 			if e.Param() != "" {
 				param = append(param, e.Param())
 			}
+
 			return fn(e.Field(), param...)
 		}
 	}
