@@ -1,4 +1,4 @@
-package fairy
+package errors
 
 import (
 	"context"
@@ -18,7 +18,7 @@ type ErrStacker interface {
 	Get(ctx context.Context) interface{}
 }
 
-// NewErrStacker to create new error stack.
-func NewErrStacker() ErrStacker {
+// New to create new error stack.
+func New() ErrStacker {
 	return stack.New()
 }

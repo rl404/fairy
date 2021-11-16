@@ -3,22 +3,22 @@ package helper
 import (
 	"context"
 
-	"github.com/rl404/fairy"
+	"github.com/rl404/fairy/errors"
 )
 
 // If you are developing a project (not library),
 // it's recommended to create a package or file
 // like this file so you don't need to pass
-// `fairy.ErrStacker` to your every functions.
+// `errors.ErrStacker` to your every functions.
 // Just call `yourPkg.Init()`, `yourPkg.Wrap()`,
 // or `yourPkg.Get()` and that's it.
 
 // See `example/errors/stack.go` for example.
 
-var stacker fairy.ErrStacker
+var stacker errors.ErrStacker
 
 func init() {
-	stacker = fairy.NewErrStacker()
+	stacker = errors.New()
 }
 
 // Init to init context for error stack.
