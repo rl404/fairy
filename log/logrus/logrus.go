@@ -119,7 +119,7 @@ func (l *Log) Panic(fmt string, args ...interface{}) {
 // Key `level` can be used to differentiate
 // log level.
 func (l *Log) Log(fields map[string]interface{}) {
-	if fields == nil || len(fields) == 0 {
+	if len(fields) == 0 {
 		return
 	}
 
