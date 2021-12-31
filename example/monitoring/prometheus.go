@@ -118,3 +118,5 @@ func httpWithPrometheus() {
 	// http_request_duration_seconds_sum{code="500",method="POST",path="/register"} 1.603506212
 	// http_request_duration_seconds_count{code="500",method="POST",path="/register"} 1
 }
+
+func main() {}

@@ -3,6 +3,7 @@ package log
 import (
 	"context"
 	"encoding/json"
+	"strings"
 	"time"
 
 	"github.com/rl404/fairy/errors"
@@ -37,10 +38,11 @@ func UnaryMiddlewareWithLog(logger Logger, middlewareConfig ...MiddlewareConfig)
 		m := map[string]interface{}{
 			"level":    getLevelFromError(err),
 			"duration": time.Since(start).String(),
-			"path":     info.FullMethod,
 			"code":     getCodeFromErr(err),
 			"ip":       getIPFromCtx(ctx),
 		}
+
+		m["service"], m["method"] = splitMethodName(info.FullMethod)
 
 		if cfg.RequestHeader {
 			meta, _ := metadata.FromIncomingContext(ctx)
@@ -122,4 +124,12 @@ func getIPFromCtx(ctx context.Context) string {
 		return ""
 	}
 	return p.Addr.String()
+}
+
+func splitMethodName(fullMethodName string) (string, string) {
+	fullMethodName = strings.TrimPrefix(fullMethodName, "/")
+	if i := strings.Index(fullMethodName, "/"); i >= 0 {
+		return fullMethodName[:i], fullMethodName[i+1:]
+	}
+	return "unknown", "unknown"
 }
