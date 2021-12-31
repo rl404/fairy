@@ -1,3 +1,4 @@
+// Package zap is a wrapper of the original "github.com/uber-go/zap" library.
 package zap
 
 import (
