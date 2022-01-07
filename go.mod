@@ -14,7 +14,7 @@ require (
 	github.com/rs/zerolog v1.26.1
 	github.com/sirupsen/logrus v1.8.1
 	github.com/streadway/amqp v1.0.0
-	go.uber.org/zap v1.19.1
+	go.uber.org/zap v1.20.0
 	google.golang.org/grpc v1.43.0
 	gorm.io/driver/mysql v1.2.2
 	gorm.io/gorm v1.22.4
