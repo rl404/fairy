@@ -17,7 +17,7 @@ require (
 	go.uber.org/zap v1.20.0
 	google.golang.org/grpc v1.43.0
 	gorm.io/driver/mysql v1.2.3
-	gorm.io/gorm v1.22.4
+	gorm.io/gorm v1.22.5
 )
 
 require (
