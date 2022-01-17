@@ -149,13 +149,12 @@ func (c *Client) Log(fields map[string]interface{}) {
 	if level, ok := fields["level"]; ok {
 		lvl := LogLevel(reflect.ValueOf(level).Int())
 		fields["level"] = c.getLevelStr(lvl)
-		if c.level <= lvl {
-			c.send(fields)
+		if c.level > lvl {
+			return
 		}
-		return
 	}
 
-	c.send(fields)
+	go c.send(fields)
 }
 
 func (c *Client) send(data interface{}) {
