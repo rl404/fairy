@@ -5,6 +5,7 @@ go 1.17
 require (
 	github.com/allegro/bigcache v1.2.1
 	github.com/bradfitz/gomemcache v0.0.0-20190913173617-a41fca850d0b
+	github.com/elastic/go-elasticsearch/v7 v7.16.0
 	github.com/go-chi/chi v1.5.4
 	github.com/go-playground/mold/v4 v4.2.0
 	github.com/go-playground/validator/v10 v10.9.0

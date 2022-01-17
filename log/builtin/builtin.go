@@ -137,56 +137,63 @@ func (l *Log) getLevelStr(lvl LogLevel) string {
 	}
 }
 
-// Trace to do nothing.
+// Trace to print trace log.
 func (l *Log) Trace(fmt string, args ...interface{}) {
 	if l.level <= TraceLevel {
 		l.print(TraceLevel, nil, fmt, args...)
 	}
 }
 
-// Debug to do nothing.
+// Debug to print debug log.
 func (l *Log) Debug(fmt string, args ...interface{}) {
 	if l.level <= DebugLevel {
 		l.print(DebugLevel, nil, fmt, args...)
 	}
 }
 
-// Info to do nothing.
+// Info to print info log.
 func (l *Log) Info(fmt string, args ...interface{}) {
 	if l.level <= InfoLevel {
 		l.print(InfoLevel, nil, fmt, args...)
 	}
 }
 
-// Warn to do nothing.
+// Warn to print warn log.
 func (l *Log) Warn(fmt string, args ...interface{}) {
 	if l.level <= WarnLevel {
 		l.print(WarnLevel, nil, fmt, args...)
 	}
 }
 
-// Error to do nothing.
+// Error to print error log.
 func (l *Log) Error(fmt string, args ...interface{}) {
 	if l.level <= ErrorLevel {
 		l.print(ErrorLevel, nil, fmt, args...)
 	}
 }
 
-// Fatal to do nothing.
+// Fatal to print fatal log.
+// Will exit the program when called.
 func (l *Log) Fatal(fmt string, args ...interface{}) {
 	if l.level <= FatalLevel {
 		l.print(FatalLevel, nil, fmt, args...)
+		os.Exit(1)
 	}
 }
 
-// Panic to do nothing.
-func (l *Log) Panic(fmt string, args ...interface{}) {
+// Panic to print panic log.
+// Will print panic error stack and exit
+// like panic().
+func (l *Log) Panic(str string, args ...interface{}) {
 	if l.level <= PanicLevel {
-		l.print(PanicLevel, nil, fmt, args...)
+		l.print(PanicLevel, nil, str, args...)
+		panic(fmt.Sprintf(str, args...))
 	}
 }
 
-// Log to do nothing.
+// Log to print general log.
+// Key `level` can be used to differentiate
+// log level.
 func (l *Log) Log(fields map[string]interface{}) {
 	level, ok := fields["level"]
 	if ok {
