@@ -27,6 +27,9 @@ func New() *Stacker {
 // Init to init context so it can be used
 // as an error stack.
 func (s *Stacker) Init(ctx context.Context) context.Context {
+	if _, ok := ctx.Value(errctx{}).(*errctxvalue); ok {
+		return ctx
+	}
 	return context.WithValue(ctx, errctx{}, &errctxvalue{})
 }
 
