@@ -14,14 +14,13 @@ import (
 )
 
 func main() {
-	// Log type, level, json format, and color.
-	t := log.Zerolog
-	lvl := log.TraceLevel
-	json := false
-	color := true
-
 	// Init logger.
-	l, err := log.New(t, lvl, json, color)
+	l, err := log.New(log.Config{
+		Type:       log.Zerolog,
+		Level:      log.TraceLevel,
+		JsonFormat: false,
+		Color:      true,
+	})
 	if err != nil {
 		panic(err)
 	}

@@ -43,7 +43,7 @@ func init() {
 }
 
 // NewHTTP to create new prometheus http middleware.
-func NewHTTP() func(next http.Handler) http.Handler {
+func NewHTTP() func(http.Handler) http.Handler {
 	return hm.handler
 }
 
