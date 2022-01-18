@@ -128,7 +128,6 @@ func (c *Client) Panic(str string, args ...interface{}) {
 
 func (c *Client) log(level LogLevel, str string, args ...interface{}) {
 	c.Log(map[string]interface{}{
-		"time":    time.Now().Format(time.RFC3339),
 		"level":   level,
 		"message": fmt.Sprintf(str, args...),
 	})
@@ -142,10 +141,10 @@ func (c *Client) Log(fields map[string]interface{}) {
 		return
 	}
 
-	if _, ok := fields["time"]; !ok {
-		fields["time"] = time.Now().Format(time.RFC3339)
-	}
+	// Set timestamp field.
+	fields["@timestamp"] = time.Now().Format(time.RFC3339)
 
+	// Handle level field.
 	if level, ok := fields["level"]; ok {
 		lvl := LogLevel(reflect.ValueOf(level).Int())
 		fields["level"] = c.getLevelStr(lvl)
@@ -154,20 +153,26 @@ func (c *Client) Log(fields map[string]interface{}) {
 		}
 	}
 
+	// Send using goroutine to prevent blocking.
 	go c.send(fields)
 }
 
 func (c *Client) send(data interface{}) {
+	// Encode to json.
 	d, err := json.Marshal(data)
 	if err != nil {
 		log.Println(err)
 		return
 	}
+
+	// Prepare index and data.
 	req := esapi.IndexRequest{
 		Index:   c.generateIndex(),
 		Body:    strings.NewReader(string(d)),
 		Refresh: "true",
 	}
+
+	// Send.
 	if err := isError(req.Do(context.Background(), c.client)); err != nil {
 		log.Println(err)
 	}
@@ -187,6 +192,7 @@ func isError(res *esapi.Response, err error) error {
 	return nil
 }
 
+// Index will contain today's date.
 func (c *Client) generateIndex() string {
 	now := time.Now()
 	return fmt.Sprintf("%s-%d-%02d-%02d", c.index, now.Year(), now.Month(), now.Day())
