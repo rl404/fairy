@@ -106,15 +106,25 @@ func HandlerWithLog(logger Logger, next http.Handler, middlewareConfig ...Middle
 		// Include the error stack if you use it.
 		errStack := s.Get(ctx).([]string)
 		if cfg.Error && len(errStack) > 0 {
+			// Copy slice to prevent reversed multiple times
+			// if using multiple middleware.
+			errTmp := cpSlice(errStack)
+
 			// Reverse the stack order.
-			for i, j := 0, len(errStack)-1; i < j; i, j = i+1, j-1 {
-				errStack[i], errStack[j] = errStack[j], errStack[i]
+			for i, j := 0, len(errTmp)-1; i < j; i, j = i+1, j-1 {
+				errTmp[i], errTmp[j] = errTmp[j], errTmp[i]
 			}
-			m["error"] = errStack
+			m["error"] = errTmp
 		}
 
 		logger.Log(m)
 	})
+}
+
+func cpSlice(arr []string) []string {
+	a := make([]string, len(arr))
+	copy(a, arr)
+	return a
 }
 
 func getLevelFromStatus(status int) LogLevel {
