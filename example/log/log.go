@@ -16,10 +16,14 @@ import (
 func main() {
 	// Init logger.
 	l, err := log.New(log.Config{
-		Type:       log.Zerolog,
-		Level:      log.TraceLevel,
-		JsonFormat: false,
-		Color:      true,
+		Type:                   log.Zerolog,
+		Level:                  log.TraceLevel,
+		JsonFormat:             false,
+		Color:                  true,
+		ElasticsearchAddresses: []string{"http://localhost:9200"},
+		ElasticsearchUser:      "elastic",
+		ElasticsearchPassword:  "pass123",
+		ElasticsearchIndex:     "logs-example",
 	})
 	if err != nil {
 		panic(err)
@@ -50,7 +54,7 @@ func main() {
 		RequestBody:    true,
 		ResponseHeader: true,
 		ResponseBody:   true,
-		QueryParam:     true,
+		RawPath:        true,
 		Error:          true,
 	}))
 
@@ -60,11 +64,11 @@ func main() {
 	// Let's see the printed log.
 	// Run this whole main() function to
 	// see the log.
-	req := httptest.NewRequest(http.MethodPost, "/test?id=1", bytes.NewBufferString(`{"name":"sample-request"}`))
+	req := httptest.NewRequest(http.MethodPost, "/test/123?query1=a&query2=b", bytes.NewBufferString(`{"name":"sample-request"}`))
 	req.Header.Add("Content-Type", "application/json")
 	req.Header.Add("Accept", "application/json")
 
-	r.Post("/test", sampleHandler)
+	r.Post("/test/{id}", sampleHandler)
 	r.ServeHTTP(httptest.NewRecorder(), req)
 }
 
