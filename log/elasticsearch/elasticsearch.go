@@ -164,7 +164,7 @@ func (c *Client) send(data interface{}) {
 		return
 	}
 	req := esapi.IndexRequest{
-		Index:   c.index,
+		Index:   c.generateIndex(),
 		Body:    strings.NewReader(string(d)),
 		Refresh: "true",
 	}
@@ -185,6 +185,11 @@ func isError(res *esapi.Response, err error) error {
 	}
 
 	return nil
+}
+
+func (c *Client) generateIndex() string {
+	now := time.Now()
+	return fmt.Sprintf("%s-%d-%02d-%02d", c.index, now.Year(), now.Month(), now.Day())
 }
 
 func (c *Client) getLevelStr(lvl LogLevel) string {
