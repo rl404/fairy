@@ -6,6 +6,7 @@ import (
 	"strconv"
 	"time"
 
+	"github.com/go-chi/chi"
 	mwChi "github.com/go-chi/chi/middleware"
 	"github.com/prometheus/client_golang/prometheus"
 )
@@ -51,8 +52,30 @@ func (mw httpMiddleware) handler(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		start := time.Now()
 		ww := mwChi.NewWrapResponseWriter(w, r.ProtoMajor)
+
 		next.ServeHTTP(ww, r)
-		mw.req.WithLabelValues(strconv.Itoa(ww.Status()), r.Method, r.URL.Path).Inc()
-		mw.lat.WithLabelValues(strconv.Itoa(ww.Status()), r.Method, r.URL.Path).Observe(float64(time.Since(start).Seconds()))
+
+		path := r.URL.Path
+		if tmp, ok := mw.getRoutePattern(r); ok {
+			path = tmp
+		}
+
+		mw.req.WithLabelValues(strconv.Itoa(ww.Status()), r.Method, path).Inc()
+		mw.lat.WithLabelValues(strconv.Itoa(ww.Status()), r.Method, path).Observe(float64(time.Since(start).Seconds()))
 	})
+}
+
+func (mw httpMiddleware) getRoutePattern(r *http.Request) (string, bool) {
+	routePath := r.URL.Path
+	if r.URL.RawPath != "" {
+		routePath = r.URL.RawPath
+	}
+
+	rctx := chi.RouteContext(r.Context())
+	tctx := chi.NewRouteContext()
+	if rctx.Routes.Match(tctx, r.Method, routePath) {
+		return tctx.RoutePattern(), true
+	}
+
+	return "", false
 }

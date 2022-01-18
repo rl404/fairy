@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"time"
 
+	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/middleware"
 	"github.com/rl404/fairy/errors"
 )
@@ -21,8 +22,8 @@ type MiddlewareConfig struct {
 	ResponseHeader bool
 	// Show response body.
 	ResponseBody bool
-	// Include query param in url path.
-	QueryParam bool
+	// Show raw path (includes query params).
+	RawPath bool
 	// Show error stack.
 	Error bool
 }
@@ -83,8 +84,12 @@ func HandlerWithLog(logger Logger, next http.Handler, middlewareConfig ...Middle
 			"ip":       getIP(r),
 		}
 
-		if cfg.QueryParam {
-			m["path"] = r.RequestURI
+		if path, ok := getRoutePattern(r); ok {
+			m["path"] = path
+		}
+
+		if cfg.RawPath {
+			m["raw_path"] = r.RequestURI
 		}
 
 		if cfg.RequestHeader {
@@ -125,6 +130,21 @@ func cpSlice(arr []string) []string {
 	a := make([]string, len(arr))
 	copy(a, arr)
 	return a
+}
+
+func getRoutePattern(r *http.Request) (string, bool) {
+	routePath := r.URL.Path
+	if r.URL.RawPath != "" {
+		routePath = r.URL.RawPath
+	}
+
+	rctx := chi.RouteContext(r.Context())
+	tctx := chi.NewRouteContext()
+	if rctx.Routes.Match(tctx, r.Method, routePath) {
+		return tctx.RoutePattern(), true
+	}
+
+	return "", false
 }
 
 func getLevelFromStatus(status int) LogLevel {
