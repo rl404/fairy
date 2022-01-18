@@ -14,20 +14,32 @@ import (
 )
 
 func main() {
-	// Init logger.
-	l, err := log.New(log.Config{
-		Type:                   log.Zerolog,
-		Level:                  log.TraceLevel,
-		JsonFormat:             false,
-		Color:                  true,
+	// Init first logger.
+	l1, err := log.New(log.Config{
+		Type:       log.Zerolog,
+		Level:      log.TraceLevel,
+		JsonFormat: false,
+		Color:      true,
+	})
+	if err != nil {
+		panic(err)
+	}
+
+	// Init second logger.
+	l2, err := log.New(log.Config{
+		Type:                   log.Elasticsearch,
+		Level:                  log.ErrorLevel,
 		ElasticsearchAddresses: []string{"http://localhost:9200"},
 		ElasticsearchUser:      "elastic",
-		ElasticsearchPassword:  "pass123",
+		ElasticsearchPassword:  "rl404",
 		ElasticsearchIndex:     "logs-example",
 	})
 	if err != nil {
 		panic(err)
 	}
+
+	// Chain the loggers.
+	l := log.NewChain(l1, l2)
 
 	// General log with additional fields.
 	// Key `level` can be used to differentiate
