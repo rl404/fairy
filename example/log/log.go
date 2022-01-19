@@ -33,6 +33,7 @@ func main() {
 		ElasticsearchUser:      "elastic",
 		ElasticsearchPassword:  "rl404",
 		ElasticsearchIndex:     "logs-example",
+		ElasticsearchIsSync:    true,
 	})
 	if err != nil {
 		panic(err)
