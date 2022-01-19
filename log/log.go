@@ -72,6 +72,7 @@ type Config struct {
 	ElasticsearchUser      string
 	ElasticsearchPassword  string
 	ElasticsearchIndex     string
+	ElasticsearchIsSync    bool
 }
 
 // New to create new log client depends on the type.
@@ -95,6 +96,7 @@ func New(cfg Config) (Logger, error) {
 			Password:  cfg.ElasticsearchPassword,
 			Index:     cfg.ElasticsearchIndex,
 			Level:     elasticsearch.LogLevel(cfg.Level),
+			IsSync:    cfg.ElasticsearchIsSync,
 		})
 	default:
 		return nil, ErrInvalidLogType
