@@ -68,6 +68,16 @@ func (lc *loggerChain) Panic(format string, args ...interface{}) {
 // log level.
 func (lc *loggerChain) Log(fields map[string]interface{}) {
 	for _, l := range lc.loggers {
-		l.Log(fields)
+		// Make a copy of the fields, so when previous logger
+		// modified the fields, the next logger won't be affected.
+		l.Log(lc.copyMap(fields))
 	}
+}
+
+func (lc *loggerChain) copyMap(m1 map[string]interface{}) map[string]interface{} {
+	m2 := make(map[string]interface{})
+	for k, v := range m1 {
+		m2[k] = v
+	}
+	return m2
 }
