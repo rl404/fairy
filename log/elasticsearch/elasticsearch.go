@@ -38,6 +38,7 @@ type Client struct {
 	client *elasticsearch.Client
 	index  string
 	level  LogLevel
+	isSync bool
 }
 
 // Config is elasticsearch config.
@@ -45,8 +46,18 @@ type Config struct {
 	Addresses []string
 	Username  string
 	Password  string
-	Index     string
 	Level     LogLevel
+
+	// Will be formatted to include
+	// current date.
+	// Ex: logs-app => logs-app-YYYY-MM-DD
+	Index string
+
+	// Turn it on if you are logging
+	// cron so it will wait until
+	// sending the log to elasticseach
+	// successfully before exiting app.
+	IsSync bool
 }
 
 // New to create new elasticsearch client.
@@ -69,6 +80,7 @@ func New(cfg Config) (*Client, error) {
 		client: es,
 		index:  cfg.Index,
 		level:  cfg.Level,
+		isSync: cfg.IsSync,
 	}, nil
 }
 
@@ -153,8 +165,11 @@ func (c *Client) Log(fields map[string]interface{}) {
 		}
 	}
 
-	// Send using goroutine to prevent blocking.
-	go c.send(fields)
+	if c.isSync {
+		c.send(fields)
+	} else {
+		go c.send(fields)
+	}
 }
 
 func (c *Client) send(data interface{}) {
