@@ -69,22 +69,22 @@ func cacheWithPrometheus() {
 	cacher.Set("key", "data")
 
 	// Sample metrics.
-	// cache_requests_total{dialect="redis",key="keyName",operation="GET",result="MISS"} 1
-	// cache_requests_total{dialect="redis",key="keyName",operation="SET",result="HIT"} 1
-	// cache_request_duration_seconds_bucket{dialect="redis",key="keyName",operation="SET",result="HIT",le="0.005"} 1
-	// cache_request_duration_seconds_bucket{dialect="redis",key="keyName",operation="SET",result="HIT",le="0.01"} 1
-	// cache_request_duration_seconds_bucket{dialect="redis",key="keyName",operation="SET",result="HIT",le="0.025"} 1
-	// cache_request_duration_seconds_bucket{dialect="redis",key="keyName",operation="SET",result="HIT",le="0.05"} 1
-	// cache_request_duration_seconds_bucket{dialect="redis",key="keyName",operation="SET",result="HIT",le="0.1"} 1
-	// cache_request_duration_seconds_bucket{dialect="redis",key="keyName",operation="SET",result="HIT",le="0.25"} 1
-	// cache_request_duration_seconds_bucket{dialect="redis",key="keyName",operation="SET",result="HIT",le="0.5"} 1
-	// cache_request_duration_seconds_bucket{dialect="redis",key="keyName",operation="SET",result="HIT",le="1"} 1
-	// cache_request_duration_seconds_bucket{dialect="redis",key="keyName",operation="SET",result="HIT",le="2.5"} 1
-	// cache_request_duration_seconds_bucket{dialect="redis",key="keyName",operation="SET",result="HIT",le="5"} 1
-	// cache_request_duration_seconds_bucket{dialect="redis",key="keyName",operation="SET",result="HIT",le="10"} 1
-	// cache_request_duration_seconds_bucket{dialect="redis",key="keyName",operation="SET",result="HIT",le="+Inf"} 1
-	// cache_request_duration_seconds_sum{dialect="redis",key="keyName",operation="SET",result="HIT"} 0.000385649
-	// cache_request_duration_seconds_count{dialect="redis",key="keyName",operation="SET",result="HIT"} 1
+	// cache_requests_total{dialect="redis",operation="GET",result="MISS"} 1
+	// cache_requests_total{dialect="redis",operation="SET",result="HIT"} 1
+	// cache_request_duration_seconds_bucket{dialect="redis",operation="SET",result="HIT",le="0.005"} 1
+	// cache_request_duration_seconds_bucket{dialect="redis",operation="SET",result="HIT",le="0.01"} 1
+	// cache_request_duration_seconds_bucket{dialect="redis",operation="SET",result="HIT",le="0.025"} 1
+	// cache_request_duration_seconds_bucket{dialect="redis",operation="SET",result="HIT",le="0.05"} 1
+	// cache_request_duration_seconds_bucket{dialect="redis",operation="SET",result="HIT",le="0.1"} 1
+	// cache_request_duration_seconds_bucket{dialect="redis",operation="SET",result="HIT",le="0.25"} 1
+	// cache_request_duration_seconds_bucket{dialect="redis",operation="SET",result="HIT",le="0.5"} 1
+	// cache_request_duration_seconds_bucket{dialect="redis",operation="SET",result="HIT",le="1"} 1
+	// cache_request_duration_seconds_bucket{dialect="redis",operation="SET",result="HIT",le="2.5"} 1
+	// cache_request_duration_seconds_bucket{dialect="redis",operation="SET",result="HIT",le="5"} 1
+	// cache_request_duration_seconds_bucket{dialect="redis",operation="SET",result="HIT",le="10"} 1
+	// cache_request_duration_seconds_bucket{dialect="redis",operation="SET",result="HIT",le="+Inf"} 1
+	// cache_request_duration_seconds_sum{dialect="redis",operation="SET",result="HIT"} 0.000385649
+	// cache_request_duration_seconds_count{dialect="redis",operation="SET",result="HIT"} 1
 }
 
 func httpWithPrometheus() {
