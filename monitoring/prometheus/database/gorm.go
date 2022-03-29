@@ -76,7 +76,7 @@ func (gp *gormPrometheus) end(name string) func(*gorm.DB) {
 		}
 
 		operation := "OTHER"
-		ops := strings.Split(db.Statement.SQL.String(), " ")
+		ops := strings.Split(strings.TrimSpace(db.Statement.SQL.String()), " ")
 		if len(ops) > 0 {
 			operation = strings.ToUpper(ops[0])
 		}

@@ -48,7 +48,8 @@ func (c *Client) Get(key string, data interface{}) error {
 }
 
 // Set to save data to cache.
-func (c *Client) Set(key string, data interface{}) error {
+// Custom ttl not supported.
+func (c *Client) Set(key string, data interface{}, _ ...time.Duration) error {
 	d, err := json.Marshal(data)
 	if err != nil {
 		return err
