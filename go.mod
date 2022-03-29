@@ -8,17 +8,17 @@ require (
 	github.com/elastic/go-elasticsearch/v7 v7.2.0
 	github.com/go-chi/chi v4.1.2+incompatible
 	github.com/go-playground/mold/v4 v4.2.0
-	github.com/go-playground/validator/v10 v10.10.0
-	github.com/go-redis/redis/v8 v8.11.4
+	github.com/go-playground/validator/v10 v10.10.1
+	github.com/go-redis/redis/v8 v8.11.5
 	github.com/nsqio/go-nsq v1.1.0
 	github.com/prometheus/client_golang v1.12.1
 	github.com/rs/zerolog v1.26.1
 	github.com/sirupsen/logrus v1.8.1
 	github.com/streadway/amqp v1.0.0
 	go.uber.org/zap v1.21.0
-	google.golang.org/grpc v1.44.0
-	gorm.io/driver/mysql v1.2.3
-	gorm.io/gorm v1.22.5
+	google.golang.org/grpc v1.45.0
+	gorm.io/driver/mysql v1.3.2
+	gorm.io/gorm v1.23.3
 )
 
 require (
@@ -42,9 +42,9 @@ require (
 	go.uber.org/atomic v1.9.0 // indirect
 	go.uber.org/multierr v1.7.0 // indirect
 	golang.org/x/crypto v0.0.0-20211215165025-cf75a172585e // indirect
-	golang.org/x/net v0.0.0-20210805182204-aaa1db679c0d // indirect
+	golang.org/x/net v0.0.0-20211112202133-69e39bad7dc2 // indirect
 	golang.org/x/sys v0.0.0-20220114195835-da31bd327af9 // indirect
-	golang.org/x/text v0.3.6 // indirect
+	golang.org/x/text v0.3.7 // indirect
 	google.golang.org/genproto v0.0.0-20211223182754-3ac035c7e7cb // indirect
 	google.golang.org/protobuf v1.27.1 // indirect
 )

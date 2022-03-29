@@ -51,12 +51,19 @@ func NewFromGoRedis(client *redis.Client, expiredTime time.Duration) *Client {
 }
 
 // Set to save data to cache,
-func (c *Client) Set(key string, data interface{}) error {
+func (c *Client) Set(key string, data interface{}, ttl ...time.Duration) error {
 	d, err := json.Marshal(data)
 	if err != nil {
 		return err
 	}
-	return c.client.Set(context.Background(), key, d, c.expiredTime).Err()
+
+	// Override ttl.
+	expiredTime := c.expiredTime
+	if len(ttl) > 0 {
+		expiredTime = ttl[0]
+	}
+
+	return c.client.Set(context.Background(), key, d, expiredTime).Err()
 }
 
 // Get to get data from cache.

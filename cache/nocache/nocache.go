@@ -3,6 +3,7 @@ package nocache
 
 import (
 	"errors"
+	"time"
 )
 
 // Client is nocache client.
@@ -17,18 +18,18 @@ func New() (*Client, error) {
 }
 
 // Set will just return nil.
-func (c *Client) Set(key string, data interface{}) error {
+func (c *Client) Set(_ string, _ interface{}, _ ...time.Duration) error {
 	return nil
 }
 
 // Get will just return error to simulate as if data is not
 // in cache.
-func (c *Client) Get(key string, data interface{}) error {
+func (c *Client) Get(_ string, _ interface{}) error {
 	return ErrNoCache
 }
 
 // Delete will just return nil.
-func (c *Client) Delete(key string) error {
+func (c *Client) Delete(_ string) error {
 	return nil
 }
 

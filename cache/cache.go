@@ -21,7 +21,7 @@ type Cacher interface {
 	// Save data to cache. Set and Get should be using
 	// the same encoding method. For example, json.Marshal
 	// for Set and json.Unmarshal for Get.
-	Set(key string, data interface{}) error
+	Set(key string, data interface{}, ttl ...time.Duration) error
 	// Delete data from cache.
 	Delete(key string) error
 	// Close cache connection.
