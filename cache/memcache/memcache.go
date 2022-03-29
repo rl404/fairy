@@ -30,15 +30,22 @@ func NewFromGoMemCache(client *memcache.Client, expiredTime time.Duration) *Clie
 }
 
 // Set to save data to cache.
-func (c *Client) Set(key string, data interface{}) error {
+func (c *Client) Set(key string, data interface{}, ttl ...time.Duration) error {
 	d, err := json.Marshal(data)
 	if err != nil {
 		return err
 	}
+
+	// Override ttl.
+	expiredTime := c.expiredTime
+	if len(ttl) > 0 {
+		expiredTime = ttl[0]
+	}
+
 	return c.client.Set(&memcache.Item{
 		Key:        key,
 		Value:      d,
-		Expiration: int32(c.expiredTime.Seconds()),
+		Expiration: int32(expiredTime.Seconds()),
 	})
 }
 
