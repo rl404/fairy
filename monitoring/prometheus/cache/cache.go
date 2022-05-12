@@ -75,9 +75,9 @@ func (c *client) Get(key string, data interface{}) error {
 }
 
 // Set to update set metrics.
-func (c *client) Set(key string, data interface{}, _ ...time.Duration) error {
+func (c *client) Set(key string, data interface{}, ttl ...time.Duration) error {
 	start := time.Now()
-	if err := c.cacher.Set(key, data); err != nil {
+	if err := c.cacher.Set(key, data, ttl...); err != nil {
 		cp.req.WithLabelValues(c.dialect, cacheSet, cacheMiss).Inc()
 		cp.lat.WithLabelValues(c.dialect, cacheSet, cacheMiss).Observe(float64(time.Since(start).Seconds()))
 		return err
