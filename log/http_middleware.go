@@ -65,11 +65,14 @@ func HandlerWithLog(logger Logger, next http.Handler, middlewareConfig ...Middle
 		ww.Tee(&bw)
 
 		// Get request body.
-		body, err := ioutil.ReadAll(r.Body)
-		if err != nil {
-			s.Wrap(ctx, err)
+		var body []byte
+		if r.Body != nil {
+			b, err := ioutil.ReadAll(r.Body)
+			if err != nil {
+				s.Wrap(ctx, err)
+			}
+			body, r.Body = b, ioutil.NopCloser(bytes.NewBuffer(b))
 		}
-		r.Body = ioutil.NopCloser(bytes.NewBuffer(body))
 
 		// Call next handler.
 		next.ServeHTTP(ww, r.WithContext(ctx))
