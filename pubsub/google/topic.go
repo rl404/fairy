@@ -83,7 +83,7 @@ func (c *Client) getSubscription(topic string) (*pubsub.Subscription, error) {
 		}
 
 		subID = sub.ID()
-		fmt.Println(subID)
+
 		c.Lock()
 		c.subscriptionExist[topic] = subID
 		c.Unlock()
