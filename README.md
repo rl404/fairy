@@ -14,6 +14,7 @@ _Fairy_ contains several general tools for easier and simpler development.
   - [Redis](https://redis.io/)
   - [RabbitMQ](https://rabbitmq.com/)
   - [NSQ](https://nsq.io/)
+  - [Google PubSub](https://cloud.google.com/pubsub)
 - Struct modification and validation
 - Logging & http middleware logging
 - Error stack tracing
