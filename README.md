@@ -17,8 +17,21 @@ _Fairy_ contains several general tools for easier and simpler development.
   - [Google PubSub](https://cloud.google.com/pubsub)
 - Struct modification and validation
 - Logging & http middleware logging
+  - [Logrus](https://github.com/sirupsen/logrus)
+  - [Zap](https://github.com/uber-go/zap)
+  - [Zerolog](https://github.com/rs/zerolog)
+  - [Elasticsearch](https://www.elastic.co/)
+  - [Newrelic](https://newrelic.com/)
 - Error stack tracing
 - Monitoring
+  - [Prometheus](https://prometheus.io/)
+    - Cache
+    - Database ([GORM](https://gorm.io/))
+    - HTTP & GRPC
+  - [Newrelic](https://newrelic.com/)
+    - Cache
+    - Database ([GORM](https://gorm.io/))
+    - HTTP & GRPC
 - Rate-limiting
 
 All these tools are simplified version of the original ones

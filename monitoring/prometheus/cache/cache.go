@@ -3,6 +3,7 @@
 package cache
 
 import (
+	"context"
 	"time"
 
 	"github.com/prometheus/client_golang/prometheus"
@@ -62,9 +63,9 @@ func New(d string, c cache.Cacher) cache.Cacher {
 }
 
 // Get to update get metrics.
-func (c *client) Get(key string, data interface{}) error {
+func (c *client) Get(ctx context.Context, key string, data interface{}) error {
 	start := time.Now()
-	if err := c.cacher.Get(key, data); err != nil {
+	if err := c.cacher.Get(ctx, key, data); err != nil {
 		cp.req.WithLabelValues(c.dialect, cacheGet, cacheMiss).Inc()
 		cp.lat.WithLabelValues(c.dialect, cacheGet, cacheMiss).Observe(float64(time.Since(start).Seconds()))
 		return err
@@ -75,9 +76,9 @@ func (c *client) Get(key string, data interface{}) error {
 }
 
 // Set to update set metrics.
-func (c *client) Set(key string, data interface{}, ttl ...time.Duration) error {
+func (c *client) Set(ctx context.Context, key string, data interface{}, ttl ...time.Duration) error {
 	start := time.Now()
-	if err := c.cacher.Set(key, data, ttl...); err != nil {
+	if err := c.cacher.Set(ctx, key, data, ttl...); err != nil {
 		cp.req.WithLabelValues(c.dialect, cacheSet, cacheMiss).Inc()
 		cp.lat.WithLabelValues(c.dialect, cacheSet, cacheMiss).Observe(float64(time.Since(start).Seconds()))
 		return err
@@ -88,9 +89,9 @@ func (c *client) Set(key string, data interface{}, ttl ...time.Duration) error {
 }
 
 // Delete to update delete metrics.
-func (c *client) Delete(key string) error {
+func (c *client) Delete(ctx context.Context, key string) error {
 	start := time.Now()
-	if err := c.cacher.Delete(key); err != nil {
+	if err := c.cacher.Delete(ctx, key); err != nil {
 		cp.req.WithLabelValues(c.dialect, cacheDelete, cacheMiss).Inc()
 		cp.lat.WithLabelValues(c.dialect, cacheDelete, cacheMiss).Observe(float64(time.Since(start).Seconds()))
 		return err

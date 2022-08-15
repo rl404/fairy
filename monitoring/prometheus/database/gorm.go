@@ -29,16 +29,16 @@ func init() {
 		req: prometheus.NewCounterVec(
 			prometheus.CounterOpts{
 				Name: gormReqName,
-				Help: "How many database queries processed, partitioned by database, operation and table.",
+				Help: "How many database queries processed, partitioned by database, operation, table and query.",
 			},
-			[]string{"database", "operation", "table"},
+			[]string{"database", "operation", "table", "query"},
 		),
 		lat: prometheus.NewHistogramVec(
 			prometheus.HistogramOpts{
 				Name: gormLatencyName,
-				Help: "How long it took to process the query, partitioned by database, operation and table.",
+				Help: "How long it took to process the query, partitioned by database, operation, table and query.",
 			},
-			[]string{"database", "operation", "table"},
+			[]string{"database", "operation", "table", "query"},
 		),
 	}
 
@@ -82,8 +82,9 @@ func (gp *gormPrometheus) end(name string) func(*gorm.DB) {
 		}
 
 		table := db.Statement.Table
+		query := db.Statement.SQL.String()
 
-		gp.req.WithLabelValues(name, operation, table).Inc()
-		gp.lat.WithLabelValues(name, operation, table).Observe(float64(time.Since(start).Seconds()))
+		gp.req.WithLabelValues(name, operation, table, query).Inc()
+		gp.lat.WithLabelValues(name, operation, table, query).Observe(float64(time.Since(start).Seconds()))
 	}
 }
