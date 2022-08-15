@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"time"
 
 	"github.com/rl404/fairy/cache"
@@ -24,7 +25,7 @@ func main() {
 	data := []string{"a", "b", "c"}
 
 	// Save to cache. Data will be encoded first.
-	if err := client.Set(key, data); err != nil {
+	if err := client.Set(context.Background(), key, data); err != nil {
 		panic(err)
 	}
 
@@ -34,12 +35,12 @@ func main() {
 
 	// Get data from cache. Data will be decoded to inputted
 	// variable. Don't forget to use pointer.
-	if err := client.Get(key, &newData); err != nil {
+	if err := client.Get(context.Background(), key, &newData); err != nil {
 		panic(err)
 	}
 
 	// Delete data from cache.
-	if err := client.Delete(key); err != nil {
+	if err := client.Delete(context.Background(), key); err != nil {
 		panic(err)
 	}
 }

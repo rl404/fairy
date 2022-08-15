@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"net/http"
 	"time"
 
@@ -66,7 +67,7 @@ func cacheWithPrometheus() {
 	cacher = cache.New("redis", cacher)
 
 	// Use cache as usual.
-	cacher.Set("key", "data")
+	cacher.Set(context.Background(), "key", "data")
 
 	// Sample metrics.
 	// cache_requests_total{dialect="redis",operation="GET",result="MISS"} 1
