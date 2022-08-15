@@ -12,22 +12,22 @@ type gormTimeNowCtxKey struct{}
 
 var gormTimeNowCtx = gormTimeNowCtxKey(struct{}{})
 
-// RegisterGORM to register prometheus plugin for gorm.
+// RegisterGORM to register newrelic plugin for gorm.
 func RegisterGORM(dialect, dbName string, db *gorm.DB) {
-	db.Callback().Query().Before("gorm:query").Register("prometheus:before_query", start)
-	db.Callback().Query().After("gorm:query").Register("prometheus:after_query", end(dialect, dbName))
+	db.Callback().Query().Before("gorm:query").Register("newrelic:before_query", start)
+	db.Callback().Query().After("gorm:query").Register("newrelic:after_query", end(dialect, dbName))
 
-	db.Callback().Create().Before("gorm:create").Register("prometheus:before_create", start)
-	db.Callback().Create().After("gorm:create").Register("prometheus:after_create", end(dialect, dbName))
+	db.Callback().Create().Before("gorm:create").Register("newrelic:before_create", start)
+	db.Callback().Create().After("gorm:create").Register("newrelic:after_create", end(dialect, dbName))
 
-	db.Callback().Delete().Before("gorm:delete").Register("prometheus:before_delete", start)
-	db.Callback().Delete().After("gorm:delete").Register("prometheus:after_delete", end(dialect, dbName))
+	db.Callback().Delete().Before("gorm:delete").Register("newrelic:before_delete", start)
+	db.Callback().Delete().After("gorm:delete").Register("newrelic:after_delete", end(dialect, dbName))
 
-	db.Callback().Update().Before("gorm:update").Register("prometheus:before_update", start)
-	db.Callback().Update().After("gorm:update").Register("prometheus:after_update", end(dialect, dbName))
+	db.Callback().Update().Before("gorm:update").Register("newrelic:before_update", start)
+	db.Callback().Update().After("gorm:update").Register("newrelic:after_update", end(dialect, dbName))
 
-	db.Callback().Row().Before("gorm:row").Register("prometheus:before_row", start)
-	db.Callback().Row().After("gorm:row").Register("prometheus:after_row", end(dialect, dbName))
+	db.Callback().Row().Before("gorm:row").Register("newrelic:before_row", start)
+	db.Callback().Row().After("gorm:row").Register("newrelic:after_row", end(dialect, dbName))
 }
 
 func start(db *gorm.DB) {
