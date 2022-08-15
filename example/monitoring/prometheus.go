@@ -36,23 +36,23 @@ func dbWithPrometheus() {
 	db.Where("id = ?", 1).First(&model)
 
 	// Sample metrics.
-	// database_requests_total{operation="INSERT",table="user"} 68
-	// database_requests_total{operation="SELECT",table="user"} 2370
-	// database_requests_total{operation="UPDATE",table="user"} 216
-	// database_request_duration_seconds_bucket{operation="UPDATE",table="user",le="0.005"} 5947
-	// database_request_duration_seconds_bucket{operation="UPDATE",table="user",le="0.01"} 6180
-	// database_request_duration_seconds_bucket{operation="UPDATE",table="user",le="0.025"} 6214
-	// database_request_duration_seconds_bucket{operation="UPDATE",table="user",le="0.05"} 6214
-	// database_request_duration_seconds_bucket{operation="UPDATE",table="user",le="0.1"} 6214
-	// database_request_duration_seconds_bucket{operation="UPDATE",table="user",le="0.25"} 6214
-	// database_request_duration_seconds_bucket{operation="UPDATE",table="user",le="0.5"} 6214
-	// database_request_duration_seconds_bucket{operation="UPDATE",table="user",le="1"} 6214
-	// database_request_duration_seconds_bucket{operation="UPDATE",table="user",le="2.5"} 6214
-	// database_request_duration_seconds_bucket{operation="UPDATE",table="user",le="5"} 6214
-	// database_request_duration_seconds_bucket{operation="UPDATE",table="user",le="10"} 6214
-	// database_request_duration_seconds_bucket{operation="UPDATE",table="user",le="+Inf"} 6214
-	// database_request_duration_seconds_sum{operation="UPDATE",table="user"} 12.041487635000017
-	// database_request_duration_seconds_count{operation="UPDATE",table="user"} 6214
+	// database_requests_total{operation="INSERT",query="INSERT INTO \"user\" VALUES($1)",table="user"} 68
+	// database_requests_total{operation="SELECT",query="SELECT * FROM \"user\" WHERE id = $1",table="user"} 2370
+	// database_requests_total{operation="UPDATE",query="UPDATE \"user\" SET name = $1 WHERE id = $2",table="user"} 216
+	// database_request_duration_seconds_bucket{operation="UPDATE",query="UPDATE \"user\" SET name = $1 WHERE id = $2",table="user",le="0.005"} 5947
+	// database_request_duration_seconds_bucket{operation="UPDATE",query="UPDATE \"user\" SET name = $1 WHERE id = $2",table="user",le="0.01"} 6180
+	// database_request_duration_seconds_bucket{operation="UPDATE",query="UPDATE \"user\" SET name = $1 WHERE id = $2",table="user",le="0.025"} 6214
+	// database_request_duration_seconds_bucket{operation="UPDATE",query="UPDATE \"user\" SET name = $1 WHERE id = $2",table="user",le="0.05"} 6214
+	// database_request_duration_seconds_bucket{operation="UPDATE",query="UPDATE \"user\" SET name = $1 WHERE id = $2",table="user",le="0.1"} 6214
+	// database_request_duration_seconds_bucket{operation="UPDATE",query="UPDATE \"user\" SET name = $1 WHERE id = $2",table="user",le="0.25"} 6214
+	// database_request_duration_seconds_bucket{operation="UPDATE",query="UPDATE \"user\" SET name = $1 WHERE id = $2",table="user",le="0.5"} 6214
+	// database_request_duration_seconds_bucket{operation="UPDATE",query="UPDATE \"user\" SET name = $1 WHERE id = $2",table="user",le="1"} 6214
+	// database_request_duration_seconds_bucket{operation="UPDATE",query="UPDATE \"user\" SET name = $1 WHERE id = $2",table="user",le="2.5"} 6214
+	// database_request_duration_seconds_bucket{operation="UPDATE",query="UPDATE \"user\" SET name = $1 WHERE id = $2",table="user",le="5"} 6214
+	// database_request_duration_seconds_bucket{operation="UPDATE",query="UPDATE \"user\" SET name = $1 WHERE id = $2",table="user",le="10"} 6214
+	// database_request_duration_seconds_bucket{operation="UPDATE",query="UPDATE \"user\" SET name = $1 WHERE id = $2",table="user",le="+Inf"} 6214
+	// database_request_duration_seconds_sum{operation="UPDATE",query="UPDATE \"user\" SET name = $1 WHERE id = $2",table="user"} 12.041487635000017
+	// database_request_duration_seconds_count{operation="UPDATE",query="UPDATE \"user\" SET name = $1 WHERE id = $2",table="user"} 6214
 }
 
 func cacheWithPrometheus() {
