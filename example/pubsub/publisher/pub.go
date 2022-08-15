@@ -1,6 +1,8 @@
 package main
 
 import (
+	"context"
+
 	"github.com/rl404/fairy/pubsub"
 )
 
@@ -29,7 +31,7 @@ func main() {
 	}
 
 	// Publish data to specific topic/channel. Data will be encoded first.
-	if err = client.Publish("topic", data); err != nil {
+	if err = client.Publish(context.Background(), "topic", data); err != nil {
 		panic(err)
 	}
 }
