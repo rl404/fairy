@@ -32,6 +32,7 @@ _Fairy_ contains several general tools for easier and simpler development.
     - Cache
     - Database ([GORM](https://gorm.io/))
     - HTTP & GRPC
+    - Pubsub
 - Rate-limiting
 
 All these tools are simplified version of the original ones

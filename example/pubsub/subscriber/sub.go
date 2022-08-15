@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"os"
 	"os/signal"
@@ -28,7 +29,7 @@ func main() {
 	defer client.Close()
 
 	// Subscribe to specific topic/channel.
-	s, err := client.Subscribe("topic")
+	s, err := client.Subscribe(context.Background(), "topic")
 	if err != nil {
 		panic(err)
 	}
@@ -47,7 +48,7 @@ func main() {
 
 	// Read incomming message. Message will be decoded
 	// to newData. Don't forget to use pointer.
-	msgs, errChan := channel.Read(&newData)
+	msgs, errChan := channel.Read(context.Background(), &newData)
 
 	// Prepare goroutine channel that will stop when
 	// ctrl+c.
