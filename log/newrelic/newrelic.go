@@ -31,7 +31,6 @@ const (
 // Client is newrelic client.
 type Client struct {
 	client *newrelic.Application
-	name   string
 	level  LogLevel
 }
 
@@ -60,9 +59,17 @@ func New(cfg Config) (*Client, error) {
 
 	return &Client{
 		client: nr,
-		name:   cfg.Name,
 		level:  cfg.Level,
 	}, nil
+}
+
+// NewFromNewrelic to create new newrelic client with
+// existing newrelic app.
+func NewFromNewrelicApp(app *newrelic.Application, level LogLevel) *Client {
+	return &Client{
+		client: app,
+		level:  level,
+	}
 }
 
 // Trace to print trace log.
