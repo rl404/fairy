@@ -65,6 +65,9 @@ func New(cfg Config) (*Client, error) {
 
 // NewFromNewrelic to create new newrelic client with
 // existing newrelic app.
+//
+// Don't forget to use `newrelic.ConfigAppLogForwardingEnabled(true)` when
+// initializing your newrelic.
 func NewFromNewrelicApp(app *newrelic.Application, level LogLevel) *Client {
 	return &Client{
 		client: app,

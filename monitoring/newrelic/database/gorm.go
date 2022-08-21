@@ -5,7 +5,7 @@ import (
 	"strconv"
 	"strings"
 
-	newrelic "github.com/newrelic/go-agent/v3/newrelic"
+	"github.com/newrelic/go-agent/v3/newrelic"
 	"gorm.io/gorm"
 )
 
@@ -51,7 +51,7 @@ func (gp *gormPlugin) Initialize(db *gorm.DB) error {
 	db.Callback().Update().After("gorm:commit_or_rollback_transaction").Register("newrelic:commit_or_rollback_transaction_update", gp.end("TRANSACTION"))
 
 	db.Callback().Row().Before("gorm:row").Register("newrelic:before_row", gp.start("ROW"))
-	db.Callback().Row().Before("gorm:row").Register("newrelic:before_row", gp.start("ROW"))
+	db.Callback().Row().After("gorm:row").Register("newrelic:after_row", gp.end("ROW"))
 
 	db.Callback().Raw().Before("gorm:raw").Register("newrelic:before_raw", gp.start("RAW"))
 	db.Callback().Raw().After("gorm:raw").Register("newrelic:after_raw", gp.end("RAW"))

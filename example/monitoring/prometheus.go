@@ -26,10 +26,11 @@ func dbWithPrometheus() {
 	db, err := gorm.Open(mysql.Open(dsn))
 	if err != nil {
 		// Handle error.
+		panic(err)
 	}
 
-	// Register prometheus to db.
-	database.RegisterGORM("dbname", db)
+	// Use prometheus as gorm plugin.
+	db.Use(database.NewGORM("dbname"))
 
 	// Do query as usual.
 	var model dummyModel
@@ -61,6 +62,7 @@ func cacheWithPrometheus() {
 	cacher, err := _cache.New(dialect, "localhost:6379", "", time.Minute)
 	if err != nil {
 		// Handle error.
+		panic(err)
 	}
 
 	// Wrap cache with prometheus.
@@ -119,5 +121,3 @@ func httpWithPrometheus() {
 	// http_request_duration_seconds_sum{code="500",method="POST",path="/register"} 1.603506212
 	// http_request_duration_seconds_count{code="500",method="POST",path="/register"} 1
 }
-
-func main() {}
