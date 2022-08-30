@@ -16,7 +16,7 @@ require (
 	github.com/newrelic/go-agent/v3/integrations/nrgrpc v1.3.1
 	github.com/nsqio/go-nsq v1.1.0
 	github.com/prometheus/client_golang v1.13.0
-	github.com/rs/zerolog v1.27.0
+	github.com/rs/zerolog v1.28.0
 	github.com/sirupsen/logrus v1.9.0
 	github.com/streadway/amqp v1.0.0
 	go.uber.org/zap v1.23.0
