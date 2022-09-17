@@ -9,7 +9,7 @@ require (
 	github.com/elastic/go-elasticsearch/v7 v7.2.0
 	github.com/go-chi/chi v4.1.2+incompatible
 	github.com/go-playground/mold/v4 v4.2.0
-	github.com/go-playground/validator/v10 v10.11.0
+	github.com/go-playground/validator/v10 v10.11.1
 	github.com/go-redis/redis/v8 v8.11.5
 	github.com/golang/mock v1.6.0
 	github.com/newrelic/go-agent/v3 v3.18.2
