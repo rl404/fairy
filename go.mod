@@ -22,7 +22,7 @@ require (
 	go.uber.org/zap v1.23.0
 	google.golang.org/api v0.98.0
 	google.golang.org/grpc v1.50.0
-	gorm.io/driver/mysql v1.4.0
+	gorm.io/driver/mysql v1.4.1
 	gorm.io/gorm v1.24.0
 )
 
