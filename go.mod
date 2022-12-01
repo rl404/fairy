@@ -20,7 +20,7 @@ require (
 	github.com/rs/zerolog v1.28.0
 	github.com/sirupsen/logrus v1.9.0
 	github.com/streadway/amqp v1.0.0
-	go.uber.org/zap v1.23.0
+	go.uber.org/zap v1.24.0
 	google.golang.org/api v0.103.0
 	google.golang.org/grpc v1.51.0
 	gorm.io/driver/mysql v1.4.4
