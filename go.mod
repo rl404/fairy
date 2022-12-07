@@ -3,7 +3,7 @@ module github.com/rl404/fairy
 go 1.17
 
 require (
-	cloud.google.com/go/pubsub v1.27.1
+	cloud.google.com/go/pubsub v1.28.0
 	github.com/allegro/bigcache v1.2.1
 	github.com/bradfitz/gomemcache v0.0.0-20190913173617-a41fca850d0b
 	github.com/elastic/go-elasticsearch/v7 v7.2.0
@@ -29,7 +29,7 @@ require (
 
 require (
 	cloud.google.com/go v0.105.0 // indirect
-	cloud.google.com/go/compute v1.12.1 // indirect
+	cloud.google.com/go/compute v1.13.0 // indirect
 	cloud.google.com/go/compute/metadata v0.2.1 // indirect
 	cloud.google.com/go/iam v0.7.0 // indirect
 	github.com/beorn7/perks v1.0.1 // indirect
@@ -64,6 +64,6 @@ require (
 	golang.org/x/sys v0.1.0 // indirect
 	golang.org/x/text v0.4.0 // indirect
 	google.golang.org/appengine v1.6.7 // indirect
-	google.golang.org/genproto v0.0.0-20221201164419-0e50fba7f41c // indirect
+	google.golang.org/genproto v0.0.0-20221202195650-67e5cbc046fd // indirect
 	google.golang.org/protobuf v1.28.1 // indirect
 )
