@@ -126,3 +126,8 @@ func validOptionalPort(port string) bool {
 	}
 	return true
 }
+
+// IterAndDelete to update delete metrics.
+func (c *client) IterAndDelete(ctx context.Context, prefix string) error {
+	return nil
+}

@@ -84,3 +84,12 @@ func (c *Client) Delete(ctx context.Context, key string) error {
 func (c *Client) Close() error {
 	return c.client.Close()
 }
+
+// IterAndDelete for delete keys from prefix.
+func (c *Client) IterAndDelete(ctx context.Context, prefix string) error {
+	iter := c.client.Scan(ctx, 0, prefix, 0).Iterator()
+	for iter.Next(ctx) {
+		c.client.Del(ctx, iter.Val())
+	}
+	return nil
+}

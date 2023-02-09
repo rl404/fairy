@@ -38,3 +38,8 @@ func (c *Client) Delete(_ context.Context, _ string) error {
 func (c *Client) Close() error {
 	return nil
 }
+
+// IterAndDelete will just return nil.
+func (c *Client) IterAndDelete(_ context.Context, _ string) error {
+	return nil
+}

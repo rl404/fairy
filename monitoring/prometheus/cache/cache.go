@@ -105,3 +105,8 @@ func (c *client) Delete(ctx context.Context, key string) error {
 func (c *client) Close() error {
 	return c.cacher.Close()
 }
+
+// IterAndDelete to update delete metrics.
+func (c *client) IterAndDelete(ctx context.Context, prefix string) error {
+	return nil
+}

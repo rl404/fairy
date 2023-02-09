@@ -71,3 +71,8 @@ func (c *Client) Delete(ctx context.Context, key string) error {
 func (c *Client) Close() error {
 	return c.bc.Close()
 }
+
+// IterAndDelete for delete keys from prefix.
+func (c *Client) IterAndDelete(ctx context.Context, prefix string) error {
+	return nil
+}

@@ -27,6 +27,8 @@ type Cacher interface {
 	Delete(ctx context.Context, key string) error
 	// Close cache connection.
 	Close() error
+	// IterAndDelete for delete keys from prefix.
+	IterAndDelete(ctx context.Context, prefix string) error
 }
 
 // CacheType is type for cache.

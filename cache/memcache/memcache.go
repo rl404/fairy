@@ -73,3 +73,8 @@ func (c *Client) Close() error {
 	// gomemcache has no function to close client connection. :(
 	return nil
 }
+
+// IterAndDelete for delete keys from prefix.
+func (c *Client) IterAndDelete(ctx context.Context, prefix string) error {
+	return nil
+}
