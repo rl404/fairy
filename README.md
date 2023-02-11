@@ -15,6 +15,7 @@ _Fairy_ contains several general tools for easier and simpler development.
   - [RabbitMQ](https://rabbitmq.com/)
   - [NSQ](https://nsq.io/)
   - [Google PubSub](https://cloud.google.com/pubsub)
+  - [Kafka](https://kafka.apache.org/)
 - Struct modification and validation
 - Logging & http middleware logging
   - [Logrus](https://github.com/sirupsen/logrus)

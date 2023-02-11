@@ -1,4 +1,4 @@
-// Package google is a wrapper of the original "cloud.google.com/go/pubsu" library.
+// Package google is a wrapper of the original "cloud.google.com/go/pubsub" library.
 //
 // Only contains basic publish, subscribe, and close methods.
 // Data will be encoded to JSON before publishing the message.
