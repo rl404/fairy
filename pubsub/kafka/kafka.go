@@ -67,7 +67,10 @@ func (c *Channel) Read(ctx context.Context, model interface{}) (<-chan interface
 	msgChan, errChan := make(chan interface{}), make(chan error)
 	go func() {
 		for {
-			c.reader.SetOffsetAt(ctx, time.Now())
+			if err := c.reader.SetOffsetAt(ctx, time.Now()); err != nil {
+				errChan <- err
+				return
+			}
 
 			msg, err := c.reader.ReadMessage(ctx)
 			if err != nil {

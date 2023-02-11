@@ -102,7 +102,6 @@ func (c *Client) Close() error {
 // Read to read incoming message.
 func (c *Channel) Read(ctx context.Context, model interface{}) (<-chan interface{}, <-chan error) {
 	msgChan, errChan := make(chan interface{}), make(chan error)
-
 	go func() {
 		for {
 			if err := c.subscription.Receive(ctx, func(_ context.Context, msg *pubsub.Message) {
