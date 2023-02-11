@@ -1,3 +1,7 @@
+// Package kafka is a wrapper of the original "github.com/segmentio/kafka-go" library.
+//
+// Only contains basic publish, subscribe, and close methods.
+// Data will be encoded to JSON before publishing the message.
 package kafka
 
 import (
