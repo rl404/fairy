@@ -8,7 +8,7 @@ require (
 	github.com/bradfitz/gomemcache v0.0.0-20190913173617-a41fca850d0b
 	github.com/elastic/go-elasticsearch/v7 v7.2.0
 	github.com/go-chi/chi v4.1.2+incompatible
-	github.com/go-playground/mold/v4 v4.2.1
+	github.com/go-playground/mold/v4 v4.3.0
 	github.com/go-playground/validator/v10 v10.11.2
 	github.com/go-redis/redis/v8 v8.11.5
 	github.com/golang/mock v1.6.0
