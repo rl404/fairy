@@ -22,7 +22,7 @@ require (
 	github.com/sirupsen/logrus v1.9.0
 	github.com/streadway/amqp v1.0.0
 	go.uber.org/zap v1.24.0
-	google.golang.org/api v0.112.0
+	google.golang.org/api v0.113.0
 	google.golang.org/grpc v1.53.0
 	gorm.io/driver/mysql v1.4.7
 	gorm.io/gorm v1.24.6
@@ -44,7 +44,7 @@ require (
 	github.com/golang/snappy v0.0.4 // indirect
 	github.com/google/go-cmp v0.5.9 // indirect
 	github.com/googleapis/enterprise-certificate-proxy v0.2.3 // indirect
-	github.com/googleapis/gax-go/v2 v2.7.0 // indirect
+	github.com/googleapis/gax-go/v2 v2.7.1 // indirect
 	github.com/jinzhu/inflection v1.0.0 // indirect
 	github.com/jinzhu/now v1.1.5 // indirect
 	github.com/klauspost/compress v1.15.9 // indirect
@@ -67,6 +67,6 @@ require (
 	golang.org/x/sys v0.6.0 // indirect
 	golang.org/x/text v0.8.0 // indirect
 	google.golang.org/appengine v1.6.7 // indirect
-	google.golang.org/genproto v0.0.0-20230303212802-e74f57abe488 // indirect
-	google.golang.org/protobuf v1.28.1 // indirect
+	google.golang.org/genproto v0.0.0-20230306155012-7f2fa6fef1f4 // indirect
+	google.golang.org/protobuf v1.29.1 // indirect
 )
