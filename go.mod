@@ -6,7 +6,7 @@ require (
 	cloud.google.com/go/pubsub v1.30.0
 	github.com/allegro/bigcache v1.2.1
 	github.com/bradfitz/gomemcache v0.0.0-20190913173617-a41fca850d0b
-	github.com/elastic/go-elasticsearch/v7 v7.2.0
+	github.com/elastic/go-elasticsearch/v7 v7.17.10
 	github.com/go-chi/chi v4.1.2+incompatible
 	github.com/go-playground/mold/v4 v4.3.0
 	github.com/go-playground/validator/v10 v10.13.0
