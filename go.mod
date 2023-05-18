@@ -19,7 +19,7 @@ require (
 	github.com/prometheus/client_golang v1.15.1
 	github.com/rs/zerolog v1.29.1
 	github.com/segmentio/kafka-go v0.4.40
-	github.com/sirupsen/logrus v1.9.0
+	github.com/sirupsen/logrus v1.9.1
 	github.com/streadway/amqp v1.0.0
 	go.uber.org/zap v1.24.0
 	google.golang.org/api v0.122.0
