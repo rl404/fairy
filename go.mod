@@ -8,7 +8,7 @@ require (
 	github.com/bradfitz/gomemcache v0.0.0-20190913173617-a41fca850d0b
 	github.com/elastic/go-elasticsearch/v7 v7.17.10
 	github.com/go-chi/chi v4.1.2+incompatible
-	github.com/go-playground/mold/v4 v4.3.0
+	github.com/go-playground/mold/v4 v4.4.0
 	github.com/go-playground/validator/v10 v10.13.0
 	github.com/go-redis/redis/v8 v8.11.5
 	github.com/golang/mock v1.6.0
@@ -46,6 +46,8 @@ require (
 	github.com/google/s2a-go v0.1.3 // indirect
 	github.com/googleapis/enterprise-certificate-proxy v0.2.3 // indirect
 	github.com/googleapis/gax-go/v2 v2.8.0 // indirect
+	github.com/gosimple/slug v1.13.1 // indirect
+	github.com/gosimple/unidecode v1.0.1 // indirect
 	github.com/jinzhu/inflection v1.0.0 // indirect
 	github.com/jinzhu/now v1.1.5 // indirect
 	github.com/klauspost/compress v1.15.9 // indirect
