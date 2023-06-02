@@ -13,7 +13,7 @@ require (
 	github.com/go-redis/redis/v8 v8.11.5
 	github.com/golang/mock v1.6.0
 	github.com/mattn/go-colorable v0.1.13
-	github.com/newrelic/go-agent/v3 v3.21.1
+	github.com/newrelic/go-agent/v3 v3.22.1
 	github.com/newrelic/go-agent/v3/integrations/nrgrpc v1.3.2
 	github.com/nsqio/go-nsq v1.1.0
 	github.com/prometheus/client_golang v1.15.1
