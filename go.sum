@@ -924,8 +924,8 @@ github.com/modern-go/reflect2 v1.0.2/go.mod h1:yWuevngMOJpCy52FWWMvUC8ws7m/LJsjY
 github.com/mwitkow/go-conntrack v0.0.0-20161129095857-cc309e4a2223/go.mod h1:qRWi+5nqEBWmkhHvq77mSJWrCKwh8bxhgT7d/eI7P4U=
 github.com/mwitkow/go-conntrack v0.0.0-20190716064945-2f068394615f/go.mod h1:qRWi+5nqEBWmkhHvq77mSJWrCKwh8bxhgT7d/eI7P4U=
 github.com/newrelic/go-agent/v3 v3.18.2/go.mod h1:BFJOlbZWRlPTXKYIC1TTTtQKTnYntEJaU0VU507hDc0=
-github.com/newrelic/go-agent/v3 v3.21.1 h1:nSLaQK+w/BHPUEpkPB+fX3ikgaRR2qyQiTECrcY+AmQ=
-github.com/newrelic/go-agent/v3 v3.21.1/go.mod h1:AGagR69YHzamnvfxq9aDHnImvZwxr7C+4w7UN0Bm3UM=
+github.com/newrelic/go-agent/v3 v3.22.1 h1:c1nPHw/LMNx+J6U5dtVb9xGywftj36cG3sxrHwOwygA=
+github.com/newrelic/go-agent/v3 v3.22.1/go.mod h1:uuvX0xe0ZuO2wAXuM30vdIjyc76z3TfG81BVkf3pclc=
 github.com/newrelic/go-agent/v3/integrations/nrgrpc v1.3.2 h1:SBtZAkWapxfAxYVZHagHxsrbRt+ULkgxi0mbn6TMRM8=
 github.com/newrelic/go-agent/v3/integrations/nrgrpc v1.3.2/go.mod h1:h5GGcju9OuzmRdKa5glKh/SrMs1HhZyvXrf0mEPv70k=
 github.com/nsqio/go-nsq v1.1.0 h1:PQg+xxiUjA7V+TLdXw7nVrJ5Jbl3sN86EhGCQj4+FYE=
