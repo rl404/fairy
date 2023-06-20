@@ -20,7 +20,7 @@ require (
 	github.com/rs/zerolog v1.29.1
 	github.com/segmentio/kafka-go v0.4.40
 	github.com/sirupsen/logrus v1.9.3
-	github.com/streadway/amqp v1.0.0
+	github.com/streadway/amqp v1.1.0
 	go.uber.org/zap v1.24.0
 	google.golang.org/api v0.128.0
 	google.golang.org/grpc v1.56.0
