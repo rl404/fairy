@@ -5,6 +5,7 @@ go 1.17
 require (
 	cloud.google.com/go/pubsub v1.32.0
 	github.com/allegro/bigcache v1.2.1
+	github.com/allegro/bigcache/v3 v3.1.0
 	github.com/bradfitz/gomemcache v0.0.0-20230611145640-acc696258285
 	github.com/elastic/go-elasticsearch/v7 v7.17.10
 	github.com/go-chi/chi v4.1.2+incompatible
