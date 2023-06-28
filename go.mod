@@ -10,7 +10,7 @@ require (
 	github.com/go-chi/chi v4.1.2+incompatible
 	github.com/go-playground/mold/v4 v4.5.0
 	github.com/go-playground/validator/v10 v10.14.1
-	github.com/go-redis/redis/v8 v8.11.5
+	github.com/go-redis/redis/v9 v9.0.5
 	github.com/golang/mock v1.6.0
 	github.com/mattn/go-colorable v0.1.13
 	github.com/newrelic/go-agent/v3 v3.23.0
