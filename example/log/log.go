@@ -8,7 +8,7 @@ import (
 	"net/http"
 	"net/http/httptest"
 
-	"github.com/go-chi/chi"
+	"github.com/go-chi/chi/v5"
 	"github.com/rl404/fairy/example/errors/helper"
 	"github.com/rl404/fairy/log"
 )
@@ -31,7 +31,7 @@ func main() {
 		Level:                  log.ErrorLevel,
 		ElasticsearchAddresses: []string{"http://localhost:9200"},
 		ElasticsearchUser:      "elastic",
-		ElasticsearchPassword:  "rl404",
+		ElasticsearchPassword:  "",
 		ElasticsearchIndex:     "logs-example",
 		ElasticsearchIsSync:    true,
 	})

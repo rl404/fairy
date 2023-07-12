@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/go-chi/chi"
+	"github.com/go-chi/chi/v5"
 	"github.com/newrelic/go-agent/v3/newrelic"
 	_cache "github.com/rl404/fairy/cache"
 	"github.com/rl404/fairy/monitoring/newrelic/cache"
