@@ -6,8 +6,8 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/go-chi/chi"
-	mwChi "github.com/go-chi/chi/middleware"
+	"github.com/go-chi/chi/v5"
+	mwChi "github.com/go-chi/chi/v5/middleware"
 	"github.com/prometheus/client_golang/prometheus"
 )
 
