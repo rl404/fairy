@@ -12,6 +12,7 @@ type user struct {
 	Name    string `validate:"required" mod:"trim"`
 	Age     int    `validate:"gt=10"`
 	Magic   string `mod:"magic"`
+	Skill   string `mod:"skill=expert"`
 	Country string `validate:"contain=konoha" mod:"lcase"`
 }
 
@@ -20,8 +21,11 @@ func main() {
 	v := validation.New(true)
 
 	// Register custom modifier.
-	v.RegisterModifier("magic", func(in string) string {
+	v.RegisterModifier("magic", func(in string, _ ...string) string {
 		return in + " magic"
+	})
+	v.RegisterModifier("skill", func(in string, param ...string) string {
+		return fmt.Sprintf("%s (%s)", in, param[0])
 	})
 
 	// Register custom validator.
@@ -42,6 +46,7 @@ func main() {
 		Name:    "  Naruto ",
 		Age:     15,
 		Magic:   "ninja",
+		Skill:   "jump",
 		Country: "Konohagakure",
 	}
 
