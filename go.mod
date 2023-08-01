@@ -12,8 +12,8 @@ require (
 	github.com/go-playground/validator/v10 v10.14.1
 	github.com/golang/mock v1.6.0
 	github.com/mattn/go-colorable v0.1.13
-	github.com/newrelic/go-agent/v3 v3.23.1
-	github.com/newrelic/go-agent/v3/integrations/nrgrpc v1.4.0
+	github.com/newrelic/go-agent/v3 v3.24.0
+	github.com/newrelic/go-agent/v3/integrations/nrgrpc v1.4.1
 	github.com/nsqio/go-nsq v1.1.0
 	github.com/prometheus/client_golang v1.16.0
 	github.com/redis/go-redis/v9 v9.0.5
