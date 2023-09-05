@@ -656,6 +656,8 @@ github.com/bradfitz/gomemcache v0.0.0-20230904043129-d8906edec246 h1:y3sHU4k8a8m
 github.com/bradfitz/gomemcache v0.0.0-20230904043129-d8906edec246/go.mod h1:r5xuitiExdLAJ09PR7vBVENGvp4ZuTBeWTGtxuX3K+c=
 github.com/bradfitz/gomemcache v0.0.0-20230904214600-21f1bbe2b5f6 h1:w7YqP/Kh3p/KfRNREPHHYwAZjx0nE4cKI76GYCY9WO8=
 github.com/bradfitz/gomemcache v0.0.0-20230904214600-21f1bbe2b5f6/go.mod h1:r5xuitiExdLAJ09PR7vBVENGvp4ZuTBeWTGtxuX3K+c=
+github.com/bradfitz/gomemcache v0.0.0-20230905024940-24af94b03874 h1:N7oVaKyGp8bttX0bfZGmcGkjz7DLQXhAn3DNd3T0ous=
+github.com/bradfitz/gomemcache v0.0.0-20230905024940-24af94b03874/go.mod h1:r5xuitiExdLAJ09PR7vBVENGvp4ZuTBeWTGtxuX3K+c=
 github.com/bsm/ginkgo/v2 v2.7.0 h1:ItPMPH90RbmZJt5GtkcNvIRuGEdwlBItdNVoyzaNQao=
 github.com/bsm/ginkgo/v2 v2.7.0/go.mod h1:AiKlXPm7ItEHNc/2+OkrNG4E0ITzojb9/xWzvQ9XZ9w=
 github.com/bsm/gomega v1.26.0 h1:LhQm+AFcgV2M0WyKroMASzAzCAJVpAxQXv4SaI9a69Y=
