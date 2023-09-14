@@ -21,9 +21,9 @@ require (
 	github.com/segmentio/kafka-go v0.4.42
 	github.com/sirupsen/logrus v1.9.3
 	github.com/streadway/amqp v1.1.0
-	go.uber.org/zap v1.25.0
-	google.golang.org/api v0.140.0
-	google.golang.org/grpc v1.58.0
+	go.uber.org/zap v1.26.0
+	google.golang.org/api v0.141.0
+	google.golang.org/grpc v1.58.1
 	gorm.io/driver/mysql v1.5.1
 	gorm.io/gorm v1.25.4
 )
