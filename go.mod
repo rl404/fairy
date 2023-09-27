@@ -15,8 +15,8 @@ require (
 	github.com/newrelic/go-agent/v3 v3.25.1
 	github.com/newrelic/go-agent/v3/integrations/nrgrpc v1.4.1
 	github.com/nsqio/go-nsq v1.1.0
-	github.com/prometheus/client_golang v1.16.0
-	github.com/redis/go-redis/v9 v9.2.0
+	github.com/prometheus/client_golang v1.17.0
+	github.com/redis/go-redis/v9 v9.2.1
 	github.com/rs/zerolog v1.31.0
 	github.com/segmentio/kafka-go v0.4.43
 	github.com/sirupsen/logrus v1.9.3
@@ -58,9 +58,9 @@ require (
 	github.com/mattn/go-isatty v0.0.19 // indirect
 	github.com/matttproud/golang_protobuf_extensions v1.0.4 // indirect
 	github.com/pierrec/lz4/v4 v4.1.15 // indirect
-	github.com/prometheus/client_model v0.3.0 // indirect
-	github.com/prometheus/common v0.42.0 // indirect
-	github.com/prometheus/procfs v0.10.1 // indirect
+	github.com/prometheus/client_model v0.4.1-0.20230718164431-9a2bf3000d16 // indirect
+	github.com/prometheus/common v0.44.0 // indirect
+	github.com/prometheus/procfs v0.11.1 // indirect
 	github.com/segmentio/go-camelcase v0.0.0-20160726192923-7085f1e3c734 // indirect
 	github.com/segmentio/go-snakecase v1.2.0 // indirect
 	github.com/stretchr/testify v1.8.3 // indirect
