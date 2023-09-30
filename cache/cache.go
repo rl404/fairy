@@ -1,3 +1,4 @@
+// Deprecated: use cache_v2.
 package cache
 
 import (
