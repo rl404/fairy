@@ -1,6 +1,7 @@
 // Package bigcache is a wrapper of the original "github.com/allegro/bigcache" library.
 //
 // Only contains basic get, set, delete, and close methods.
+//
 // Data will be encoded to JSON before saving to cache.
 package bigcache
 
@@ -20,14 +21,12 @@ type Client struct {
 
 // New to create new cache with default bigcache config.
 func New(expiredTime time.Duration) (*Client, error) {
-	cfg := bigcache.DefaultConfig(expiredTime)
-	cfg.CleanWindow = time.Second
-	return NewWithConfig(cfg)
+	return NewWithConfig(bigcache.DefaultConfig(expiredTime))
 }
 
 // NewWithConfig to create new cache with bigcache config.
 func NewWithConfig(cfg bigcache.Config) (*Client, error) {
-	c, err := bigcache.NewBigCache(cfg)
+	c, err := bigcache.New(context.Background(), cfg)
 	if err != nil {
 		return nil, err
 	}
