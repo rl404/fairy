@@ -1,33 +1,23 @@
-// Deprecated: use log_v2.
-package log
+// This file contains function to help you switch logging type easily.
+//
+// You can use this in your project if you want.
+//
+// You don't need to handle all logging types, just handle
+// the ones you will use.
+package main
 
 import (
 	"errors"
 
-	"github.com/rl404/fairy/log/builtin"
-	"github.com/rl404/fairy/log/elasticsearch"
-	"github.com/rl404/fairy/log/logrus"
-	"github.com/rl404/fairy/log/newrelic"
-	"github.com/rl404/fairy/log/nolog"
-	"github.com/rl404/fairy/log/zap"
-	"github.com/rl404/fairy/log/zerolog"
+	log "github.com/rl404/fairy/log_v2"
+	"github.com/rl404/fairy/log_v2/builtin"
+	"github.com/rl404/fairy/log_v2/elasticsearch"
+	"github.com/rl404/fairy/log_v2/logrus"
+	"github.com/rl404/fairy/log_v2/newrelic"
+	"github.com/rl404/fairy/log_v2/nolog"
+	"github.com/rl404/fairy/log_v2/zap"
+	"github.com/rl404/fairy/log_v2/zerolog"
 )
-
-// Logger is logging interface.
-//
-// See usage example in example folder.
-type Logger interface {
-	Trace(format string, args ...interface{})
-	Debug(format string, args ...interface{})
-	Info(format string, args ...interface{})
-	Warn(format string, args ...interface{})
-	Error(format string, args ...interface{})
-	Fatal(format string, args ...interface{})
-	Panic(format string, args ...interface{})
-
-	// General log with key value.
-	Log(fields map[string]interface{})
-}
 
 // LogLevel is level of log that will be printed.
 // Will print level that is higher than your
@@ -84,7 +74,7 @@ type Config struct {
 
 // New to create new log client depends on the type.
 // Color will not work in json format.
-func New(cfg Config) (Logger, error) {
+func New(cfg Config) (log.Logger, error) {
 	switch cfg.Type {
 	case NoLog:
 		return nolog.New(), nil
@@ -95,7 +85,7 @@ func New(cfg Config) (Logger, error) {
 	case Logrus:
 		return logrus.New(logrus.LogLevel(cfg.Level), cfg.JsonFormat, cfg.Color), nil
 	case Zap:
-		return zap.New(zap.LogLevel(cfg.Level), cfg.JsonFormat, cfg.Color), nil
+		return zap.New(zap.LogLevel(cfg.Level), cfg.JsonFormat, cfg.Color)
 	case Elasticsearch:
 		return elasticsearch.New(elasticsearch.Config{
 			Addresses: cfg.ElasticsearchAddresses,
