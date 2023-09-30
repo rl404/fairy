@@ -5,10 +5,10 @@ import (
 	"time"
 )
 
-// Cache is caching interface.
+// Cacher is caching interface.
 //
 // See usage example in example folder.
-type Cache interface {
+type Cacher interface {
 	// Get data from cache. The returned value will be
 	// assigned to param `data`. Param `data` should
 	// be a pointer just like when using json.Unmarshal.
