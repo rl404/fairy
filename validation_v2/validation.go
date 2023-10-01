@@ -1,7 +1,4 @@
-// Deprecated: use validation_v2.
 package validation
-
-import "github.com/rl404/fairy/validation/playground"
 
 // Validator is validating interface.
 //
@@ -20,11 +17,4 @@ type Validator interface {
 	// Validate struct field value according to validator tag.
 	// Param `data` should be a pointer.
 	Validate(data interface{}) error
-}
-
-// New to create new validator.
-// Pass true if you want to modify the data
-// automatically before validate.
-func New(mod bool) Validator {
-	return playground.New(mod)
 }
