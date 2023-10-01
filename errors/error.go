@@ -1,3 +1,4 @@
+// Deprecated: use errors_v2.
 package errors
 
 import (
