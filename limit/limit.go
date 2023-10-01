@@ -1,3 +1,4 @@
+// Deprecated: use limit_v2.
 package limit
 
 import (
