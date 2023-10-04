@@ -34,7 +34,7 @@ type Log struct {
 
 // New to create new logging client.
 // Color is not working in json format.
-func New(level LogLevel, jsonFmt, color bool) *Log {
+func New(level LogLevel, jsonFmt, color bool) (*Log, error) {
 	cfg := zap.Config{
 		Level:             zap.NewAtomicLevelAt(convertLevel[level]),
 		Development:       false,
@@ -66,11 +66,14 @@ func New(level LogLevel, jsonFmt, color bool) *Log {
 		cfg.EncoderConfig.EncodeLevel = zapcore.CapitalColorLevelEncoder
 	}
 
-	l, _ := cfg.Build()
+	l, err := cfg.Build()
+	if err != nil {
+		return nil, err
+	}
 
 	return &Log{
 		log: l,
-	}
+	}, nil
 }
 
 var convertFmt = map[bool]string{
@@ -142,7 +145,9 @@ func (l *Log) Log(fields map[string]interface{}) {
 
 	var keyVals []interface{}
 	for k, v := range fields {
-		keyVals = append(keyVals, k, v)
+		if k != "level" {
+			keyVals = append(keyVals, k, v)
+		}
 	}
 
 	if level, ok := fields["level"]; ok {

@@ -27,8 +27,7 @@ func UnaryMiddlewareWithLog(logger Logger, middlewareConfig ...MiddlewareConfig)
 		}
 
 		// Prepare error stack tracing.
-		s := errors.New()
-		ctx = s.Init(ctx)
+		ctx = errors.Init(ctx)
 		start := time.Now()
 
 		// Call handler.
@@ -46,8 +45,7 @@ func UnaryMiddlewareWithLog(logger Logger, middlewareConfig ...MiddlewareConfig)
 
 		if cfg.RequestHeader {
 			meta, _ := metadata.FromIncomingContext(ctx)
-			header, _ := json.Marshal(meta)
-			m["request_header"] = string(header)
+			m["request_header"] = meta
 		}
 
 		if cfg.RequestBody {
@@ -61,16 +59,22 @@ func UnaryMiddlewareWithLog(logger Logger, middlewareConfig ...MiddlewareConfig)
 		}
 
 		if cfg.ResponseHeader {
-			// todo: how?
+			meta, _ := metadata.FromOutgoingContext(ctx)
+			m["response_header"] = meta
 		}
 
 		// Include the error stack if you use it.
-		errStack := s.Get(ctx).([]string)
+		errStack := errors.Get(ctx)
 		if len(errStack) > 0 {
+			// Copy slice to prevent reversed multiple times
+			// if using multiple middleware.
+			errTmp := cpSlice(errStack)
+
 			// Reverse the stack order.
 			for i, j := 0, len(errStack)-1; i < j; i, j = i+1, j-1 {
-				errStack[i], errStack[j] = errStack[j], errStack[i]
+				errTmp[i], errTmp[j] = errTmp[j], errTmp[i]
 			}
+
 			m["error"] = errStack
 		}
 
@@ -99,9 +103,9 @@ func getCodeFromErr(err error) codes.Code {
 	return c.Code()
 }
 
-func getLevelFromError(err error) LogLevel {
+func getLevelFromError(err error) logLevel {
 	if err == nil {
-		return InfoLevel
+		return infoLevel
 	}
 	e, _ := status.FromError(err)
 	switch e.Code() {
@@ -112,9 +116,9 @@ func getLevelFromError(err error) LogLevel {
 		codes.AlreadyExists,
 		codes.PermissionDenied,
 		codes.Aborted:
-		return WarnLevel
+		return warnLevel
 	default:
-		return ErrorLevel
+		return errorLevel
 	}
 }
 

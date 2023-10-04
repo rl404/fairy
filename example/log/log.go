@@ -3,21 +3,22 @@ package main
 import (
 	"bytes"
 	"context"
-	"errors"
+	_errors "errors"
 	"io"
 	"net/http"
 	"net/http/httptest"
 
 	"github.com/go-chi/chi/v5"
-	"github.com/rl404/fairy/example/errors/helper"
+	"github.com/rl404/fairy/errors"
 	"github.com/rl404/fairy/log"
+	"github.com/rl404/fairy/log/chain"
 )
 
 func main() {
 	// Init first logger.
-	l1, err := log.New(log.Config{
-		Type:       log.Zerolog,
-		Level:      log.TraceLevel,
+	l1, err := New(Config{
+		Type:       Zerolog,
+		Level:      TraceLevel,
 		JsonFormat: false,
 		Color:      true,
 	})
@@ -26,9 +27,9 @@ func main() {
 	}
 
 	// Init second logger.
-	l2, err := log.New(log.Config{
-		Type:                   log.Elasticsearch,
-		Level:                  log.ErrorLevel,
+	l2, err := New(Config{
+		Type:                   Elasticsearch,
+		Level:                  ErrorLevel,
 		ElasticsearchAddresses: []string{"http://localhost:9200"},
 		ElasticsearchUser:      "elastic",
 		ElasticsearchPassword:  "",
@@ -40,13 +41,13 @@ func main() {
 	}
 
 	// Chain the loggers.
-	l := log.NewChain(l1, l2)
+	l := chain.New(l1, l2)
 
 	// General log with additional fields.
 	// Key `level` can be used to differentiate
 	// log level.
 	l.Log(map[string]interface{}{
-		"level":  log.ErrorLevel,
+		"level":  ErrorLevel,
 		"field1": "f1",
 		"field2": "f2",
 	})
@@ -88,7 +89,7 @@ func main() {
 func sampleHandler(w http.ResponseWriter, r *http.Request) {
 	if err := sampleErr(r.Context()); err != nil {
 		// Let's also test the error stack trace feature.
-		helper.Wrap(r.Context(), errors.New("sample error"), err)
+		errors.Wrap(r.Context(), _errors.New("sample error"), err)
 	}
 
 	w.WriteHeader(http.StatusInternalServerError)
@@ -97,5 +98,5 @@ func sampleHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func sampleErr(ctx context.Context) error {
-	return helper.Wrap(ctx, errors.New("sample original error"))
+	return errors.Wrap(ctx, _errors.New("sample original error"))
 }

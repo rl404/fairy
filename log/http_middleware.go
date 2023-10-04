@@ -2,7 +2,7 @@ package log
 
 import (
 	"bytes"
-	"io/ioutil"
+	"io"
 	"net"
 	"net/http"
 	"time"
@@ -56,8 +56,7 @@ func HandlerWithLog(logger Logger, next http.Handler, middlewareConfig ...Middle
 		}
 
 		// Prepare error stack tracing.
-		s := errors.New()
-		ctx := s.Init(r.Context())
+		ctx := errors.Init(r.Context())
 		start := time.Now()
 
 		var bw bodyWriter
@@ -67,11 +66,11 @@ func HandlerWithLog(logger Logger, next http.Handler, middlewareConfig ...Middle
 		// Get request body.
 		var body []byte
 		if r.Body != nil {
-			b, err := ioutil.ReadAll(r.Body)
+			b, err := io.ReadAll(r.Body)
 			if err != nil {
-				s.Wrap(ctx, err)
+				errors.Wrap(ctx, err)
 			}
-			body, r.Body = b, ioutil.NopCloser(bytes.NewBuffer(b))
+			body, r.Body = b, io.NopCloser(bytes.NewBuffer(b))
 		}
 
 		// Call next handler.
@@ -112,7 +111,7 @@ func HandlerWithLog(logger Logger, next http.Handler, middlewareConfig ...Middle
 		}
 
 		// Include the error stack if you use it.
-		errStack := s.Get(ctx).([]string)
+		errStack := errors.Get(ctx)
 		if cfg.Error && len(errStack) > 0 {
 			// Copy slice to prevent reversed multiple times
 			// if using multiple middleware.
@@ -122,6 +121,7 @@ func HandlerWithLog(logger Logger, next http.Handler, middlewareConfig ...Middle
 			for i, j := 0, len(errTmp)-1; i < j; i, j = i+1, j-1 {
 				errTmp[i], errTmp[j] = errTmp[j], errTmp[i]
 			}
+
 			m["error"] = errTmp
 		}
 
@@ -129,8 +129,8 @@ func HandlerWithLog(logger Logger, next http.Handler, middlewareConfig ...Middle
 	})
 }
 
-func cpSlice(arr []string) []string {
-	a := make([]string, len(arr))
+func cpSlice(arr []errors.ErrStack) []errors.ErrStack {
+	a := make([]errors.ErrStack, len(arr))
 	copy(a, arr)
 	return a
 }
@@ -150,7 +150,7 @@ func getRoutePattern(r *http.Request) (string, bool) {
 	return "", false
 }
 
-func getLevelFromStatus(status int) LogLevel {
+func getLevelFromStatus(status int) logLevel {
 	switch status {
 	case
 		http.StatusOK,
@@ -163,7 +163,7 @@ func getLevelFromStatus(status int) LogLevel {
 		http.StatusNotModified,
 		http.StatusTemporaryRedirect,
 		http.StatusPermanentRedirect:
-		return InfoLevel
+		return infoLevel
 	case
 		http.StatusBadRequest,
 		http.StatusUnauthorized,
@@ -180,9 +180,9 @@ func getLevelFromStatus(status int) LogLevel {
 		http.StatusUnprocessableEntity,
 		http.StatusFailedDependency,
 		http.StatusTooManyRequests:
-		return WarnLevel
+		return warnLevel
 	default:
-		return ErrorLevel
+		return errorLevel
 	}
 }
 

@@ -9,14 +9,14 @@ package main
 import (
 	"errors"
 
-	log "github.com/rl404/fairy/log_v2"
-	"github.com/rl404/fairy/log_v2/builtin"
-	"github.com/rl404/fairy/log_v2/elasticsearch"
-	"github.com/rl404/fairy/log_v2/logrus"
-	"github.com/rl404/fairy/log_v2/newrelic"
-	"github.com/rl404/fairy/log_v2/nolog"
-	"github.com/rl404/fairy/log_v2/zap"
-	"github.com/rl404/fairy/log_v2/zerolog"
+	"github.com/rl404/fairy/log"
+	"github.com/rl404/fairy/log/builtin"
+	"github.com/rl404/fairy/log/elasticsearch"
+	"github.com/rl404/fairy/log/logrus"
+	"github.com/rl404/fairy/log/newrelic"
+	"github.com/rl404/fairy/log/nolog"
+	"github.com/rl404/fairy/log/zap"
+	"github.com/rl404/fairy/log/zerolog"
 )
 
 // LogLevel is level of log that will be printed.
