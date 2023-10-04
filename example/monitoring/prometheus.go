@@ -7,7 +7,7 @@ import (
 
 	"github.com/go-chi/chi/v5"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
-	_cache "github.com/rl404/fairy/cache"
+	_cache "github.com/rl404/fairy/example/cache"
 	"github.com/rl404/fairy/monitoring/prometheus/cache"
 	"github.com/rl404/fairy/monitoring/prometheus/database"
 	"github.com/rl404/fairy/monitoring/prometheus/middleware"

@@ -7,7 +7,7 @@ import (
 
 	"github.com/go-chi/chi/v5"
 	"github.com/newrelic/go-agent/v3/newrelic"
-	_cache "github.com/rl404/fairy/cache"
+	_cache "github.com/rl404/fairy/example/cache"
 	"github.com/rl404/fairy/monitoring/newrelic/cache"
 	"github.com/rl404/fairy/monitoring/newrelic/database"
 	"github.com/rl404/fairy/monitoring/newrelic/middleware"
@@ -93,7 +93,7 @@ func httpWithNewrelic() {
 	r := chi.NewRouter()
 
 	// Use newrelic middleware.
-	// Automatically start newrelic transaction
+	// Will automatically start newrelic transaction
 	// and put it in the context.
 	r.Use(middleware.NewHTTP(nrApp))
 

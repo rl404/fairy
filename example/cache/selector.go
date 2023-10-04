@@ -10,11 +10,11 @@ import (
 	"errors"
 	"time"
 
-	cache "github.com/rl404/fairy/cache_v2"
-	"github.com/rl404/fairy/cache_v2/inmemory"
-	"github.com/rl404/fairy/cache_v2/memcache"
-	"github.com/rl404/fairy/cache_v2/nocache"
-	"github.com/rl404/fairy/cache_v2/redis"
+	"github.com/rl404/fairy/cache"
+	"github.com/rl404/fairy/cache/inmemory"
+	"github.com/rl404/fairy/cache/memcache"
+	"github.com/rl404/fairy/cache/nocache"
+	"github.com/rl404/fairy/cache/redis"
 )
 
 // CacheType is type for cache.
