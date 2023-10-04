@@ -1,14 +1,11 @@
 // Package kafka is a wrapper of the original "github.com/segmentio/kafka-go" library.
-//
-// Only contains basic publish, subscribe, and close methods.
-// Data will be encoded to JSON before publishing the message.
 package kafka
 
 import (
 	"context"
-	"encoding/json"
 	"time"
 
+	"github.com/rl404/fairy/pubsub"
 	"github.com/segmentio/kafka-go"
 )
 
@@ -16,11 +13,6 @@ import (
 type Client struct {
 	url    string
 	writer *kafka.Writer
-}
-
-// Channel is kafka subscription channel.
-type Channel struct {
-	reader *kafka.Reader
 }
 
 // New to create new kafka pubsub client.
@@ -35,63 +27,40 @@ func New(url string) (*Client, error) {
 }
 
 // Publish to publish message.
-func (c *Client) Publish(ctx context.Context, topic string, data interface{}) error {
-	j, err := json.Marshal(data)
-	if err != nil {
-		return err
-	}
-
+func (c *Client) Publish(ctx context.Context, topic string, data []byte) error {
 	return c.writer.WriteMessages(ctx, kafka.Message{
 		Topic: topic,
-		Value: j,
+		Value: data,
 	})
 }
 
-// Subscribe to subscribe queue.
-//
-// Need to convert the return type to pubsub.Channel.
-func (c *Client) Subscribe(ctx context.Context, topic string) (interface{}, error) {
-	return &Channel{
-		reader: kafka.NewReader(kafka.ReaderConfig{
-			Brokers:        []string{c.url},
-			Topic:          topic,
-			GroupID:        topic + "-consumer-group",
-			GroupBalancers: []kafka.GroupBalancer{kafka.RoundRobinGroupBalancer{}, kafka.RangeGroupBalancer{}},
-		}),
-	}, nil
+// Subscribe to subscribe topic.
+func (c *Client) Subscribe(ctx context.Context, topic string, handlerFunc pubsub.HandlerFunc) error {
+	reader := kafka.NewReader(kafka.ReaderConfig{
+		Brokers:        []string{c.url},
+		Topic:          topic,
+		GroupBalancers: []kafka.GroupBalancer{kafka.RoundRobinGroupBalancer{}, kafka.RangeGroupBalancer{}},
+	})
+
+	go func(r *kafka.Reader) {
+		for {
+			if err := reader.SetOffsetAt(ctx, time.Now()); err != nil {
+				return
+			}
+
+			msg, err := r.ReadMessage(ctx)
+			if err != nil {
+				return
+			}
+
+			handlerFunc(ctx, msg.Value)
+		}
+	}(reader)
+
+	return nil
 }
 
 // Close to close pubsub connection.
 func (c *Client) Close() error {
 	return c.writer.Close()
-}
-
-// Read to read incoming message.
-func (c *Channel) Read(ctx context.Context, model interface{}) (<-chan interface{}, <-chan error) {
-	msgChan, errChan := make(chan interface{}), make(chan error)
-	go func() {
-		for {
-			if err := c.reader.SetOffsetAt(ctx, time.Now()); err != nil {
-				errChan <- err
-				return
-			}
-
-			msg, err := c.reader.ReadMessage(ctx)
-			if err != nil {
-				errChan <- err
-			} else {
-				if err := json.Unmarshal(msg.Value, &model); err != nil {
-					errChan <- err
-				} else {
-					msgChan <- model
-				}
-			}
-		}
-	}()
-	return (<-chan interface{})(msgChan), (<-chan error)(errChan)
-}
-
-// Close to close subscription.
-func (c *Channel) Close() error {
-	return c.reader.Close()
 }

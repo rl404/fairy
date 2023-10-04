@@ -9,12 +9,12 @@ package main
 import (
 	"errors"
 
-	pubsub "github.com/rl404/fairy/pubsub_v2"
-	"github.com/rl404/fairy/pubsub_v2/google"
-	"github.com/rl404/fairy/pubsub_v2/kafka"
-	"github.com/rl404/fairy/pubsub_v2/nsq"
-	"github.com/rl404/fairy/pubsub_v2/rabbitmq"
-	"github.com/rl404/fairy/pubsub_v2/redis"
+	"github.com/rl404/fairy/pubsub"
+	"github.com/rl404/fairy/pubsub/google"
+	"github.com/rl404/fairy/pubsub/kafka"
+	"github.com/rl404/fairy/pubsub/nsq"
+	"github.com/rl404/fairy/pubsub/rabbitmq"
+	"github.com/rl404/fairy/pubsub/redis"
 )
 
 // PubsubType is type for pubsub.
