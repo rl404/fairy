@@ -10,9 +10,9 @@ import (
 	"errors"
 	"time"
 
-	limit "github.com/rl404/fairy/limit_v2"
-	"github.com/rl404/fairy/limit_v2/atomic"
-	"github.com/rl404/fairy/limit_v2/mutex"
+	"github.com/rl404/fairy/limit"
+	"github.com/rl404/fairy/limit/atomic"
+	"github.com/rl404/fairy/limit/mutex"
 )
 
 // LimitType is type for rate limit.
