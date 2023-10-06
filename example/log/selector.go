@@ -15,6 +15,7 @@ import (
 	"github.com/rl404/fairy/log/logrus"
 	"github.com/rl404/fairy/log/newrelic"
 	"github.com/rl404/fairy/log/nolog"
+	"github.com/rl404/fairy/log/slog"
 	"github.com/rl404/fairy/log/zap"
 	"github.com/rl404/fairy/log/zerolog"
 )
@@ -48,6 +49,7 @@ const (
 	Zap
 	Elasticsearch
 	Newrelic
+	Slog
 )
 
 // ErrInvalidLogType is error for invalid log type.
@@ -101,6 +103,8 @@ func New(cfg Config) (log.Logger, error) {
 			LicenseKey: cfg.NewrelicLicense,
 			Level:      newrelic.LogLevel(cfg.Level),
 		})
+	case Slog:
+		return slog.New(slog.LogLevel(cfg.Level), cfg.JsonFormat, cfg.Color), nil
 	default:
 		return nil, ErrInvalidLogType
 	}
