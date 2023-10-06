@@ -7,7 +7,6 @@ import (
 
 	"github.com/go-chi/chi/v5"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
-	_cache "github.com/rl404/fairy/example/cache"
 	"github.com/rl404/fairy/monitoring/prometheus/cache"
 	"github.com/rl404/fairy/monitoring/prometheus/database"
 	"github.com/rl404/fairy/monitoring/prometheus/middleware"
@@ -58,8 +57,8 @@ func dbWithPrometheus() {
 
 func cacheWithPrometheus() {
 	// Init cache.
-	dialect := _cache.Redis
-	cacher, err := _cache.New(dialect, "localhost:6379", "", time.Minute)
+	dialect := Redis
+	cacher, err := New(dialect, "localhost:6379", "", time.Minute)
 	if err != nil {
 		// Handle error.
 		panic(err)
