@@ -6,6 +6,8 @@ import "context"
 //
 // See usage example in example folder.
 type PubSub interface {
+	// Use to add pubsub middlewares.
+	Use(middlewares ...func(HandlerFunc) HandlerFunc)
 	// Publish message to specific topic/channel.
 	Publish(ctx context.Context, topic string, message []byte) error
 	// Subscribe to specific topic/channel.

@@ -11,8 +11,9 @@ import (
 
 // Client is kafka pubsub client.
 type Client struct {
-	url    string
-	writer *kafka.Writer
+	url         string
+	middlewares []func(pubsub.HandlerFunc) pubsub.HandlerFunc
+	writer      *kafka.Writer
 }
 
 // New to create new kafka pubsub client.
@@ -24,6 +25,18 @@ func New(url string) (*Client, error) {
 			AllowAutoTopicCreation: true,
 		},
 	}, nil
+}
+
+// Use to add pubsub middlewares.
+func (c *Client) Use(middlewares ...func(pubsub.HandlerFunc) pubsub.HandlerFunc) {
+	c.middlewares = append(c.middlewares, middlewares...)
+}
+
+func (c *Client) applyMiddlewares(handlerFunc pubsub.HandlerFunc) pubsub.HandlerFunc {
+	for _, mw := range c.middlewares {
+		handlerFunc = mw(handlerFunc)
+	}
+	return handlerFunc
 }
 
 // Publish to publish message.
@@ -42,7 +55,9 @@ func (c *Client) Subscribe(ctx context.Context, topic string, handlerFunc pubsub
 		GroupBalancers: []kafka.GroupBalancer{kafka.RoundRobinGroupBalancer{}, kafka.RangeGroupBalancer{}},
 	})
 
-	go func(r *kafka.Reader) {
+	go func(r *kafka.Reader, h pubsub.HandlerFunc) {
+		h = c.applyMiddlewares(h)
+
 		for {
 			if err := reader.SetOffsetAt(ctx, time.Now()); err != nil {
 				return
@@ -53,9 +68,9 @@ func (c *Client) Subscribe(ctx context.Context, topic string, handlerFunc pubsub
 				return
 			}
 
-			handlerFunc(ctx, msg.Value)
+			h(ctx, msg.Value)
 		}
-	}(reader)
+	}(reader, handlerFunc)
 
 	return nil
 }

@@ -11,7 +11,8 @@ import (
 
 // Client is redis pubsub client.
 type Client struct {
-	client *redis.Client
+	client      *redis.Client
+	middlewares []func(pubsub.HandlerFunc) pubsub.HandlerFunc
 }
 
 // New to create new redis pubsub client.
@@ -44,6 +45,18 @@ func NewFromGoRedis(client *redis.Client) *Client {
 	}
 }
 
+// Use to add pubsub middlewares.
+func (c *Client) Use(middlewares ...func(pubsub.HandlerFunc) pubsub.HandlerFunc) {
+	c.middlewares = append(c.middlewares, middlewares...)
+}
+
+func (c *Client) applyMiddlewares(handlerFunc pubsub.HandlerFunc) pubsub.HandlerFunc {
+	for _, mw := range c.middlewares {
+		handlerFunc = mw(handlerFunc)
+	}
+	return handlerFunc
+}
+
 // Publish to publish message.
 func (c *Client) Publish(ctx context.Context, channel string, data []byte) error {
 	return c.client.Publish(ctx, channel, data).Err()
@@ -53,11 +66,13 @@ func (c *Client) Publish(ctx context.Context, channel string, data []byte) error
 func (c *Client) Subscribe(ctx context.Context, channel string, handlerFunc pubsub.HandlerFunc) error {
 	ch := c.client.Subscribe(ctx, channel)
 
-	go func(c *redis.PubSub) {
-		for msg := range c.Channel() {
-			handlerFunc(ctx, []byte(msg.Payload))
+	go func(cl *redis.PubSub, h pubsub.HandlerFunc) {
+		h = c.applyMiddlewares(h)
+
+		for msg := range cl.Channel() {
+			h(ctx, []byte(msg.Payload))
 		}
-	}(ch)
+	}(ch, handlerFunc)
 
 	return nil
 }

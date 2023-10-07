@@ -15,8 +15,8 @@ import (
 )
 
 // UnaryMiddlewareWithLog is unary grpc middleware that will log the request and response.
-func UnaryMiddlewareWithLog(logger Logger, middlewareConfig ...MiddlewareConfig) grpc.UnaryServerInterceptor {
-	var cfg MiddlewareConfig
+func UnaryMiddlewareWithLog(logger Logger, middlewareConfig ...APIMiddlewareConfig) grpc.UnaryServerInterceptor {
+	var cfg APIMiddlewareConfig
 	if len(middlewareConfig) > 0 {
 		cfg = middlewareConfig[0]
 	}
@@ -86,7 +86,7 @@ func UnaryMiddlewareWithLog(logger Logger, middlewareConfig ...MiddlewareConfig)
 
 // StreamMiddlewareWithLog is stream grpc middleware that will log the request and response.
 // Todo: implement logger here.
-func StreamMiddlewareWithLog(logger Logger, middlewareConfig ...MiddlewareConfig) grpc.StreamServerInterceptor {
+func StreamMiddlewareWithLog(logger Logger, middlewareConfig ...APIMiddlewareConfig) grpc.StreamServerInterceptor {
 	return func(srv interface{}, ss grpc.ServerStream, info *grpc.StreamServerInfo, handler grpc.StreamHandler) error {
 		return handler(srv, ss)
 	}

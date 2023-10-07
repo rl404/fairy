@@ -12,8 +12,8 @@ import (
 	"github.com/rl404/fairy/errors"
 )
 
-// MiddlewareConfig is log config for middleware.
-type MiddlewareConfig struct {
+// APIMiddlewareConfig is log config for middleware.
+type APIMiddlewareConfig struct {
 	// Show request header.
 	RequestHeader bool
 	// Show request body.
@@ -28,23 +28,23 @@ type MiddlewareConfig struct {
 	Error bool
 }
 
-// MiddlewareWithLog is http middleware that will log the request and response.
-func MiddlewareWithLog(logger Logger, middlewareConfig ...MiddlewareConfig) func(http.Handler) http.Handler {
+// HTTPMiddlewareWithLog is http middleware that will log the request and response.
+func HTTPMiddlewareWithLog(logger Logger, middlewareConfig ...APIMiddlewareConfig) func(http.Handler) http.Handler {
 	return func(next http.Handler) http.Handler {
-		return HandlerWithLog(logger, next, middlewareConfig...)
+		return HTTPHandlerWithLog(logger, next, middlewareConfig...)
 	}
 }
 
-// HandlerFuncWithLog is http handler func with log.
-func HandlerFuncWithLog(logger Logger, next http.HandlerFunc, middlewareConfig ...MiddlewareConfig) http.HandlerFunc {
-	return HandlerWithLog(logger, next, middlewareConfig...).(http.HandlerFunc)
+// HTTPHandlerFuncWithLog is http handler func with log.
+func HTTPHandlerFuncWithLog(logger Logger, next http.HandlerFunc, middlewareConfig ...APIMiddlewareConfig) http.HandlerFunc {
+	return HTTPHandlerWithLog(logger, next, middlewareConfig...).(http.HandlerFunc)
 }
 
-// HandlerWithLog is http handler with log.
+// HTTPHandlerWithLog is http handler with log.
 // Also includes error stack tracing feature
 // if you use it.
-func HandlerWithLog(logger Logger, next http.Handler, middlewareConfig ...MiddlewareConfig) http.Handler {
-	var cfg MiddlewareConfig
+func HTTPHandlerWithLog(logger Logger, next http.Handler, middlewareConfig ...APIMiddlewareConfig) http.Handler {
+	var cfg APIMiddlewareConfig
 	if len(middlewareConfig) > 0 {
 		cfg = middlewareConfig[0]
 	}

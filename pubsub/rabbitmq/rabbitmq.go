@@ -12,7 +12,8 @@ import (
 
 // Client is rabbitmq pubsub client.
 type Client struct {
-	client *amqp.Connection
+	client      *amqp.Connection
+	middlewares []func(pubsub.HandlerFunc) pubsub.HandlerFunc
 }
 
 // New to create new rabbitmq pubsub client.
@@ -22,6 +23,18 @@ func New(url string) (*Client, error) {
 		return nil, err
 	}
 	return &Client{client: c}, nil
+}
+
+// Use to add pubsub middlewares.
+func (c *Client) Use(middlewares ...func(pubsub.HandlerFunc) pubsub.HandlerFunc) {
+	c.middlewares = append(c.middlewares, middlewares...)
+}
+
+func (c *Client) applyMiddlewares(handlerFunc pubsub.HandlerFunc) pubsub.HandlerFunc {
+	for _, mw := range c.middlewares {
+		handlerFunc = mw(handlerFunc)
+	}
+	return handlerFunc
 }
 
 // Publish to publish message.
@@ -63,11 +76,13 @@ func (c *Client) Subscribe(ctx context.Context, queue string, handlerFunc pubsub
 		return err
 	}
 
-	go func(msgs <-chan amqp.Delivery) {
+	go func(msgs <-chan amqp.Delivery, h pubsub.HandlerFunc) {
+		h = c.applyMiddlewares(h)
+
 		for msg := range msgs {
-			handlerFunc(ctx, msg.Body)
+			h(ctx, msg.Body)
 		}
-	}(msgs)
+	}(msgs, handlerFunc)
 
 	return nil
 }

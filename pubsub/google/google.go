@@ -14,6 +14,7 @@ import (
 type Client struct {
 	sync.Mutex
 	client            *pubsub.Client
+	middlewares       []func(_pubsub.HandlerFunc) _pubsub.HandlerFunc
 	topicExist        map[string]bool
 	subscriptionExist map[string]string
 }
@@ -44,6 +45,18 @@ func New(projectID, serviceAccountCredentialPath string) (*Client, error) {
 	}, nil
 }
 
+// Use to add pubsub middlewares.
+func (c *Client) Use(middlewares ...func(_pubsub.HandlerFunc) _pubsub.HandlerFunc) {
+	c.middlewares = append(c.middlewares, middlewares...)
+}
+
+func (c *Client) applyMiddlewares(handlerFunc _pubsub.HandlerFunc) _pubsub.HandlerFunc {
+	for _, mw := range c.middlewares {
+		handlerFunc = mw(handlerFunc)
+	}
+	return handlerFunc
+}
+
 // Publish to publish message.
 func (c *Client) Publish(ctx context.Context, topic string, data []byte) error {
 	t, err := c.getTopic(topic)
@@ -72,14 +85,16 @@ func (c *Client) Subscribe(ctx context.Context, topic string, handlerFunc _pubsu
 	subscription.ReceiveSettings.NumGoroutines = 1
 	subscription.ReceiveSettings.MaxOutstandingMessages = 1
 
-	go func(s *pubsub.Subscription) {
+	go func(s *pubsub.Subscription, h _pubsub.HandlerFunc) {
+		h = c.applyMiddlewares(h)
+
 		if err := s.Receive(ctx, func(ctx context.Context, msg *pubsub.Message) {
 			msg.Ack()
-			handlerFunc(ctx, msg.Data)
+			h(ctx, msg.Data)
 		}); err != nil {
 			panic(err)
 		}
-	}(subscription)
+	}(subscription, handlerFunc)
 
 	return nil
 }

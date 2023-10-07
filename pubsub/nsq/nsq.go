@@ -10,10 +10,11 @@ import (
 
 // Client is NSQ pubsub client.
 type Client struct {
-	address  string
-	config   *nsq.Config
-	producer *nsq.Producer
-	consumer *nsq.Consumer
+	address     string
+	config      *nsq.Config
+	middlewares []func(pubsub.HandlerFunc) pubsub.HandlerFunc
+	producer    *nsq.Producer
+	consumer    *nsq.Consumer
 }
 
 // New to create new NSQ pubsub client.
@@ -35,6 +36,18 @@ func NewWithConfig(address string, cfg *nsq.Config) (*Client, error) {
 	}, nil
 }
 
+// Use to add pubsub middlewares.
+func (c *Client) Use(middlewares ...func(pubsub.HandlerFunc) pubsub.HandlerFunc) {
+	c.middlewares = append(c.middlewares, middlewares...)
+}
+
+func (c *Client) applyMiddlewares(handlerFunc pubsub.HandlerFunc) pubsub.HandlerFunc {
+	for _, mw := range c.middlewares {
+		handlerFunc = mw(handlerFunc)
+	}
+	return handlerFunc
+}
+
 // Publish to publish message.
 func (c *Client) Publish(ctx context.Context, topic string, data []byte) error {
 	return c.producer.Publish(topic, data)
@@ -47,12 +60,20 @@ func (c *Client) Subscribe(ctx context.Context, topic string, handlerFunc pubsub
 		return err
 	}
 
-	c.consumer.AddHandler(nsq.HandlerFunc(func(msg *nsq.Message) error {
-		handlerFunc(context.Background(), msg.Body)
-		return nil
-	}))
+	c.consumer.AddHandler(c.handlerFunc(handlerFunc))
 
 	return c.consumer.ConnectToNSQD(c.address)
+}
+
+func (c *Client) handlerFunc(handlerFunc pubsub.HandlerFunc) nsq.HandlerFunc {
+	ctx := context.Background()
+
+	handlerFunc = c.applyMiddlewares(handlerFunc)
+
+	return nsq.HandlerFunc(func(msg *nsq.Message) error {
+		handlerFunc(ctx, msg.Body)
+		return nil
+	})
 }
 
 // Close to close pubsub connection.
