@@ -2,10 +2,10 @@ package main
 
 import (
 	"context"
-	_errors "errors"
+	"errors"
 	"fmt"
 
-	"github.com/rl404/fairy/errors"
+	"github.com/rl404/fairy/errors/stack"
 )
 
 func main() {
@@ -23,7 +23,7 @@ func fn() {
 	// Init the stack.
 	// Put this once in the outer most of
 	// your function. Like this function.
-	ctx = errors.Init(ctx)
+	ctx = stack.Init(ctx)
 
 	// Optional.
 	// Print the stacked errors.
@@ -43,7 +43,7 @@ func fn1(ctx context.Context) error {
 	// Do something but return error.
 	if err := fn2(ctx); err != nil {
 		// Just wrap the error.
-		return errors.Wrap(ctx, err)
+		return stack.Wrap(ctx, err)
 	}
 	return nil
 }
@@ -54,27 +54,27 @@ func fn2(ctx context.Context) error {
 		// Just wrap the error.
 		// Add your custom error if
 		// you want.
-		return errors.Wrap(ctx, err, _errors.New("custom fn2 error"))
+		return stack.Wrap(ctx, err, errors.New("custom fn2 error"))
 	}
 	return nil
 }
 
 func fn3(ctx context.Context) error {
 	// Do something but return error.
-	err := _errors.New("original error")
+	err := errors.New("original error")
 
 	// But you don't want to show the error message
 	// to user because, for example, it contains
 	// credential. So, just wrap it and
 	// add a custom error message.
-	return errors.Wrap(ctx, err, _errors.New("custom fn3 error"))
+	return stack.Wrap(ctx, err, errors.New("custom fn3 error"))
 }
 
 // Create your own function to print the
 // error stack.
 func printStack(ctx context.Context) {
 	// Get the error stacks from ctx.
-	stacks := errors.Get(ctx)
+	stacks := stack.Get(ctx)
 
 	// Print however you like.
 	for _, stack := range stacks {

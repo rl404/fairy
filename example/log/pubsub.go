@@ -3,11 +3,11 @@ package main
 import (
 	"context"
 	"encoding/json"
-	_errors "errors"
+	"errors"
 	"fmt"
 	"time"
 
-	"github.com/rl404/fairy/errors"
+	"github.com/rl404/fairy/errors/stack"
 	"github.com/rl404/fairy/log"
 	"github.com/rl404/fairy/pubsub"
 	"github.com/rl404/fairy/pubsub/rabbitmq"
@@ -79,6 +79,6 @@ func handler(ctx context.Context, data []byte) {
 
 	if err := sampleErr(ctx); err != nil {
 		// Let's also test the error stack trace feature.
-		errors.Wrap(ctx, _errors.New("sample error"), err)
+		stack.Wrap(ctx, errors.New("sample error"), err)
 	}
 }

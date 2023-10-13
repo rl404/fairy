@@ -3,13 +3,13 @@ package main
 import (
 	"bytes"
 	"context"
-	_errors "errors"
+	"errors"
 	"io"
 	"net/http"
 	"net/http/httptest"
 
 	"github.com/go-chi/chi/v5"
-	"github.com/rl404/fairy/errors"
+	"github.com/rl404/fairy/errors/stack"
 	"github.com/rl404/fairy/log"
 )
 
@@ -42,7 +42,7 @@ func httpWithLog(l log.Logger) {
 func sampleHandler(w http.ResponseWriter, r *http.Request) {
 	if err := sampleErr(r.Context()); err != nil {
 		// Let's also test the error stack trace feature.
-		errors.Wrap(r.Context(), _errors.New("sample error"), err)
+		stack.Wrap(r.Context(), errors.New("sample error"), err)
 	}
 
 	w.WriteHeader(http.StatusInternalServerError)
@@ -51,5 +51,5 @@ func sampleHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func sampleErr(ctx context.Context) error {
-	return errors.Wrap(ctx, _errors.New("sample original error"))
+	return stack.Wrap(ctx, errors.New("sample original error"))
 }
