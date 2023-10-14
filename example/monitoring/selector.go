@@ -13,7 +13,6 @@ import (
 	"github.com/rl404/fairy/cache"
 	"github.com/rl404/fairy/cache/inmemory"
 	"github.com/rl404/fairy/cache/memcache"
-	"github.com/rl404/fairy/cache/nocache"
 	"github.com/rl404/fairy/cache/redis"
 )
 
@@ -22,8 +21,7 @@ type CacheType int8
 
 // Available types for cache.
 const (
-	NoCache CacheType = iota
-	InMemory
+	InMemory CacheType = iota + 1
 	Redis
 	Memcache
 )
@@ -34,8 +32,6 @@ var ErrInvalidCacheType = errors.New("invalid cache type")
 // New to create new cache client depends on the type.
 func New(cacheType CacheType, address string, password string, expiredTime time.Duration) (cache.Cacher, error) {
 	switch cacheType {
-	case NoCache:
-		return nocache.New()
 	case InMemory:
 		return inmemory.New(expiredTime)
 	case Redis:

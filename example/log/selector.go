@@ -10,11 +10,9 @@ import (
 	"errors"
 
 	"github.com/rl404/fairy/log"
-	"github.com/rl404/fairy/log/builtin"
 	"github.com/rl404/fairy/log/elasticsearch"
 	"github.com/rl404/fairy/log/logrus"
 	"github.com/rl404/fairy/log/newrelic"
-	"github.com/rl404/fairy/log/nolog"
 	"github.com/rl404/fairy/log/slog"
 	"github.com/rl404/fairy/log/zap"
 	"github.com/rl404/fairy/log/zerolog"
@@ -42,9 +40,7 @@ type LogType int8
 
 // Available types for logging.
 const (
-	NoLog LogType = iota
-	BuiltIn
-	Zerolog
+	Zerolog LogType = iota + 1
 	Logrus
 	Zap
 	Elasticsearch
@@ -78,10 +74,6 @@ type Config struct {
 // Color will not work in json format.
 func New(cfg Config) (log.Logger, error) {
 	switch cfg.Type {
-	case NoLog:
-		return nolog.New(), nil
-	case BuiltIn:
-		return builtin.New(builtin.LogLevel(cfg.Level), cfg.JsonFormat, cfg.Color), nil
 	case Zerolog:
 		return zerolog.New(zerolog.LogLevel(cfg.Level), cfg.JsonFormat, cfg.Color), nil
 	case Logrus:
