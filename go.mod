@@ -1,6 +1,6 @@
 module github.com/rl404/fairy
 
-go 1.17
+go 1.21
 
 require (
 	cloud.google.com/go/pubsub v1.33.0
@@ -11,6 +11,7 @@ require (
 	github.com/go-playground/mold/v4 v4.5.0
 	github.com/go-playground/validator/v10 v10.15.5
 	github.com/golang/mock v1.6.0
+	github.com/lmittmann/tint v1.0.2
 	github.com/mattn/go-colorable v0.1.13
 	github.com/newrelic/go-agent/v3 v3.26.0
 	github.com/newrelic/go-agent/v3/integrations/nrgrpc v1.4.1

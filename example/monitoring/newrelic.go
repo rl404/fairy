@@ -7,7 +7,6 @@ import (
 
 	"github.com/go-chi/chi/v5"
 	"github.com/newrelic/go-agent/v3/newrelic"
-	_cache "github.com/rl404/fairy/cache"
 	"github.com/rl404/fairy/monitoring/newrelic/cache"
 	"github.com/rl404/fairy/monitoring/newrelic/database"
 	"github.com/rl404/fairy/monitoring/newrelic/middleware"
@@ -33,9 +32,9 @@ func cacheWithNewrelic() {
 	ctx := context.Background()
 
 	// Init cache.
-	dialect := _cache.Redis
+	dialect := Redis
 	address := "localhost:6379"
-	cacher, err := _cache.New(dialect, address, "", time.Minute)
+	cacher, err := New(dialect, address, "", time.Minute)
 	if err != nil {
 		// Handle error.
 		panic(err)
@@ -93,7 +92,7 @@ func httpWithNewrelic() {
 	r := chi.NewRouter()
 
 	// Use newrelic middleware.
-	// Automatically start newrelic transaction
+	// Will automatically start newrelic transaction
 	// and put it in the context.
 	r.Use(middleware.NewHTTP(nrApp))
 

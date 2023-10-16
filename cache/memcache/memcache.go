@@ -1,6 +1,7 @@
 // Package memcache is a wrapper of the original "github.com/bradfitz/gomemcache/memcache" library.
 //
 // Only contains basic get, set, delete, and close methods.
+//
 // Data will be encoded to JSON before saving to cache.
 package memcache
 

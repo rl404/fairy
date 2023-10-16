@@ -5,9 +5,11 @@
 package mock_pubsub
 
 import (
+	context "context"
 	reflect "reflect"
 
 	gomock "github.com/golang/mock/gomock"
+	pubsub "github.com/rl404/fairy/pubsub"
 )
 
 // MockPubSub is a mock of PubSub interface.
@@ -48,82 +50,45 @@ func (mr *MockPubSubMockRecorder) Close() *gomock.Call {
 }
 
 // Publish mocks base method.
-func (m *MockPubSub) Publish(topic string, data interface{}) error {
+func (m *MockPubSub) Publish(ctx context.Context, topic string, message []byte) error {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Publish", topic, data)
+	ret := m.ctrl.Call(m, "Publish", ctx, topic, message)
 	ret0, _ := ret[0].(error)
 	return ret0
 }
 
 // Publish indicates an expected call of Publish.
-func (mr *MockPubSubMockRecorder) Publish(topic, data interface{}) *gomock.Call {
+func (mr *MockPubSubMockRecorder) Publish(ctx, topic, message interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Publish", reflect.TypeOf((*MockPubSub)(nil).Publish), topic, data)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Publish", reflect.TypeOf((*MockPubSub)(nil).Publish), ctx, topic, message)
 }
 
 // Subscribe mocks base method.
-func (m *MockPubSub) Subscribe(topic string) (interface{}, error) {
+func (m *MockPubSub) Subscribe(ctx context.Context, topic string, handlerFunc pubsub.HandlerFunc) error {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Subscribe", topic)
-	ret0, _ := ret[0].(interface{})
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// Subscribe indicates an expected call of Subscribe.
-func (mr *MockPubSubMockRecorder) Subscribe(topic interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Subscribe", reflect.TypeOf((*MockPubSub)(nil).Subscribe), topic)
-}
-
-// MockChannel is a mock of Channel interface.
-type MockChannel struct {
-	ctrl     *gomock.Controller
-	recorder *MockChannelMockRecorder
-}
-
-// MockChannelMockRecorder is the mock recorder for MockChannel.
-type MockChannelMockRecorder struct {
-	mock *MockChannel
-}
-
-// NewMockChannel creates a new mock instance.
-func NewMockChannel(ctrl *gomock.Controller) *MockChannel {
-	mock := &MockChannel{ctrl: ctrl}
-	mock.recorder = &MockChannelMockRecorder{mock}
-	return mock
-}
-
-// EXPECT returns an object that allows the caller to indicate expected use.
-func (m *MockChannel) EXPECT() *MockChannelMockRecorder {
-	return m.recorder
-}
-
-// Close mocks base method.
-func (m *MockChannel) Close() error {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Close")
+	ret := m.ctrl.Call(m, "Subscribe", ctx, topic, handlerFunc)
 	ret0, _ := ret[0].(error)
 	return ret0
 }
 
-// Close indicates an expected call of Close.
-func (mr *MockChannelMockRecorder) Close() *gomock.Call {
+// Subscribe indicates an expected call of Subscribe.
+func (mr *MockPubSubMockRecorder) Subscribe(ctx, topic, handlerFunc interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Close", reflect.TypeOf((*MockChannel)(nil).Close))
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Subscribe", reflect.TypeOf((*MockPubSub)(nil).Subscribe), ctx, topic, handlerFunc)
 }
 
-// Read mocks base method.
-func (m *MockChannel) Read(data interface{}) (<-chan interface{}, <-chan error) {
+// Use mocks base method.
+func (m *MockPubSub) Use(middlewares ...func(pubsub.HandlerFunc) pubsub.HandlerFunc) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Read", data)
-	ret0, _ := ret[0].(<-chan interface{})
-	ret1, _ := ret[1].(<-chan error)
-	return ret0, ret1
+	varargs := []interface{}{}
+	for _, a := range middlewares {
+		varargs = append(varargs, a)
+	}
+	m.ctrl.Call(m, "Use", varargs...)
 }
 
-// Read indicates an expected call of Read.
-func (mr *MockChannelMockRecorder) Read(data interface{}) *gomock.Call {
+// Use indicates an expected call of Use.
+func (mr *MockPubSubMockRecorder) Use(middlewares ...interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Read", reflect.TypeOf((*MockChannel)(nil).Read), data)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Use", reflect.TypeOf((*MockPubSub)(nil).Use), middlewares...)
 }

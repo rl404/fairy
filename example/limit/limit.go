@@ -9,11 +9,11 @@ import (
 
 func main() {
 	// Rate limit type.
-	t := limit.Mutex
+	t := Mutex
 
 	// Init rate limiter.
 	// For example, 5 request per second.
-	l, err := limit.New(t, 5, time.Second)
+	l, err := New(t, 5, time.Second)
 	if err != nil {
 		panic(err)
 	}

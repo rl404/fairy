@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/rl404/fairy/validation"
+	"github.com/rl404/fairy/validation/playground"
 )
 
 type user struct {
@@ -18,7 +18,7 @@ type user struct {
 
 func main() {
 	// Init validator.
-	v := validation.New(true)
+	v := playground.New(true)
 
 	// Register custom modifier.
 	v.RegisterModifier("magic", func(in string, _ ...string) string {
@@ -47,14 +47,19 @@ func main() {
 		Age:     15,
 		Magic:   "ninja",
 		Skill:   "jump",
-		Country: "Konohagakure",
+		Country: "KONOHAGAKURE",
 	}
+
+	// Print the original struct.
+	j, _ := json.MarshalIndent(naruto, "", "  ")
+	fmt.Println(string(j))
 
 	// Validate struct fields.
 	if err := v.Validate(&naruto); err != nil {
 		panic(err)
 	}
 
-	j, _ := json.MarshalIndent(naruto, "", "  ")
-	fmt.Println(string(j))
+	// Print the validated and modified struct.
+	j2, _ := json.MarshalIndent(naruto, "", "  ")
+	fmt.Println(string(j2))
 }

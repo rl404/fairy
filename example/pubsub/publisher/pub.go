@@ -2,8 +2,7 @@ package main
 
 import (
 	"context"
-
-	"github.com/rl404/fairy/pubsub"
+	"encoding/json"
 )
 
 type sampleData struct {
@@ -13,10 +12,10 @@ type sampleData struct {
 
 func main() {
 	// Pubsub type.
-	t := pubsub.RabbitMQ
+	t := RabbitMQ
 
 	// Init client.
-	client, err := pubsub.New(t, "amqp://guest:guest@localhost:5672", "")
+	client, err := New(t, "amqp://guest:guest@localhost:5672", "")
 	if err != nil {
 		panic(err)
 	}
@@ -30,8 +29,14 @@ func main() {
 		Field2: 1,
 	}
 
-	// Publish data to specific topic/channel. Data will be encoded first.
-	if err = client.Publish(context.Background(), "topic", data); err != nil {
+	// Convert to []byte.
+	jsonData, err := json.Marshal(data)
+	if err != nil {
+		panic(err)
+	}
+
+	// Publish data to specific topic/channel.
+	if err := client.Publish(context.Background(), "topic", jsonData); err != nil {
 		panic(err)
 	}
 }

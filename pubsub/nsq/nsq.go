@@ -1,26 +1,20 @@
 // Package nsq is a wrapper of the original "github.com/nsqio/go-nsq" library.
-//
-// Only contains basic publish, subscribe, and close methods.
-// Data will be encoded to JSON before publishing the message.
 package nsq
 
 import (
 	"context"
-	"encoding/json"
 
 	"github.com/nsqio/go-nsq"
+	"github.com/rl404/fairy/pubsub"
 )
 
 // Client is NSQ pubsub client.
 type Client struct {
-	address string
-	config  *nsq.Config
-}
-
-// Channel is NSQ subscription channel.
-type Channel struct {
-	consumer *nsq.Consumer
-	messages chan *nsq.Message
+	address     string
+	config      *nsq.Config
+	middlewares []func(pubsub.HandlerFunc) pubsub.HandlerFunc
+	producer    *nsq.Producer
+	consumer    *nsq.Consumer
 }
 
 // New to create new NSQ pubsub client.
@@ -30,82 +24,65 @@ func New(address string) (*Client, error) {
 
 // NewWithConfig to create new NSQ pubsub client with config.
 func NewWithConfig(address string, cfg *nsq.Config) (*Client, error) {
+	producer, err := nsq.NewProducer(address, cfg)
+	if err != nil {
+		return nil, err
+	}
+
 	return &Client{
-		address: address,
-		config:  cfg,
+		address:  address,
+		config:   cfg,
+		producer: producer,
 	}, nil
+}
+
+// Use to add pubsub middlewares.
+func (c *Client) Use(middlewares ...func(pubsub.HandlerFunc) pubsub.HandlerFunc) {
+	c.middlewares = append(c.middlewares, middlewares...)
+}
+
+func (c *Client) applyMiddlewares(handlerFunc pubsub.HandlerFunc) pubsub.HandlerFunc {
+	for i := len(c.middlewares) - 1; i >= 0; i-- {
+		handlerFunc = c.middlewares[i](handlerFunc)
+	}
+	return handlerFunc
 }
 
 // Publish to publish message.
-func (c *Client) Publish(ctx context.Context, topic string, data interface{}) error {
-	j, err := json.Marshal(data)
-	if err != nil {
-		return err
-	}
-
-	p, err := nsq.NewProducer(c.address, c.config)
-	if err != nil {
-		return err
-	}
-	defer p.Stop()
-
-	return p.Publish(topic, j)
+func (c *Client) Publish(ctx context.Context, topic string, data []byte) error {
+	return c.producer.Publish(topic, data)
 }
 
-// Subscribe to subscribe to a topic.
-//
-// Need to convert the return type to pubsub.Channel.
-func (c *Client) Subscribe(ctx context.Context, topic string) (interface{}, error) {
-	cc, err := nsq.NewConsumer(topic, "channel", c.config)
+// Subscribe to subscriber topic.
+func (c *Client) Subscribe(ctx context.Context, topic string, handlerFunc pubsub.HandlerFunc) (err error) {
+	c.consumer, err = nsq.NewConsumer(topic, "channel", c.config)
 	if err != nil {
-		return nil, err
+		return err
 	}
 
-	m := make(chan *nsq.Message)
-	cc.AddHandler(&msgHandler{messages: m})
+	c.consumer.AddHandler(c.handlerFunc(handlerFunc))
 
-	if err = cc.ConnectToNSQD(c.address); err != nil {
-		return nil, err
-	}
+	return c.consumer.ConnectToNSQD(c.address)
+}
 
-	return &Channel{
-		consumer: cc,
-		messages: m,
-	}, nil
+func (c *Client) handlerFunc(handlerFunc pubsub.HandlerFunc) nsq.HandlerFunc {
+	ctx := context.Background()
+
+	handlerFunc = c.applyMiddlewares(handlerFunc)
+
+	return nsq.HandlerFunc(func(msg *nsq.Message) error {
+		handlerFunc(ctx, msg.Body)
+		return nil
+	})
 }
 
 // Close to close pubsub connection.
 func (c *Client) Close() error {
-	return nil
-}
-
-// Read to read incoming message.
-func (c *Channel) Read(ctx context.Context, model interface{}) (<-chan interface{}, <-chan error) {
-	msgChan, errChan := make(chan interface{}), make(chan error)
-	go func() {
-		for msg := range c.messages {
-			if err := json.Unmarshal(msg.Body, &model); err != nil {
-				errChan <- err
-			} else {
-				msgChan <- model
-			}
-		}
-	}()
-	return (<-chan interface{})(msgChan), (<-chan error)(errChan)
-}
-
-// Close to close subscription.
-func (c *Channel) Close() error {
-	c.consumer.Stop()
-	return nil
-}
-
-type msgHandler struct {
-	messages chan *nsq.Message
-}
-
-// HandleMessage to handle incoming message.
-func (h *msgHandler) HandleMessage(m *nsq.Message) error {
-	h.messages <- m
+	if c.consumer != nil {
+		c.consumer.Stop()
+	}
+	if c.producer != nil {
+		c.producer.Stop()
+	}
 	return nil
 }

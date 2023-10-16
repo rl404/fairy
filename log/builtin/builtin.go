@@ -1,3 +1,4 @@
+// Deprecated: use slog.
 // Package builtin is a wrapper of the built-in log package.
 package builtin
 

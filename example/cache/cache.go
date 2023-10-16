@@ -3,16 +3,14 @@ package main
 import (
 	"context"
 	"time"
-
-	"github.com/rl404/fairy/cache"
 )
 
 func main() {
 	// Cache type.
-	t := cache.Redis
+	t := Redis
 
 	// Init client.
-	client, err := cache.New(t, "localhost:6379", "", time.Minute)
+	client, err := New(t, "localhost:6379", "", time.Minute)
 	if err != nil {
 		panic(err)
 	}
