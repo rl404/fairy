@@ -66,17 +66,21 @@ func PubSubHandlerFuncWithLog(logger Logger, next pubsub.HandlerFunc, middleware
 
 		// Include the error stack if you use it.
 		errStack := stack.Get(ctx)
-		if len(errStack) > 0 && cfg.Error {
-			// Copy slice to prevent reversed multiple times
-			// if using multiple middleware.
-			errTmp := cpSlice(errStack)
+		if len(errStack) > 0 {
+			m["level"] = warnLevel
 
-			// Reverse the stack order.
-			for i, j := 0, len(errTmp)-1; i < j; i, j = i+1, j-1 {
-				errTmp[i], errTmp[j] = errTmp[j], errTmp[i]
+			if cfg.Error {
+				// Copy slice to prevent reversed multiple times
+				// if using multiple middleware.
+				errTmp := cpSlice(errStack)
+
+				// Reverse the stack order.
+				for i, j := 0, len(errTmp)-1; i < j; i, j = i+1, j-1 {
+					errTmp[i], errTmp[j] = errTmp[j], errTmp[i]
+				}
+
+				m["error"] = errTmp
 			}
-
-			m["error"] = errTmp
 		}
 
 		logger.Log(m)
