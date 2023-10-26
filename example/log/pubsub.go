@@ -67,11 +67,11 @@ func pubsubWithLog(l log.Logger) {
 }
 
 // handler to handle the incoming message.
-func handler(ctx context.Context, data []byte) {
+func handler(ctx context.Context, data []byte) error {
 	// Convert to the original struct when you publish it.
 	var sampleData sampleData
 	if err := json.Unmarshal(data, &sampleData); err != nil {
-		panic(err)
+		return err
 	}
 
 	// Process the message.
@@ -81,4 +81,6 @@ func handler(ctx context.Context, data []byte) {
 		// Let's also test the error stack trace feature.
 		stack.Wrap(ctx, errors.New("sample error"), err)
 	}
+
+	return nil
 }

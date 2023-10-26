@@ -40,13 +40,15 @@ func main() {
 }
 
 // handler to handle the incoming message.
-func handler(ctx context.Context, data []byte) {
+func handler(ctx context.Context, data []byte) error {
 	// Convert to the original struct when you publish it.
 	var sampleData sampleData
 	if err := json.Unmarshal(data, &sampleData); err != nil {
-		panic(err)
+		return err
 	}
 
 	// Process the message.
 	fmt.Println(sampleData.Field1, sampleData.Field2)
+
+	return nil
 }
