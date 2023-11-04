@@ -9,7 +9,7 @@ require (
 	github.com/elastic/go-elasticsearch/v8 v8.10.1
 	github.com/go-chi/chi/v5 v5.0.10
 	github.com/go-playground/mold/v4 v4.5.0
-	github.com/go-playground/validator/v10 v10.15.5
+	github.com/go-playground/validator/v10 v10.16.0
 	github.com/golang/mock v1.6.0
 	github.com/lmittmann/tint v1.0.3
 	github.com/mattn/go-colorable v0.1.13
