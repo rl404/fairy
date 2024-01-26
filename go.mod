@@ -3,7 +3,7 @@ module github.com/rl404/fairy
 go 1.21
 
 require (
-	cloud.google.com/go/pubsub v1.35.0
+	cloud.google.com/go/pubsub v1.36.0
 	github.com/allegro/bigcache/v3 v3.1.0
 	github.com/bradfitz/gomemcache v0.0.0-20230905024940-24af94b03874
 	github.com/elastic/go-elasticsearch/v8 v8.12.0
@@ -23,10 +23,10 @@ require (
 	github.com/sirupsen/logrus v1.9.3
 	github.com/streadway/amqp v1.1.0
 	go.uber.org/zap v1.26.0
-	google.golang.org/api v0.158.0
+	google.golang.org/api v0.159.0
 	google.golang.org/grpc v1.61.0
 	gorm.io/driver/mysql v1.5.2
-	gorm.io/gorm v1.25.5
+	gorm.io/gorm v1.25.6
 )
 
 require (
