@@ -6,15 +6,15 @@ require (
 	cloud.google.com/go/pubsub v1.37.0
 	github.com/allegro/bigcache/v3 v3.1.0
 	github.com/bradfitz/gomemcache v0.0.0-20230905024940-24af94b03874
-	github.com/elastic/go-elasticsearch/v8 v8.12.1
+	github.com/elastic/go-elasticsearch/v8 v8.13.0
 	github.com/go-chi/chi/v5 v5.0.12
 	github.com/go-playground/mold/v4 v4.5.0
 	github.com/go-playground/validator/v10 v10.19.0
 	github.com/golang/mock v1.6.0
 	github.com/lmittmann/tint v1.0.4
 	github.com/mattn/go-colorable v0.1.13
-	github.com/newrelic/go-agent/v3 v3.30.0
-	github.com/newrelic/go-agent/v3/integrations/nrgrpc v1.4.2
+	github.com/newrelic/go-agent/v3 v3.31.0
+	github.com/newrelic/go-agent/v3/integrations/nrgrpc v1.4.3
 	github.com/nsqio/go-nsq v1.1.0
 	github.com/prometheus/client_golang v1.19.0
 	github.com/redis/go-redis/v9 v9.5.1
@@ -23,7 +23,7 @@ require (
 	github.com/sirupsen/logrus v1.9.3
 	github.com/streadway/amqp v1.1.0
 	go.uber.org/zap v1.27.0
-	google.golang.org/api v0.171.0
+	google.golang.org/api v0.172.0
 	google.golang.org/grpc v1.62.1
 	gorm.io/driver/mysql v1.5.6
 	gorm.io/gorm v1.25.8
@@ -37,7 +37,7 @@ require (
 	github.com/beorn7/perks v1.0.1 // indirect
 	github.com/cespare/xxhash/v2 v2.2.0 // indirect
 	github.com/dgryski/go-rendezvous v0.0.0-20200823014737-9f7001d12a5f // indirect
-	github.com/elastic/elastic-transport-go/v8 v8.4.0 // indirect
+	github.com/elastic/elastic-transport-go/v8 v8.5.0 // indirect
 	github.com/felixge/httpsnoop v1.0.4 // indirect
 	github.com/gabriel-vasile/mimetype v1.4.3 // indirect
 	github.com/go-logr/logr v1.4.1 // indirect
@@ -83,6 +83,6 @@ require (
 	google.golang.org/appengine v1.6.8 // indirect
 	google.golang.org/genproto v0.0.0-20240213162025-012b6fc9bca9 // indirect
 	google.golang.org/genproto/googleapis/api v0.0.0-20240311132316-a219d84964c2 // indirect
-	google.golang.org/genproto/googleapis/rpc v0.0.0-20240314234333-6e1732d8331c // indirect
+	google.golang.org/genproto/googleapis/rpc v0.0.0-20240318140521-94a12d6c2237 // indirect
 	google.golang.org/protobuf v1.33.0 // indirect
 )
