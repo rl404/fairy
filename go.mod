@@ -24,7 +24,7 @@ require (
 	github.com/streadway/amqp v1.1.0
 	go.uber.org/zap v1.27.0
 	google.golang.org/api v0.172.0
-	google.golang.org/grpc v1.63.0
+	google.golang.org/grpc v1.63.2
 	gorm.io/driver/mysql v1.5.6
 	gorm.io/gorm v1.25.9
 )
