@@ -9,7 +9,7 @@ require (
 	github.com/elastic/go-elasticsearch/v8 v8.14.0
 	github.com/go-chi/chi/v5 v5.0.12
 	github.com/go-playground/mold/v4 v4.5.0
-	github.com/go-playground/validator/v10 v10.21.0
+	github.com/go-playground/validator/v10 v10.22.0
 	github.com/golang/mock v1.6.0
 	github.com/lmittmann/tint v1.0.4
 	github.com/mattn/go-colorable v0.1.13
@@ -23,9 +23,9 @@ require (
 	github.com/sirupsen/logrus v1.9.3
 	github.com/streadway/amqp v1.1.0
 	go.uber.org/zap v1.27.0
-	google.golang.org/api v0.183.0
+	google.golang.org/api v0.184.0
 	google.golang.org/grpc v1.64.0
-	gorm.io/driver/mysql v1.5.6
+	gorm.io/driver/mysql v1.5.7
 	gorm.io/gorm v1.25.10
 )
 
@@ -75,16 +75,16 @@ require (
 	go.opentelemetry.io/otel/trace v1.24.0 // indirect
 	go.uber.org/multierr v1.10.0 // indirect
 	golang.org/x/arch v0.5.0 // indirect
-	golang.org/x/crypto v0.23.0 // indirect
-	golang.org/x/net v0.25.0 // indirect
+	golang.org/x/crypto v0.24.0 // indirect
+	golang.org/x/net v0.26.0 // indirect
 	golang.org/x/oauth2 v0.21.0 // indirect
 	golang.org/x/sync v0.7.0 // indirect
-	golang.org/x/sys v0.20.0 // indirect
-	golang.org/x/text v0.15.0 // indirect
+	golang.org/x/sys v0.21.0 // indirect
+	golang.org/x/text v0.16.0 // indirect
 	golang.org/x/time v0.5.0 // indirect
 	google.golang.org/appengine v1.6.8 // indirect
-	google.golang.org/genproto v0.0.0-20240528184218-531527333157 // indirect
-	google.golang.org/genproto/googleapis/api v0.0.0-20240521202816-d264139d666e // indirect
-	google.golang.org/genproto/googleapis/rpc v0.0.0-20240528184218-531527333157 // indirect
+	google.golang.org/genproto v0.0.0-20240604185151-ef581f913117 // indirect
+	google.golang.org/genproto/googleapis/api v0.0.0-20240528184218-531527333157 // indirect
+	google.golang.org/genproto/googleapis/rpc v0.0.0-20240604185151-ef581f913117 // indirect
 	google.golang.org/protobuf v1.34.1 // indirect
 )
