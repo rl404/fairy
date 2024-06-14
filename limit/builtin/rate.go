@@ -1,4 +1,4 @@
-// Package mutex is a rate limiter based on "golang.org/x/time/rate" library.
+// Package builtin is a wrapper of the built-in "golang.org/x/time/rate" library.
 package builtin
 
 import (
