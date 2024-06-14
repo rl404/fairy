@@ -12,6 +12,7 @@ import (
 
 	"github.com/rl404/fairy/limit"
 	"github.com/rl404/fairy/limit/atomic"
+	"github.com/rl404/fairy/limit/builtin"
 	"github.com/rl404/fairy/limit/mutex"
 )
 
@@ -22,6 +23,7 @@ type LimitType int8
 const (
 	Mutex LimitType = iota
 	Atomic
+	Builtin
 )
 
 // ErrInvalidLimitType is error for invalid rate limit type.
@@ -34,6 +36,8 @@ func New(limitType LimitType, rate int, interval time.Duration) (limit.Limiter, 
 		return mutex.New(rate, interval), nil
 	case Atomic:
 		return atomic.New(rate, interval), nil
+	case Builtin:
+		return builtin.New(rate, interval), nil
 	default:
 		return nil, ErrInvalidLimitype
 	}
