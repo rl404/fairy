@@ -13,8 +13,8 @@ require (
 	github.com/golang/mock v1.6.0
 	github.com/lmittmann/tint v1.0.4
 	github.com/mattn/go-colorable v0.1.13
-	github.com/newrelic/go-agent/v3 v3.33.0
-	github.com/newrelic/go-agent/v3/integrations/nrgrpc v1.4.3
+	github.com/newrelic/go-agent/v3 v3.33.1
+	github.com/newrelic/go-agent/v3/integrations/nrgrpc v1.4.4
 	github.com/nsqio/go-nsq v1.1.0
 	github.com/prometheus/client_golang v1.19.1
 	github.com/redis/go-redis/v9 v9.5.3
@@ -24,7 +24,7 @@ require (
 	github.com/streadway/amqp v1.1.0
 	go.uber.org/zap v1.27.0
 	google.golang.org/api v0.187.0
-	google.golang.org/grpc v1.64.0
+	google.golang.org/grpc v1.65.0
 	gorm.io/driver/mysql v1.5.7
 	gorm.io/gorm v1.25.10
 )
@@ -37,7 +37,7 @@ require (
 	cloud.google.com/go/compute/metadata v0.3.0 // indirect
 	cloud.google.com/go/iam v1.1.8 // indirect
 	github.com/beorn7/perks v1.0.1 // indirect
-	github.com/cespare/xxhash/v2 v2.2.0 // indirect
+	github.com/cespare/xxhash/v2 v2.3.0 // indirect
 	github.com/dgryski/go-rendezvous v0.0.0-20200823014737-9f7001d12a5f // indirect
 	github.com/elastic/elastic-transport-go/v8 v8.6.0 // indirect
 	github.com/felixge/httpsnoop v1.0.4 // indirect
