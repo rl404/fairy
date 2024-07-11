@@ -11,7 +11,7 @@ require (
 	github.com/go-playground/mold/v4 v4.5.0
 	github.com/go-playground/validator/v10 v10.22.0
 	github.com/golang/mock v1.6.0
-	github.com/lmittmann/tint v1.0.4
+	github.com/lmittmann/tint v1.0.5
 	github.com/mattn/go-colorable v0.1.13
 	github.com/newrelic/go-agent/v3 v3.33.1
 	github.com/newrelic/go-agent/v3/integrations/nrgrpc v1.4.4
@@ -26,7 +26,7 @@ require (
 	google.golang.org/api v0.188.0
 	google.golang.org/grpc v1.65.0
 	gorm.io/driver/mysql v1.5.7
-	gorm.io/gorm v1.25.10
+	gorm.io/gorm v1.25.11
 )
 
 require (
