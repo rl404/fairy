@@ -3,7 +3,7 @@ module github.com/rl404/fairy
 go 1.21
 
 require (
-	cloud.google.com/go/pubsub v1.45.0
+	cloud.google.com/go/pubsub v1.45.1
 	github.com/allegro/bigcache/v3 v3.1.0
 	github.com/bradfitz/gomemcache v0.0.0-20230905024940-24af94b03874
 	github.com/elastic/go-elasticsearch/v8 v8.15.0
@@ -13,7 +13,7 @@ require (
 	github.com/golang/mock v1.6.0
 	github.com/lmittmann/tint v1.0.5
 	github.com/mattn/go-colorable v0.1.13
-	github.com/newrelic/go-agent/v3 v3.35.0
+	github.com/newrelic/go-agent/v3 v3.35.1
 	github.com/newrelic/go-agent/v3/integrations/nrgrpc v1.4.4
 	github.com/nsqio/go-nsq v1.1.0
 	github.com/prometheus/client_golang v1.20.5
