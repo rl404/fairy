@@ -2,10 +2,10 @@ module github.com/rl404/fairy
 
 go 1.22.7
 
-toolchain go1.23.3
+toolchain go1.23.4
 
 require (
-	cloud.google.com/go/pubsub v1.45.1
+	cloud.google.com/go/pubsub v1.45.2
 	github.com/allegro/bigcache/v3 v3.1.0
 	github.com/bradfitz/gomemcache v0.0.0-20230905024940-24af94b03874
 	github.com/elastic/go-elasticsearch/v8 v8.16.0
