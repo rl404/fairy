@@ -13,7 +13,7 @@ require (
 	github.com/go-playground/mold/v4 v4.5.0
 	github.com/go-playground/validator/v10 v10.23.0
 	github.com/golang/mock v1.6.0
-	github.com/lmittmann/tint v1.0.5
+	github.com/lmittmann/tint v1.0.6
 	github.com/mattn/go-colorable v0.1.13
 	github.com/newrelic/go-agent/v3 v3.35.1
 	github.com/newrelic/go-agent/v3/integrations/nrgrpc v1.4.4
@@ -26,7 +26,7 @@ require (
 	github.com/streadway/amqp v1.1.0
 	go.uber.org/zap v1.27.0
 	golang.org/x/time v0.8.0
-	google.golang.org/api v0.211.0
+	google.golang.org/api v0.212.0
 	google.golang.org/grpc v1.69.0
 	gorm.io/driver/mysql v1.5.7
 	gorm.io/gorm v1.25.12
@@ -34,9 +34,9 @@ require (
 
 require (
 	cloud.google.com/go v0.116.0 // indirect
-	cloud.google.com/go/auth v0.12.1 // indirect
+	cloud.google.com/go/auth v0.13.0 // indirect
 	cloud.google.com/go/auth/oauth2adapt v0.2.6 // indirect
-	cloud.google.com/go/compute/metadata v0.5.2 // indirect
+	cloud.google.com/go/compute/metadata v0.6.0 // indirect
 	cloud.google.com/go/iam v1.2.2 // indirect
 	github.com/beorn7/perks v1.0.1 // indirect
 	github.com/cespare/xxhash/v2 v2.3.0 // indirect
@@ -79,7 +79,7 @@ require (
 	go.opentelemetry.io/otel/trace v1.31.0 // indirect
 	go.uber.org/multierr v1.10.0 // indirect
 	golang.org/x/arch v0.5.0 // indirect
-	golang.org/x/crypto v0.30.0 // indirect
+	golang.org/x/crypto v0.31.0 // indirect
 	golang.org/x/net v0.32.0 // indirect
 	golang.org/x/oauth2 v0.24.0 // indirect
 	golang.org/x/sync v0.10.0 // indirect
