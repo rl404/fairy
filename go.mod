@@ -13,7 +13,7 @@ require (
 	github.com/go-playground/mold/v4 v4.5.1
 	github.com/go-playground/validator/v10 v10.24.0
 	github.com/golang/mock v1.6.0
-	github.com/lmittmann/tint v1.0.6
+	github.com/lmittmann/tint v1.0.7
 	github.com/mattn/go-colorable v0.1.14
 	github.com/newrelic/go-agent/v3 v3.36.0
 	github.com/newrelic/go-agent/v3/integrations/nrgrpc v1.4.5
@@ -26,7 +26,7 @@ require (
 	github.com/streadway/amqp v1.1.0
 	go.uber.org/zap v1.27.0
 	golang.org/x/time v0.9.0
-	google.golang.org/api v0.218.0
+	google.golang.org/api v0.219.0
 	google.golang.org/grpc v1.70.0
 	gorm.io/driver/mysql v1.5.7
 	gorm.io/gorm v1.25.12
@@ -86,6 +86,6 @@ require (
 	golang.org/x/text v0.21.0 // indirect
 	google.golang.org/genproto v0.0.0-20241118233622-e639e219e697 // indirect
 	google.golang.org/genproto/googleapis/api v0.0.0-20241209162323-e6fa225c2576 // indirect
-	google.golang.org/genproto/googleapis/rpc v0.0.0-20250115164207-1a7da9e5054f // indirect
-	google.golang.org/protobuf v1.36.3 // indirect
+	google.golang.org/genproto/googleapis/rpc v0.0.0-20250124145028-65684f501c47 // indirect
+	google.golang.org/protobuf v1.36.4 // indirect
 )
