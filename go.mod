@@ -7,7 +7,7 @@ toolchain go1.24.2
 require (
 	cloud.google.com/go/pubsub v1.48.1
 	github.com/allegro/bigcache/v3 v3.1.0
-	github.com/bradfitz/gomemcache v0.0.0-20230905024940-24af94b03874
+	github.com/bradfitz/gomemcache v0.0.0-20250403215159-8d39553ac7cf
 	github.com/elastic/go-elasticsearch/v8 v8.17.1
 	github.com/go-chi/chi/v5 v5.2.1
 	github.com/go-playground/mold/v4 v4.5.1
