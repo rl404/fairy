@@ -8,7 +8,7 @@ require (
 	cloud.google.com/go/pubsub v1.49.0
 	github.com/allegro/bigcache/v3 v3.1.0
 	github.com/bradfitz/gomemcache v0.0.0-20250403215159-8d39553ac7cf
-	github.com/elastic/go-elasticsearch/v9 v9.0.0
+	github.com/elastic/go-elasticsearch/v8 v8.18.1
 	github.com/elastic/go-elasticsearch/v9 v9.0.0
 	github.com/go-chi/chi/v5 v5.2.2
 	github.com/go-playground/mold/v4 v4.5.1
@@ -20,14 +20,14 @@ require (
 	github.com/newrelic/go-agent/v3/integrations/nrgrpc v1.4.5
 	github.com/nsqio/go-nsq v1.1.0
 	github.com/prometheus/client_golang v1.22.0
-	github.com/redis/go-redis/v9 v9.10.0
+	github.com/redis/go-redis/v9 v9.11.0
 	github.com/rs/zerolog v1.34.0
 	github.com/segmentio/kafka-go v0.4.48
 	github.com/sirupsen/logrus v1.9.3
 	github.com/streadway/amqp v1.1.0
 	go.uber.org/zap v1.27.0
 	golang.org/x/time v0.12.0
-	google.golang.org/api v0.238.0
+	google.golang.org/api v0.239.0
 	google.golang.org/grpc v1.73.0
 	gorm.io/driver/mysql v1.6.0
 	gorm.io/gorm v1.30.0
