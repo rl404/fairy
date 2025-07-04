@@ -11,7 +11,7 @@ require (
 	github.com/elastic/go-elasticsearch/v8 v8.18.1
 	github.com/go-chi/chi/v5 v5.2.2
 	github.com/go-playground/mold/v4 v4.5.1
-	github.com/go-playground/validator/v10 v10.26.0
+	github.com/go-playground/validator/v10 v10.27.0
 	github.com/golang/mock v1.6.0
 	github.com/lmittmann/tint v1.1.2
 	github.com/mattn/go-colorable v0.1.14
@@ -26,7 +26,7 @@ require (
 	github.com/streadway/amqp v1.1.0
 	go.uber.org/zap v1.27.0
 	golang.org/x/time v0.12.0
-	google.golang.org/api v0.239.0
+	google.golang.org/api v0.240.0
 	google.golang.org/grpc v1.73.0
 	gorm.io/driver/mysql v1.6.0
 	gorm.io/gorm v1.30.0
