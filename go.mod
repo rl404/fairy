@@ -1,8 +1,6 @@
 module github.com/rl404/fairy
 
-go 1.23.0
-
-toolchain go1.24.5
+go 1.24.5
 
 require (
 	cloud.google.com/go/pubsub v1.49.0
@@ -15,8 +13,8 @@ require (
 	github.com/golang/mock v1.6.0
 	github.com/lmittmann/tint v1.1.2
 	github.com/mattn/go-colorable v0.1.14
-	github.com/newrelic/go-agent/v3 v3.39.0
-	github.com/newrelic/go-agent/v3/integrations/nrgrpc v1.4.5
+	github.com/newrelic/go-agent/v3 v3.40.1
+	github.com/newrelic/go-agent/v3/integrations/nrgrpc v1.4.6
 	github.com/nsqio/go-nsq v1.1.0
 	github.com/prometheus/client_golang v1.22.0
 	github.com/redis/go-redis/v9 v9.11.0
