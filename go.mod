@@ -4,6 +4,7 @@ go 1.24.5
 
 require (
 	cloud.google.com/go/pubsub v1.49.0
+	cloud.google.com/go/pubsub/v2 v2.0.0
 	github.com/allegro/bigcache/v3 v3.1.0
 	github.com/bradfitz/gomemcache v0.0.0-20250403215159-8d39553ac7cf
 	github.com/elastic/go-elasticsearch/v8 v8.18.1
@@ -31,7 +32,7 @@ require (
 )
 
 require (
-	cloud.google.com/go v0.120.0 // indirect
+	cloud.google.com/go v0.121.1 // indirect
 	cloud.google.com/go/auth v0.16.3 // indirect
 	cloud.google.com/go/auth/oauth2adapt v0.2.8 // indirect
 	cloud.google.com/go/compute/metadata v0.7.0 // indirect
