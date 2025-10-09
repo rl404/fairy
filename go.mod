@@ -9,7 +9,7 @@ require (
 	github.com/elastic/go-elasticsearch/v8 v8.19.0
 	github.com/go-chi/chi/v5 v5.2.3
 	github.com/go-playground/mold/v4 v4.5.1
-	github.com/go-playground/validator/v10 v10.27.0
+	github.com/go-playground/validator/v10 v10.28.0
 	github.com/golang/mock v1.6.0
 	github.com/lmittmann/tint v1.1.2
 	github.com/mattn/go-colorable v0.1.14
@@ -23,16 +23,16 @@ require (
 	github.com/sirupsen/logrus v1.9.3
 	github.com/streadway/amqp v1.1.0
 	go.uber.org/zap v1.27.0
-	golang.org/x/time v0.13.0
-	google.golang.org/api v0.251.0
-	google.golang.org/grpc v1.75.1
+	golang.org/x/time v0.14.0
+	google.golang.org/api v0.252.0
+	google.golang.org/grpc v1.76.0
 	gorm.io/driver/mysql v1.6.0
 	gorm.io/gorm v1.31.0
 )
 
 require (
 	cloud.google.com/go v0.121.6 // indirect
-	cloud.google.com/go/auth v0.16.5 // indirect
+	cloud.google.com/go/auth v0.17.0 // indirect
 	cloud.google.com/go/auth/oauth2adapt v0.2.8 // indirect
 	cloud.google.com/go/compute/metadata v0.9.0 // indirect
 	cloud.google.com/go/iam v1.5.2 // indirect
@@ -42,7 +42,7 @@ require (
 	github.com/dgryski/go-rendezvous v0.0.0-20200823014737-9f7001d12a5f // indirect
 	github.com/elastic/elastic-transport-go/v8 v8.7.0 // indirect
 	github.com/felixge/httpsnoop v1.0.4 // indirect
-	github.com/gabriel-vasile/mimetype v1.4.8 // indirect
+	github.com/gabriel-vasile/mimetype v1.4.10 // indirect
 	github.com/go-logr/logr v1.4.3 // indirect
 	github.com/go-logr/stdr v1.2.2 // indirect
 	github.com/go-playground/locales v0.14.1 // indirect
@@ -87,6 +87,6 @@ require (
 	golang.org/x/text v0.29.0 // indirect
 	google.golang.org/genproto v0.0.0-20250721164621-a45f3dfb1074 // indirect
 	google.golang.org/genproto/googleapis/api v0.0.0-20250818200422-3122310a409c // indirect
-	google.golang.org/genproto/googleapis/rpc v0.0.0-20250929231259-57b25ae835d4 // indirect
-	google.golang.org/protobuf v1.36.9 // indirect
+	google.golang.org/genproto/googleapis/rpc v0.0.0-20251002232023-7c0ddcbb5797 // indirect
+	google.golang.org/protobuf v1.36.10 // indirect
 )
