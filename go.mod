@@ -3,7 +3,7 @@ module github.com/rl404/fairy
 go 1.24.5
 
 require (
-	cloud.google.com/go/pubsub/v2 v2.2.0
+	cloud.google.com/go/pubsub/v2 v2.2.1
 	github.com/allegro/bigcache/v3 v3.1.0
 	github.com/bradfitz/gomemcache v0.0.0-20250403215159-8d39553ac7cf
 	github.com/elastic/go-elasticsearch/v8 v8.19.0
