@@ -7,7 +7,7 @@ require (
 	github.com/allegro/bigcache/v3 v3.1.0
 	github.com/bradfitz/gomemcache v0.0.0-20250403215159-8d39553ac7cf
 	github.com/elastic/go-elasticsearch/v8 v8.19.1
-	github.com/go-chi/chi/v5 v5.2.3
+	github.com/go-chi/chi/v5 v5.2.4
 	github.com/go-playground/mold/v4 v4.5.1
 	github.com/go-playground/validator/v10 v10.30.1
 	github.com/golang/mock v1.6.0
@@ -19,12 +19,12 @@ require (
 	github.com/prometheus/client_golang v1.23.2
 	github.com/redis/go-redis/v9 v9.17.2
 	github.com/rs/zerolog v1.34.0
-	github.com/segmentio/kafka-go v0.4.49
-	github.com/sirupsen/logrus v1.9.3
+	github.com/segmentio/kafka-go v0.4.50
+	github.com/sirupsen/logrus v1.9.4
 	github.com/streadway/amqp v1.1.0
 	go.uber.org/zap v1.27.1
 	golang.org/x/time v0.14.0
-	google.golang.org/api v0.259.0
+	google.golang.org/api v0.260.0
 	google.golang.org/grpc v1.78.0
 	gorm.io/driver/mysql v1.6.0
 	gorm.io/gorm v1.31.1
@@ -52,7 +52,7 @@ require (
 	github.com/golang/snappy v0.0.4 // indirect
 	github.com/google/s2a-go v0.1.9 // indirect
 	github.com/google/uuid v1.6.0 // indirect
-	github.com/googleapis/enterprise-certificate-proxy v0.3.7 // indirect
+	github.com/googleapis/enterprise-certificate-proxy v0.3.9 // indirect
 	github.com/googleapis/gax-go/v2 v2.16.0 // indirect
 	github.com/gosimple/slug v1.15.0 // indirect
 	github.com/gosimple/unidecode v1.0.1 // indirect
