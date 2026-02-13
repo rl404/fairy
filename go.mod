@@ -6,7 +6,7 @@ require (
 	cloud.google.com/go/pubsub/v2 v2.4.0
 	github.com/allegro/bigcache/v3 v3.1.0
 	github.com/bradfitz/gomemcache v0.0.0-20250403215159-8d39553ac7cf
-	github.com/elastic/go-elasticsearch/v8 v8.19.2
+	github.com/elastic/go-elasticsearch/v8 v8.19.3
 	github.com/go-chi/chi/v5 v5.2.5
 	github.com/go-playground/mold/v4 v4.5.1
 	github.com/go-playground/validator/v10 v10.30.1
@@ -24,8 +24,8 @@ require (
 	github.com/streadway/amqp v1.1.0
 	go.uber.org/zap v1.27.1
 	golang.org/x/time v0.14.0
-	google.golang.org/api v0.265.0
-	google.golang.org/grpc v1.78.0
+	google.golang.org/api v0.266.0
+	google.golang.org/grpc v1.79.0
 	gorm.io/driver/mysql v1.6.0
 	gorm.io/gorm v1.31.1
 )
@@ -53,7 +53,7 @@ require (
 	github.com/google/s2a-go v0.1.9 // indirect
 	github.com/google/uuid v1.6.0 // indirect
 	github.com/googleapis/enterprise-certificate-proxy v0.3.11 // indirect
-	github.com/googleapis/gax-go/v2 v2.16.0 // indirect
+	github.com/googleapis/gax-go/v2 v2.17.0 // indirect
 	github.com/gosimple/slug v1.15.0 // indirect
 	github.com/gosimple/unidecode v1.0.1 // indirect
 	github.com/jinzhu/inflection v1.0.0 // indirect
@@ -81,12 +81,12 @@ require (
 	golang.org/x/arch v0.5.0 // indirect
 	golang.org/x/crypto v0.47.0 // indirect
 	golang.org/x/net v0.49.0 // indirect
-	golang.org/x/oauth2 v0.34.0 // indirect
+	golang.org/x/oauth2 v0.35.0 // indirect
 	golang.org/x/sync v0.19.0 // indirect
 	golang.org/x/sys v0.40.0 // indirect
 	golang.org/x/text v0.33.0 // indirect
-	google.golang.org/genproto v0.0.0-20251202230838-ff82c1b0f217 // indirect
-	google.golang.org/genproto/googleapis/api v0.0.0-20251222181119-0a764e51fe1b // indirect
-	google.golang.org/genproto/googleapis/rpc v0.0.0-20260128011058-8636f8732409 // indirect
+	google.golang.org/genproto v0.0.0-20260128011058-8636f8732409 // indirect
+	google.golang.org/genproto/googleapis/api v0.0.0-20260128011058-8636f8732409 // indirect
+	google.golang.org/genproto/googleapis/rpc v0.0.0-20260203192932-546029d2fa20 // indirect
 	google.golang.org/protobuf v1.36.11 // indirect
 )
