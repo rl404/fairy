@@ -13,8 +13,8 @@ require (
 	github.com/golang/mock v1.6.0
 	github.com/lmittmann/tint v1.1.3
 	github.com/mattn/go-colorable v0.1.14
-	github.com/newrelic/go-agent/v3 v3.42.0
-	github.com/newrelic/go-agent/v3/integrations/nrgrpc v1.4.7
+	github.com/newrelic/go-agent/v3 v3.43.0
+	github.com/newrelic/go-agent/v3/integrations/nrgrpc v1.4.8
 	github.com/nsqio/go-nsq v1.1.0
 	github.com/prometheus/client_golang v1.23.2
 	github.com/redis/go-redis/v9 v9.18.0
@@ -24,8 +24,8 @@ require (
 	github.com/streadway/amqp v1.1.0
 	go.uber.org/zap v1.27.1
 	golang.org/x/time v0.15.0
-	google.golang.org/api v0.273.1
-	google.golang.org/grpc v1.79.3
+	google.golang.org/api v0.274.0
+	google.golang.org/grpc v1.80.0
 	gorm.io/driver/mysql v1.6.0
 	gorm.io/gorm v1.31.1
 )
