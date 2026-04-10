@@ -241,12 +241,16 @@ github.com/newrelic/go-agent/v3 v3.42.0 h1:aA2Ea1RT5eD59LtOS1KGFXSmaDs6kM3Jeqo7P
 github.com/newrelic/go-agent/v3 v3.42.0/go.mod h1:sCgxDCVydoKD/C4S8BFxDtmFHvdWHtaIz/a3kiyNB/k=
 github.com/newrelic/go-agent/v3 v3.43.0 h1:PIm1BM+hus7NVZjd3c/h4eFMT/lVM26wrmuMDVk8WeY=
 github.com/newrelic/go-agent/v3 v3.43.0/go.mod h1:MFXnCId5xXMIJI6A/kbkg0DO48EVTsKcmNijMYphzTg=
+github.com/newrelic/go-agent/v3 v3.43.1 h1:ANp6NxTloZjlU20RbOUy2/g5fLb4hf70DRkNjJJXRL4=
+github.com/newrelic/go-agent/v3 v3.43.1/go.mod h1:MFXnCId5xXMIJI6A/kbkg0DO48EVTsKcmNijMYphzTg=
 github.com/newrelic/go-agent/v3/integrations/nrgrpc v1.4.6 h1:L6kLcoDI8cEzWzqY19wmCHFCPehtxZoD9H0DmVBQuNk=
 github.com/newrelic/go-agent/v3/integrations/nrgrpc v1.4.6/go.mod h1:cQS3+ztB2hkaszWxoufyxOxCVRcH4rH5KcuAilVRigs=
 github.com/newrelic/go-agent/v3/integrations/nrgrpc v1.4.7 h1:QE9VlVJZBWmFr5/LxbOegDXW5QZMmk1lK5eu48Dyn1M=
 github.com/newrelic/go-agent/v3/integrations/nrgrpc v1.4.7/go.mod h1:CFe6nTKFh4CznvfJ23tb7wBplhXJjFr53s9Au5AcUq8=
 github.com/newrelic/go-agent/v3/integrations/nrgrpc v1.4.8 h1:GBB+Xm+TaTTCHC5MPe00ROFS9dvn375lzGY8M7FLXN4=
 github.com/newrelic/go-agent/v3/integrations/nrgrpc v1.4.8/go.mod h1:yfIXy/pXdwkW+M5A+FbB0wKdCGOuLiIqDYCojnLf4Bw=
+github.com/newrelic/go-agent/v3/integrations/nrgrpc v1.4.9 h1:mkoYqqEjFTNjJURsX+08iwuXTmsW7eFT+L0+hBuvAzw=
+github.com/newrelic/go-agent/v3/integrations/nrgrpc v1.4.9/go.mod h1:KkYfN06JZLI/H6l7w2+TJ5ILKF5NCXN5iysLsKkzMiI=
 github.com/newrelic/go-agent/v3/integrations/nrsecurityagent v1.1.0 h1:gqkTDYUHWUyiG+u0PJQCRh98rcHLxP/w7GtIbJDVULY=
 github.com/newrelic/go-agent/v3/integrations/nrsecurityagent v1.1.0/go.mod h1:3wugGvRmOVYov/08y+D8tB1uYIZds5bweVdr5vo4Gbs=
 github.com/nsqio/go-nsq v1.1.0 h1:PQg+xxiUjA7V+TLdXw7nVrJ5Jbl3sN86EhGCQj4+FYE=
