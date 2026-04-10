@@ -13,8 +13,8 @@ require (
 	github.com/golang/mock v1.6.0
 	github.com/lmittmann/tint v1.1.3
 	github.com/mattn/go-colorable v0.1.14
-	github.com/newrelic/go-agent/v3 v3.43.0
-	github.com/newrelic/go-agent/v3/integrations/nrgrpc v1.4.8
+	github.com/newrelic/go-agent/v3 v3.43.1
+	github.com/newrelic/go-agent/v3/integrations/nrgrpc v1.4.9
 	github.com/nsqio/go-nsq v1.1.0
 	github.com/prometheus/client_golang v1.23.2
 	github.com/redis/go-redis/v9 v9.18.0
