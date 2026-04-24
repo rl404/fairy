@@ -5,7 +5,7 @@ go 1.25.0
 require (
 	cloud.google.com/go/pubsub/v2 v2.6.0
 	github.com/allegro/bigcache/v3 v3.1.0
-	github.com/bradfitz/gomemcache v0.0.0-20250403215159-8d39553ac7cf
+	github.com/bradfitz/gomemcache v0.0.0-20260422231931-4d751bb6e37c
 	github.com/elastic/go-elasticsearch/v8 v8.19.4
 	github.com/go-chi/chi/v5 v5.2.5
 	github.com/go-playground/mold/v4 v4.5.1
