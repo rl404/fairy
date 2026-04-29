@@ -6,23 +6,23 @@ require (
 	cloud.google.com/go/pubsub/v2 v2.6.0
 	github.com/allegro/bigcache/v3 v3.1.0
 	github.com/bradfitz/gomemcache v0.0.0-20260422231931-4d751bb6e37c
-	github.com/elastic/go-elasticsearch/v8 v8.19.4
+	github.com/elastic/go-elasticsearch/v8 v8.19.5
 	github.com/go-chi/chi/v5 v5.2.5
 	github.com/go-playground/mold/v4 v4.5.1
 	github.com/go-playground/validator/v10 v10.30.2
 	github.com/golang/mock v1.6.0
 	github.com/lmittmann/tint v1.1.3
 	github.com/mattn/go-colorable v0.1.14
-	github.com/newrelic/go-agent/v3 v3.43.2
+	github.com/newrelic/go-agent/v3 v3.43.3
 	github.com/newrelic/go-agent/v3/integrations/nrgrpc v1.4.9
 	github.com/nsqio/go-nsq v1.1.0
 	github.com/prometheus/client_golang v1.23.2
-	github.com/redis/go-redis/v9 v9.18.0
+	github.com/redis/go-redis/v9 v9.19.0
 	github.com/rs/zerolog v1.35.1
 	github.com/segmentio/kafka-go v0.4.51
 	github.com/sirupsen/logrus v1.9.4
 	github.com/streadway/amqp v1.1.0
-	go.uber.org/zap v1.27.1
+	go.uber.org/zap v1.28.0
 	golang.org/x/time v0.15.0
 	google.golang.org/api v0.276.0
 	google.golang.org/grpc v1.80.0
