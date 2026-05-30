@@ -9,10 +9,10 @@ require (
 	github.com/elastic/go-elasticsearch/v8 v8.19.6
 	github.com/go-chi/chi/v5 v5.3.0
 	github.com/go-playground/mold/v4 v4.5.1
-	github.com/go-playground/validator/v10 v10.30.2
+	github.com/go-playground/validator/v10 v10.30.3
 	github.com/golang/mock v1.6.0
 	github.com/lmittmann/tint v1.1.3
-	github.com/mattn/go-colorable v0.1.14
+	github.com/mattn/go-colorable v0.1.15
 	github.com/newrelic/go-agent/v3 v3.43.3
 	github.com/newrelic/go-agent/v3/integrations/nrgrpc v1.4.9
 	github.com/nsqio/go-nsq v1.1.0
@@ -80,7 +80,7 @@ require (
 	go.uber.org/multierr v1.10.0 // indirect
 	go.yaml.in/yaml/v2 v2.4.2 // indirect
 	golang.org/x/arch v0.5.0 // indirect
-	golang.org/x/crypto v0.51.0 // indirect
+	golang.org/x/crypto v0.52.0 // indirect
 	golang.org/x/net v0.55.0 // indirect
 	golang.org/x/oauth2 v0.36.0 // indirect
 	golang.org/x/sync v0.20.0 // indirect
