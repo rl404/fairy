@@ -6,7 +6,7 @@ require (
 	cloud.google.com/go/pubsub/v2 v2.6.1
 	github.com/allegro/bigcache/v3 v3.1.0
 	github.com/bradfitz/gomemcache v0.0.0-20260422231931-4d751bb6e37c
-	github.com/elastic/go-elasticsearch/v8 v8.19.6
+	github.com/elastic/go-elasticsearch/v8 v8.19.7
 	github.com/go-chi/chi/v5 v5.3.1
 	github.com/go-playground/mold/v4 v4.5.1
 	github.com/go-playground/validator/v10 v10.30.3
@@ -24,7 +24,7 @@ require (
 	github.com/streadway/amqp v1.1.0
 	go.uber.org/zap v1.28.0
 	golang.org/x/time v0.15.0
-	google.golang.org/api v0.291.0
+	google.golang.org/api v0.292.0
 	google.golang.org/grpc v1.83.0
 	gorm.io/driver/mysql v1.6.0
 	gorm.io/gorm v1.31.2
@@ -88,6 +88,6 @@ require (
 	golang.org/x/text v0.40.0 // indirect
 	google.golang.org/genproto v0.0.0-20260319201613-d00831a3d3e7 // indirect
 	google.golang.org/genproto/googleapis/api v0.0.0-20260630182238-925bb5da69e7 // indirect
-	google.golang.org/genproto/googleapis/rpc v0.0.0-20260724162435-b2f20204f0df // indirect
+	google.golang.org/genproto/googleapis/rpc v0.0.0-20260803160001-6ac0973c030d // indirect
 	google.golang.org/protobuf v1.36.11 // indirect
 )
