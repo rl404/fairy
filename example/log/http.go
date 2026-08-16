@@ -16,6 +16,8 @@ import (
 // Example use of go-chi http middleware with log.
 func httpWithLog(l log.Logger) {
 	r := chi.NewRouter()
+
+	// Add as middleware.
 	r.Use(log.HTTPMiddlewareWithLog(l, log.APIMiddlewareConfig{
 		RequestHeader:  true,
 		RequestBody:    true,
