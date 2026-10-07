@@ -12,12 +12,12 @@ require (
 	github.com/go-playground/validator/v10 v10.30.5
 	github.com/golang/mock v1.6.0
 	github.com/lmittmann/tint v1.2.1
-	github.com/mattn/go-colorable v0.1.15
+	github.com/mattn/go-colorable v0.1.16
 	github.com/newrelic/go-agent/v3 v3.45.0
 	github.com/newrelic/go-agent/v3/integrations/nrgrpc v1.4.11
 	github.com/nsqio/go-nsq v1.1.0
 	github.com/prometheus/client_golang v1.24.1
-	github.com/redis/go-redis/v9 v9.22.0
+	github.com/redis/go-redis/v9 v9.23.0
 	github.com/rs/zerolog v1.35.1
 	github.com/segmentio/kafka-go v0.4.51
 	github.com/sirupsen/logrus v1.10.2
@@ -76,7 +76,7 @@ require (
 	go.opentelemetry.io/otel v1.45.0 // indirect
 	go.opentelemetry.io/otel/metric v1.45.0 // indirect
 	go.opentelemetry.io/otel/trace v1.45.0 // indirect
-	go.uber.org/atomic v1.11.0 // indirect
+	go.uber.org/atomic v1.12.0 // indirect
 	go.uber.org/multierr v1.10.0 // indirect
 	golang.org/x/arch v0.5.0 // indirect
 	golang.org/x/crypto v0.57.0 // indirect
