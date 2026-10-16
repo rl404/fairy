@@ -7,7 +7,7 @@ require (
 	github.com/allegro/bigcache/v3 v3.2.0
 	github.com/bradfitz/gomemcache v0.0.0-20260422231931-4d751bb6e37c
 	github.com/elastic/go-elasticsearch/v8 v8.19.7
-	github.com/go-chi/chi/v5 v5.4.0
+	github.com/go-chi/chi/v5 v5.5.0
 	github.com/go-playground/mold/v4 v4.5.1
 	github.com/go-playground/validator/v10 v10.30.5
 	github.com/golang/mock v1.6.0
@@ -24,7 +24,7 @@ require (
 	github.com/streadway/amqp v1.1.0
 	go.uber.org/zap v1.28.0
 	golang.org/x/time v0.16.0
-	google.golang.org/api v0.302.0
+	google.golang.org/api v0.304.0
 	google.golang.org/grpc v1.84.0
 	gorm.io/driver/mysql v1.6.0
 	gorm.io/gorm v1.31.2
