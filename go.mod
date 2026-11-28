@@ -17,7 +17,7 @@ require (
 	github.com/newrelic/go-agent/v3/integrations/nrgrpc v1.4.11
 	github.com/nsqio/go-nsq v1.1.0
 	github.com/prometheus/client_golang v1.25.0
-	github.com/redis/go-redis/v9 v9.24.0
+	github.com/redis/go-redis/v9 v9.24.1
 	github.com/rs/zerolog v1.35.1
 	github.com/segmentio/kafka-go v0.4.51
 	github.com/sirupsen/logrus v1.10.2
